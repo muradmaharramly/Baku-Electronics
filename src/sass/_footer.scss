@@ -88,6 +88,9 @@
                   }
               }
             }
+            .footer-privacy{
+                display: none;
+            }
           }
         }
       }
@@ -192,6 +195,16 @@
       }
       .footer-links{
         justify-content: center;
+        h5{
+            margin-top: 18px ;
+            margin-bottom: 8px !important;
+        }
+        li{
+            margin-bottom: 8px !important;
+        }
+        .footer-privacy{
+            display: block !important;
+        }
       }
       .footer-subscribe{
         h5{

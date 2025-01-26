@@ -28,6 +28,7 @@ const Footer = () => {
                             <li>Servis mərkəzləri</li>
                             <li>Çatdırılma və ödəniş</li>
                             <li><Link to="/DoubleGuarantee">İkiqat zəmanət</Link></li>
+                            <li className="footer-privacy"><Link>Məxfilik siyasəti</Link></li>
                         </ul>
                     </div>
                     <div>
