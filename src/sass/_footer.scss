@@ -2,7 +2,8 @@
     background-color: $box-light;
     font-family: Arial, sans-serif;
     padding: 20px 9.5%;
-    margin-top: 600px;
+    margin-top: 30px;
+    padding-top: 40px;
     
     &-top {
       display: flex;
@@ -15,7 +16,7 @@
         flex: 1 1 28%;
         margin-bottom: 20px;
   
-        h4 {
+        h5 {
           font-size: 16px;
           margin-bottom: 20px;
         }
@@ -75,14 +76,16 @@
   
             li {
               margin-bottom: 14px;
-              font-size: 15px;
               color: $black-2nd;
               cursor: pointer;
               font-weight: 500;
-              @include transition();
-  
-              &:hover {
-                color: $black;
+              a{
+                color: $black-2nd;
+                text-decoration: none;
+                @include transition();
+                &:hover {
+                    color: $black;
+                  }
               }
             }
           }
@@ -114,7 +117,7 @@
           display: flex;
           gap: 20px;
   
-          ion-icon {
+          svg {
             color: $black-2nd;
             font-size: 20px;
             cursor: pointer;
@@ -125,13 +128,14 @@
           }
         }
         .footer-call{
-            p{
+            h1{
                 margin-bottom: -15px;
                 margin-left: 60px;
                 color: $black;
                 font-size: 28px;
-                ion-icon{
-                    margin-bottom: -5px;
+                svg{
+                    font-size: 22px;
+                    margin-right: 8px;
                 }
             }
         }
@@ -143,10 +147,23 @@
         align-items: center;
         justify-content: right;
   
-        .footer-apps img {
-          width: 130px;
-          margin-left: 10px;
-        }
+        .footer-apps {
+            display: flex;
+            gap: 10px;
+            .img{
+                width: 135px;
+                height: 40px;
+                margin-left: 10px;
+                background-size: contain;
+                background-repeat: no-repeat
+            } 
+            .img.play{
+                background-image: url(https://new.bakuelectronics.az/img/google-play-light.svg)
+            }
+            .img.apple{
+                background-image: url(https://new.bakuelectronics.az/img/app-store-light.svg)
+            }        
+        }    
       }
     }
   
@@ -156,11 +173,6 @@
       align-items: center;
       font-size: 15px;
       margin-top: 20px;
-  
-      span {
-        font-weight: bold;
-      }
-  
       a {
         margin-left: 10px;
         color: $black;
@@ -182,7 +194,7 @@
         justify-content: center;
       }
       .footer-subscribe{
-        h4{
+        h5{
             text-align: center;
         }
       }
@@ -194,9 +206,10 @@
             justify-content: space-between;
         }
         .footer-call{
-            p{
+            h1{
                 margin-bottom: 0;
                 margin-left: 0;
+                margin-top: 15px;
                 padding: 5px 0 15px 0;
             }
         }
@@ -207,6 +220,9 @@
       .footer-copyright{
         justify-content: center;
         text-align: center;
+        span{
+            display: none;
+        }
         a{
             display: none;
         }

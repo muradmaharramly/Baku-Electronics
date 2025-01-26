@@ -1,0 +1,131 @@
+.loan-container {
+    padding: 20px 9.5%; 
+    background-color: transparent;
+    .top-h1{
+        padding: 20px 0;
+    }
+    .inner-container{
+        background: $box-light;
+        border-radius: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+        h1{
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: $main-dark;
+          }
+    }
+    .content-box {
+      
+      padding: 30px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+  
+      h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+      
+  
+      p{
+        color: $main-dark;
+        font-size: 15px;
+        padding: 0;
+        margin: 0;
+        line-height: 14px;
+      }
+      .ques{
+        font-weight: bold;
+      }
+  
+      h3 {
+        font-size: 16px;
+        margin-top: 20px;
+        margin-bottom: 5px;
+        font-weight: normal;
+        color: #333;
+        strong{
+            font-weight: bold;
+        }
+      }
+  
+      .section{
+        p {
+            font-size: 15px;
+            margin: 5px 0;
+            line-height: 20px;
+          }
+      }
+  
+      .note-section {
+        margin-top: 20px;
+  
+        p {
+          font-style: italic;
+          line-height: 24px;
+        }
+      }
+  
+      .expanded-content {
+        margin-top: 15px;
+  
+      }
+  
+      .toggle-text{
+        margin-top: 5px;
+        padding: 0px;
+        font-weight: 600;
+        color: $red;
+        cursor: pointer;
+        font-size: 15px;
+      }
+    }
+  
+    .image-box {
+      img {
+        width: 100%;
+        max-width: 500px;
+        margin-top: 30px;
+        margin-right: 10px;
+        height: auto;
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+}
+    }
+  
+    @media (max-width: 768px) {
+      .loan-container{
+        padding: 10px !important;
+      }
+      .content-box {
+        width: 100%;
+      }
+      .image-box{
+        img{
+            margin-top: 0;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
+      }
+    }
+    @media (max-width: 576px) {
+        .image-box{
+          img{
+              max-width: 300px !important;
+          }
+        }
+      }
+  }
+  

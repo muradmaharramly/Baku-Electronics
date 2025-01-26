@@ -1,0 +1,297 @@
+.body.dark{
+    background-color: $main-dark;
+    .header{
+        background-color: $main-dark;
+        .fixed{
+            border-bottom: 1px solid $main-dark;
+            box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.071);
+        }
+        .top-navbar{
+            background-color: $box-dark;
+            color: $white;
+            ul{
+                li{
+                    color: $white-2nd;
+                    &:hover {
+                        color: $white;
+                    }
+                }
+                .active{
+                    color: $white;
+                }
+                .dropdown{
+                    background-color: $main-dark;
+                    li{
+                        color: $white-2nd;
+                        &:hover{
+                            color: $white;
+                        }
+                    }
+                }
+                .mode-toggle{
+                    background-color: black !important;
+                }
+            }
+        }
+        .main-navbar{
+            background-color: $main-dark;
+            .category-panel{
+                background-color: $box-dark;
+                .side-panel-item{
+                    color: $white;
+                    &:hover{
+                        background-color: $box-hover-dark;
+                      }
+                
+                    &.active {
+                        background-color: $box-hover-dark;
+                        font-weight: bold;
+                    }
+                }
+                .content-panel {
+                    overflow-x: hidden;
+                    overflow-y: visible;
+                    scrollbar-width: 2px;
+                    &::-webkit-scrollbar {
+                      width: 2px; 
+                      height: 6px; 
+                    }
+                    &::-webkit-scrollbar-track {
+                      background: #888; 
+                      border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                      background: #f0f0f0; 
+                      border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-thumb:hover {
+                      background: $white;
+                    }
+                    &* {
+                      scrollbar-width: thin;
+                      scrollbar-color:#f0f0f0 #888; 
+                    }
+                    .subcategory {                  
+                        h6 {
+                          color: $white;
+                        }
+                  
+                        ul {                  
+                          li {
+                            color: $white-2nd;
+                  
+                            &:hover {
+                              color: $white;
+                            }
+                          }
+                        }
+                      }
+                }
+            }
+            .search-bar {
+                background-color: $box-dark;
+                input{
+                  color: $white;
+                  &::placeholder{
+                    color: $white-2nd;
+                  }
+                }
+                button {
+                    color: $white-2nd;
+                  }
+            }
+            .actions {
+                button {
+                  color: $white;
+                  background-color: $box-dark;
+                  &:hover{
+                    background-color: $box-hover-dark;
+                  }
+        }
+              }
+        }
+    }
+    .mobile-navbar {
+        background-color: $main-dark;
+        p{
+            color: $white;
+        }
+      
+        &-top-icons {
+      
+          button {
+            background-color: $box-hover-dark;
+      
+            svg{
+              color: $white;
+            }
+      
+            &:hover {
+              background-color: $red;
+            }
+          }
+        }
+      
+        &-menu {
+          ul {
+            li {
+              a {
+                background-color: $box-dark;
+                color: $white;
+                transition: background-color 0.3s;
+                ion-icon{
+                  color: $white;
+                }
+      
+                &:hover {
+                  background-color: $box-hover-dark;
+                }
+              }
+            }
+          }
+        }
+      }
+      .mobile-navbar.active{
+        left: 0;
+      }
+    .about-us{
+        h2{
+            color: $white;
+        }
+        .caption{
+            color: $soft-white;
+        }
+        .timeline-details {
+            h3 {
+              color: $white !important;
+            }
+    
+            p {
+              color: $soft-white !important;
+            }
+          }
+    } 
+    .breadcrumb{
+        span{
+            color: $white;
+        }
+        a,
+        svg{
+            color: #999999cc;
+            &:hover{
+                color: $white;
+            }
+        }
+    
+    }
+    .footer {
+        background-color: $box-dark;
+        &-top {      
+          .footer-subscribe {
+            h4 {
+              color: $white;
+            }
+          }
+      
+          .footer-links {
+            div {
+              h5 {
+                color: $white;
+              }
+      
+              ul {      
+                li {
+                  color: $white-2nd;
+                  a{
+                    color: $white-2nd;
+                    &:hover {
+                        color: $white;
+                      }
+                  }
+                }
+              }
+            }
+          }
+        }
+      
+        &-bottom {
+          border-bottom: 1px solid #6b6b6b;
+      
+          .footer-social {      
+            p {
+              color: $white;
+            }
+      
+            .footer-icons {      
+              svg {
+                color: $black-2nd;
+                &:hover{
+                  color: $white;
+                }
+              }
+            }
+            .footer-call{
+                h1{
+                    color: $white;
+                    svg{
+                        color: $white;
+                    }
+                }
+            }
+          }
+      
+          .footer-info {      
+            .footer-apps {
+                .img.play{
+                    background-image: url(https://new.bakuelectronics.az/img/google-play-dark.svg)
+                }
+                .img.apple{
+                    background-image: url(https://new.bakuelectronics.az/img/app-store-dark.svg)
+                }        
+            }
+          }
+        }
+      
+        &-copyright {
+          font-weight: 500;
+          color: $white;
+      
+          span {
+            color: $white;
+          }
+      
+          a {
+            color: $white;
+            border-bottom: 2px solid $white;
+          }
+        }
+      }
+      .corporative-sales,
+.double-guarantee{
+    .text-area{
+        h1{
+            color: $white;
+        }
+        h4{
+            color: $white;
+        }
+        h3{
+            color: $white;
+        }
+        p{
+            
+            color: $soft-white;
+        }
+        ul{
+            li{
+                color: $soft-white;
+            }
+        }
+        .secondary-list li::before {
+            content: "- "; 
+            color: $soft-white; 
+          }
+    }
+}
+       
+}

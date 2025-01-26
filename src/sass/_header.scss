@@ -87,7 +87,7 @@
                         color: $black-2nd;
                         @include transition();
                         &:hover{
-                            color: black;
+                            color: $black;
                         }
                     }
                 }
@@ -106,22 +106,29 @@
           }
        }
   
-      .dark-mode-toggle {
+      .mode-toggle {
         position: relative;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: $black;
+        background-color: $main-dark;
         border-radius: 15px;
-        padding:3px 4px;
+        padding: 5px 6px;
         cursor: pointer;
         -webkit-border-radius: 15px;
         -moz-border-radius: 15px;
         -ms-border-radius: 15px;
         -o-border-radius: 15px;
+        span{
+            display: flex;
+            gap: 3px;
+            svg{
+                font-size: 20px;
+            }
+        }
         .toggle-round{
-            width: 25px;
-            height: 25px;
+            width: 24px;
+            height: 24px;
             position: absolute;
             left: 3px;
             background-color: $main-light;
@@ -130,11 +137,18 @@
             -moz-border-radius: 50%;
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
+            @include transition();
+            &.left{
+                left: 3px;
+            }
+            &.right{
+                left: 27px;
+            }
 }
-        ion-icon{
-            padding:3px;
+        svg{
             color: $white;
-            margin-bottom: -5px;
+            padding:3px;
+            font-size: 15px;
         }
 }
     }
@@ -145,16 +159,16 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 0px;
+      padding: 15px 0px;
       position: relative;
       z-index: 10;
   
       &.fixed {
-        padding: 10px 15% 10px 12%;
+        padding: 10px 9%;
         position: fixed;
         top: 0;
-        left: -40px;
-        width: 80%;
+        left: 0px;
+        width: 100%;
       }
   
       .logo img {
@@ -165,7 +179,7 @@
         gap: 5px;
         cursor: pointer;
         background-color: $box-dark;
-        padding: 10px 20px;
+        padding: 12px 18px;
         border-radius: 30px;
         -webkit-border-radius: 30px;
         -moz-border-radius: 30px;
@@ -176,10 +190,146 @@
         &:hover{
             background-color: $box-hover-dark;
         }
-        ion-icon{
-            margin-bottom: -2px;
+        svg{
+            margin-bottom: -6px;
+            font-size: 23px;
         }
-}
+       }
+       .category-panel {
+        box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.085);
+        padding: 20px;
+        position: absolute;
+        top: 80px;
+        width: 100%;
+        height: auto;
+        max-width: 1240px;
+        background-color: $box-light;
+        border-radius: 30px;
+        display: none;
+        font-family: Arial, sans-serif;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+        &.fixed{
+            top: 78px;
+            height: 600px;
+        }
+        &.active{
+            display: flex;
+        }
+        .side-panel{
+          width: 300px;
+          background-color: transparent;
+          border-right: 1px solid #ddd;
+          padding-right: 15px;
+          border-radius: 30px 0px 0px 30px;
+          -webkit-border-radius: 30px 0px 0px 30px;
+          -moz-border-radius: 30px 0px 0px 30px;
+          -ms-border-radius: 30px 0px 0px 30px;
+          -o-border-radius: 30px 0px 0px 30px;
+          .side-panel-item{
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+            font-size: 13px;
+            border-radius: 15px;
+            color: #333;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -ms-border-radius: 15px;
+            -o-border-radius: 15px;
+            svg{
+                font-size: 18px;
+                margin-bottom: -3px;
+                margin-right: 10px;
+            }
+            &:hover{
+              background-color: $box-hover-light;
+            }
+      
+            &.active {
+              background-color: $box-hover-light;
+              font-weight: bold;
+            }
+          }
+        }
+      
+        .content-panel {
+          display: flex;
+          justify-content: left;
+          flex-wrap: wrap;
+          width: 100%;
+          padding:15px 15px 15px 30px;
+          overflow-x: hidden;
+          overflow-y: visible;
+          scrollbar-width: 2px;
+          &::-webkit-scrollbar {
+            width: 2px; 
+            height: 6px; 
+          }
+          &::-webkit-scrollbar-track {
+            background: #f0f0f0; 
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
+          &* {
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f0f0f0; 
+          }
+
+      
+          .subcategory {
+            margin-bottom: 0px;
+            margin-right: 80px;
+      
+            h6 {
+              font-size: 15px;
+              margin-bottom: 0.5rem;
+              color: #444;
+            }
+      
+            ul {
+              list-style: none;
+              padding: 0;
+      
+              li {
+                padding: 6px 0;
+                color: #666;
+      
+                &:hover {
+                  color: #000;
+                }
+              }
+            }
+          }
+        }
+      
+        @media (max-width: 768px) {
+          flex-direction: column;
+      
+          .side-panel {
+            width: 100%;
+            border-right: none;
+            border-bottom: 1px solid #ddd;
+          }
+      
+          .content-panel {
+            width: 100%;
+          }
+        }
+      }
+      
       .search-bar {
         position: relative;
         display: flex;
@@ -198,7 +348,6 @@
           border: none;
           outline: none;
           color: $black;
-          font-size: 14px;
           &::placeholder{
             color: $black-2nd;
           }
@@ -218,7 +367,7 @@
         gap: 10px;
   
         button {
-          padding: 12px 12px;
+          padding: 12px 14px;
           border: none;
           color: $black;
           font-size: 20px;
@@ -230,9 +379,9 @@
           -ms-border-radius: 12px;
           -o-border-radius: 12px;
           @include transition();
-          ion-icon{
+          svg{
             margin-bottom: -4px;
-            font-size: 24px;
+            font-size: 20px;
           }
           &:hover{
             background-color: $box-hover-light;
@@ -241,13 +390,14 @@
       }
     }
     .mobile-navbar {
+        display: none;
         background-color: $main-light;
         padding:0px 10px 20px 10px;
         margin: 0;
         border-radius: 8px;
         width: 100%;
         top: 55px;
-        left:500px;
+        left:100%;
         z-index: 1000;
         height: 100vh;
         position: fixed;
@@ -263,22 +413,25 @@
         &-top-icons {
           display: flex;
           justify-content: center;
-          gap: 15px;
-          margin-bottom: 20px;
+          gap: 8px;
+          margin-bottom: 15px;
       
           button {
-            width: 45px;
-            height: 45px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
             background-color: #fdeaea;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             @include transition();
-      
-            ion-icon {
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            svg{
               font-size: 20px;
               color: $red;
             }
@@ -335,7 +488,7 @@
   }
   @media (max-width: 768px) {
     .header{
-        padding: 0 2%;
+        padding: 0 20px;
     }
     .top-navbar{
         padding: 4px 8px  !important;
@@ -346,11 +499,15 @@
             }
         }
     }
+    .mobile-navbar{
+        display: block !important;
+    }
     .burger{
         display: flex !important;
     }
     .main-navbar{
         gap: 15px;
+        padding: 10px 0px !important;
         .logo img{
             height: 45px !important;
         }
@@ -364,11 +521,10 @@
             display: none !important;
         }
         &.fixed {
-            padding: 10px 12% 10px 12%;
+            padding: 5px 20px !important;
             position: fixed;
             top: 0;
-            left: -40px;
-            width: 95% !important;
+            left: 0px;
           }
     }
   } 
