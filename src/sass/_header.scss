@@ -392,11 +392,11 @@
     .mobile-navbar {
         display: none;
         background-color: $main-light;
-        padding:0px 10px 20px 10px;
+        padding:20px 25px;
         margin: 0;
         border-radius: 8px;
         width: 100%;
-        top: 55px;
+        top: 45px;
         left:100%;
         z-index: 1000;
         height: 100vh;
@@ -452,7 +452,7 @@
               margin-bottom: 8px;
       
               a {
-                width:88%;
+                width:100%;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
