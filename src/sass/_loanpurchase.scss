@@ -17,13 +17,11 @@
         -ms-border-radius: 30px;
         -o-border-radius: 30px;
         h1{
-            font-size: 1.5rem;
             margin-bottom: 10px;
             color: $main-dark;
           }
     }
     .content-box {
-      
       padding: 30px;
       width: 50%;
       display: flex;
@@ -31,14 +29,12 @@
       gap: 10px;
   
       h2 {
-        font-size: 24px;
         margin-bottom: 10px;
       }
       
   
       p{
         color: $main-dark;
-        font-size: 15px;
         padding: 0;
         margin: 0;
         line-height: 14px;
@@ -60,7 +56,6 @@
   
       .section{
         p {
-            font-size: 15px;
             margin: 5px 0;
             line-height: 20px;
           }
@@ -68,11 +63,6 @@
   
       .note-section {
         margin-top: 20px;
-  
-        p {
-          font-style: italic;
-          line-height: 24px;
-        }
       }
   
       .expanded-content {
@@ -86,7 +76,7 @@
         font-weight: 600;
         color: $red;
         cursor: pointer;
-        font-size: 15px;
+        font-size: 14px;
       }
     }
   
@@ -104,28 +94,42 @@
         -o-border-radius: 30px;
 }
     }
-  
-    @media (max-width: 768px) {
-      .loan-container{
-        padding: 10px !important;
-      }
-      .content-box {
-        width: 100%;
-      }
-      .image-box{
-        img{
-            margin-top: 0;
-            margin-right: 0;
-            margin-bottom: 20px;
-        }
-      }
-    }
-    @media (max-width: 576px) {
-        .image-box{
-          img{
-              max-width: 300px !important;
-          }
-        }
-      }
   }
   
+  @media (max-width: 768px) {
+    .top-h1{
+        padding: 5px 0px !important;
+        padding-bottom: 20px !important;
+    }
+    .loan-container{
+      padding: 5px 20px !important;
+    }
+    .content-box {
+        padding: 20px !important;
+      width: 100% !important;
+      p{
+        line-height: 18px !important;
+      }
+      
+    }
+    .image-box{
+      img{
+          margin-top: -25px !important;
+          margin-right: 0 !important;
+          margin-bottom: 20px !important;
+      }
+    }
+    .toggle-text{
+        font-size: 13px !important;
+    }
+  }
+  @media (max-width: 576px) {
+      .image-box{
+        img{
+            max-width: 300px !important;
+        }
+      }
+    } 
+    .toggle-text{
+        font-size: 12px !important;
+    }

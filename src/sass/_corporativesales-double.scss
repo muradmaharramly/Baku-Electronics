@@ -53,12 +53,34 @@
     height: 500px;
 }
 @media (max-width: 768px){
-    .double-guarantee .img-area{
+    .double-guarantee .img-area,
+    .corporative-sales .img-area{
         height: 230px !important;
         padding-top: 0 !important;
+        img{
+            border-radius: 20px !important;
+            -webkit-border-radius: 20px !important;
+            -moz-border-radius: 20px !important;
+            -ms-border-radius: 20px !important;
+            -o-border-radius: 20px !important;
+}
     }
     .corporative-sales,
     .double-guarantee{
         padding:10px 20px !important;
+    }
+}
+@media (max-width: 576px){
+    .double-guarantee .img-area,
+    .corporative-sales .img-area{
+        height: 160px !important;
+        padding-top: 0 !important;
+        img{
+            border-radius: 15px !important;
+            -webkit-border-radius: 15px !important;
+            -moz-border-radius: 15px !important;
+            -ms-border-radius: 15px !important;
+            -o-border-radius: 15px !important;
+        }
     }
 }
