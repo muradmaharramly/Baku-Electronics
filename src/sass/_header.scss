@@ -488,7 +488,7 @@
   }
   @media (max-width: 768px) {
     .header{
-        padding: 0 20px;
+        padding: 0 15px;
     }
     .top-navbar{
         padding: 4px 8px  !important;
@@ -521,7 +521,7 @@
             display: none !important;
         }
         &.fixed {
-            padding: 5px 20px !important;
+            padding: 5px 15px !important;
             position: fixed;
             top: 0;
             left: 0px;

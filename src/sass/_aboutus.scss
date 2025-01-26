@@ -29,12 +29,19 @@
         justify-content: center;
         gap: 80px;
         padding: 20px;
+        position: relative;
         .line{
+            top: 20px;
+            bottom: 0;
+            left: 19%;
+            height: 94%;
+            margin: auto;
+            z-index: 1;
             margin-top: 70px;
             width: 1px;
-            height: 553vh;
+            position: absolute;
             background-color: $red;
-            position: relative;
+            
         }
         .timeline-items{
             display: flex;
@@ -42,6 +49,7 @@
             align-items: center;
             gap: 80px;
             .event-year{
+                z-index: 2;
                 position: absolute;
                 left: -110px;
                 top: 60px;
@@ -116,6 +124,7 @@
         gap: 0px !important;
     }
     .timeline-details {
+        margin-left: 60px;
         margin-top: 0 !important;
       h3 {
         margin-bottom: 5px !important;
@@ -127,10 +136,11 @@
     }
     .line{
         margin-top: 20px !important;
-        height: 256vh !important;
+        left: 15% !important;
+        height: 90% !important;
     }
     .event-year{
-        left: -70px !important;
+        left: -10px !important;
         top: 20px !important;
         padding: 12px 8px !important;
         font-size: 10px !important;
@@ -140,6 +150,13 @@
         height: 350px !important;
     }
   } 
+  @media (max-width: 576px){
+    .line{
+        margin-top: 20px !important;
+        left: 8% !important;
+        height: 90% !important;
+    }
+  }
 
 
   
