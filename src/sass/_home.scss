@@ -169,5 +169,33 @@
     .why-us{
         flex-wrap: wrap;
         justify-content: center !important;
+        .card{
+            padding: 15px !important;
+            width: 160px !important;
+            height: 180px !important;
+            border-radius: 15px !important;
+            -webkit-border-radius: 15px !important;
+            -moz-border-radius: 15px !important;
+            -ms-border-radius: 15px !important;
+            -o-border-radius: 15px !important;
+            div{
+                width: 30px !important;
+                height: 30px !important;
+                border-radius: 6px !important;
+                -webkit-border-radius: 6px !important;
+                -moz-border-radius: 6px !important;
+                -ms-border-radius: 6px !important;
+                -o-border-radius: 6px !important;
+                svg{
+                    font-size: 18px !important;
+                }
+}
+            h2{
+                font-size: 14px;
+            }
+            p{
+                font-size: 11px;
+            }
+}
     }
 }
