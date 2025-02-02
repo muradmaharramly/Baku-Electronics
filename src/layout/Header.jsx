@@ -11,6 +11,7 @@ import { PiLaptop } from "react-icons/pi";
 import { FiSun } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { ThemeContext } from "../context/ThemeContext";
+import { Link } from "react-router-dom";
 
 const categories = [
     {
@@ -155,9 +156,9 @@ const Header = () => {
             </div>
 
             <div className={`main-navbar ${isScrolled ? "fixed" : ""}`}>
-                <div className="logo">
+                <Link to="/" className="logo">
                     <img src="https://img.b-e.az/media/logo/baku-electronics-logo.svg" alt="Logo" />
-                </div>
+                </Link>
                 <div className={`catalogue-btn ${isPanelActive ? "clicked" : ""}`} onClick={handleCatalogueClick}><span className="clicker">{isPanelActive ? <IoClose /> : <HiOutlineViewGrid />}</span> Kataloq</div>
                 <div className={`category-panel ${isScrolled ? "fixed" : ""} ${isPanelActive ? "active" : ""}`}>
                     <div className="side-panel">
