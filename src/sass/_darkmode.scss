@@ -426,6 +426,24 @@
         margin-top: 5px;
       }
   }
-
+  .why-us{
+    .card{
+        background-color: $box-dark;
+        div{
+            background-color: $box-hover-dark;
+            svg{
+                font-size: 28px;
+                color: $main-light;
+            }
+        }
+        h2{
+            color: $main-light;
+            margin: 2px 0;
+        }
+        p{
+            color: $white-2nd;
+        }
+}
+  }
        
 }

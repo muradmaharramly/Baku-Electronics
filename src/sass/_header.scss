@@ -50,6 +50,17 @@
                 cursor: pointer;
                 color: $black-2nd;
                 @include transition();
+                a{
+                  color: $black-2nd;
+                  text-decoration: none;
+                  @include transition();
+                  &:hover{
+                    color: $black;
+                  }
+                }
+                .active{
+                  color: $black;
+                }
               &:hover {
                 color: $black;
               }

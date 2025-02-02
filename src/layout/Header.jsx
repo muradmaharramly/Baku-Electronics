@@ -11,7 +11,7 @@ import { PiLaptop } from "react-icons/pi";
 import { FiSun } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { ThemeContext } from "../context/ThemeContext";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const categories = [
     {
@@ -136,8 +136,8 @@ const Header = () => {
                         <ion-icon name={isClicked ? "close-outline" : "menu-outline"}></ion-icon>
                     </div>
                     <ul>
-                        <li className="active">Kampaniyalar</li>
-                        <li>Korporativ satışlar</li>
+                        <li><NavLink>Kampaniyalar</NavLink></li>
+                        <li><NavLink to="/corporative-sales">Korporativ satışlar</NavLink></li>
                         <li>Mağazalar</li>
                         <li>Aylıq ödəniş</li>
                         <li className="droped">Digər<ion-icon name="chevron-down-outline"></ion-icon>
