@@ -328,5 +328,104 @@
     }
   
   }
+  .delivery-billing-container {
+    h1{
+        color: $white;
+    }
+  
+    .tabs {
+      button {
+        &.active {
+          color: $white;
+        }
+      }
+    }
+    .items-div{
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+    }
+    .content-box {
+      .info-box{
+        background: $box-dark;
+        .text{
+            flex: 1;
+            h1 {
+                color: $white;
+              }
+        
+              p {
+                color: $white;
+              }
+        
+              a {
+                color: $white;
+              }
+        }
+        .h6{
+            color: $white;
+        }  
+      }
+    }
+  }
+
+  .service-centers {
+    .filter-line{
+      h2{
+        color: $white;
+      }
+      .filters {    
+        input {
+          background-color: $box-hover-dark;
+          color: $white;
+          &::placeholder{
+            color: $white-2nd;
+          }
+  }
+    
+        div {
+          background-color: $box-hover-dark;
+          select{
+              color: $white-2nd;
+          }
+          
+        }
+        a{
+          background-color: $box-hover-dark;
+          color: $white;
+        }
+      }
+    }
+    .tab-note{
+        background-color: $box-hover-dark;
+        color: $white;
+}  
+    .centers-list {  
+      .center-box {
+        background: $box-hover-dark;
+        &:hover{
+            box-shadow: 0px 0px 10px rgba(239, 239, 239, 0.212);
+        }
+  
+        h3 {
+          color: $white;
+        }
+  
+        p {
+          color: $white-2nd;
+          strong{
+            color: $white;
+          }
+        }
+      }
+    }
+    .no-results {
+        width: 100%;
+        text-align: left;
+        color: $red;
+        margin-top: 5px;
+      }
+  }
+
        
 }

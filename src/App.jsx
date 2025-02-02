@@ -1,12 +1,14 @@
 import React from "react";
-import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
 import LoanPurchase from "./components/pages/LoanPurchase";
 import CorporativeSales from "./components/pages/CorporativeSales"
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DoubleGuarantee from "./components/pages/DoubleGuarantee";
 import Brands from "./components/pages/Brands";
 import AboutUs from "./components/pages/AboutUs";
+import ServiceCenters from "./components/pages/ServiceCenters";
+import DeliveryandBilling from "./components/pages/DeliveryandBilling";
 
 
 
@@ -15,11 +17,13 @@ const App = () => {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/AboutUs" element={<AboutUs />}></Route>
-        <Route path="/LoanPurchase" element={<LoanPurchase />}></Route>
-        <Route path="/CorporativeSales" element={<CorporativeSales />}></Route>
-        <Route path="/DoubleGuarantee" element={<DoubleGuarantee />}></Route>
-        <Route path="/Brands" element={<Brands />}></Route>
+        <Route path="/about-us" element={<AboutUs />}></Route>
+        <Route path="/loan-purchase" element={<LoanPurchase />}></Route>
+        <Route path="/corporative-sales" element={<CorporativeSales />}></Route>
+        <Route path="/double-guarantee" element={<DoubleGuarantee />}></Route>
+        <Route path="/brands" element={<Brands />}></Route>
+        <Route path="/service-centers" element={<ServiceCenters />}></Route>
+        <Route path="/delivery-and-billing" element={<DeliveryandBilling />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

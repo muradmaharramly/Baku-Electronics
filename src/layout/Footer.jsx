@@ -23,11 +23,11 @@ const Footer = () => {
                     <div>
                         <h5>Alıcılara</h5>
                         <ul>
-                            <li><Link to="/LoanPurchase">Nisyə alış</Link></li>
+                            <li><Link to="/loan-purchase">Nisyə alış</Link></li>
                             <li>Mağazalar</li>
-                            <li>Servis mərkəzləri</li>
-                            <li>Çatdırılma və ödəniş</li>
-                            <li><Link to="/DoubleGuarantee">İkiqat zəmanət</Link></li>
+                            <li><Link to="/service-centers">Servis mərkəzləri</Link></li>
+                            <li><Link to="/delivery-and-billing">Çatdırılma və ödəniş</Link></li>
+                            <li><Link to="/double-guarantee">İkiqat zəmanət</Link></li>
                             <li className="footer-privacy"><Link>Məxfilik siyasəti</Link></li>
                         </ul>
                     </div>
@@ -36,7 +36,7 @@ const Footer = () => {
                         <ul>
                             <li>Kampaniyalar</li>
                             <li>Müştəri kartı</li>
-                            <li><Link to="/Brands">Brendlər</Link></li>
+                            <li><Link to="/brands">Brendlər</Link></li>
                             <li>Bloq və xəbərlər</li>
                             <li>Zəmanət</li>
                         </ul>
@@ -44,9 +44,9 @@ const Footer = () => {
                     <div>
                         <h5>Haqqımızda</h5>
                         <ul>
-                            <li><Link to="/AboutUs">Haqqımızda</Link></li>
+                            <li><Link to="/about-us">Haqqımızda</Link></li>
                             <li>Vakansiyalar</li>
-                            <li><Link to="/CorporativeSales">Korporativ satışlar</Link></li>
+                            <li><Link to="/corporative-sales">Korporativ satışlar</Link></li>
                         </ul>
                     </div>
                 </div>
