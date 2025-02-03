@@ -445,5 +445,29 @@
         }
 }
   }
+  .video-roll-area{
+    background-color: $box-dark;
+    .area-head{
+      h3{
+        color: $white;
+      }
+        p{
+            color: $white-2nd;
+        }
+    }
+    
+    .slide{
+        h4{
+            color: $white;
+        }
+      }
+      .mobile-yt-btn{
+        background-color: $red;
+        color: $white;
+        &:hover{
+            background-color: $red-hover;
+        }
+}
+}
        
 }

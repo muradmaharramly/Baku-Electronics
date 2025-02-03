@@ -1,5 +1,6 @@
 import React from 'react'
 import HeroSlider from "../sliders/HeroSlider"
+import VideoRollSlider from "../sliders/VideoRollSlider"
 import { PiHandPeace } from 'react-icons/pi'
 import { MdOutlineCloudDone } from 'react-icons/md'
 import { LuClipboardList } from 'react-icons/lu'
@@ -31,6 +32,7 @@ const Home = () => {
           <p>Endirimli qiymətə indi al, 3 aya böl, hissə-hissə ödə!.</p>
         </div>
       </div>
+      <VideoRollSlider />
     </div>
   )
 }
