@@ -1,10 +1,12 @@
 import React from 'react'
-import HeroSlider from "../sliders/HeroSlider"
-import VideoRollSlider from "../sliders/VideoRollSlider"
+import HeroSlider from "../components/sliders/HeroSlider"
+import VideoRollSlider from "../components/sliders/VideoRollSlider"
 import { PiHandPeace } from 'react-icons/pi'
 import { MdOutlineCloudDone } from 'react-icons/md'
 import { LuClipboardList } from 'react-icons/lu'
 import { BsCalendar4Week } from 'react-icons/bs'
+import NewsSlider from '../components/sliders/NewsSlider'
+import ProductList from '../components/ProductList'
 
 const Home = () => {
   return (
@@ -32,7 +34,15 @@ const Home = () => {
           <p>Endirimli qiymətə indi al, 3 aya böl, hissə-hissə ödə!.</p>
         </div>
       </div>
+      <div className="products-container">
+            <div className="area-head">
+                <p>Ən çox satılanlar</p>
+                <h3>Ən çox satılanlar</h3>
+            </div>
+            <ProductList />
+        </div>
       <VideoRollSlider />
+      <NewsSlider />
     </div>
   )
 }

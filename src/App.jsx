@@ -1,15 +1,17 @@
 import React from "react";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import Home from "./components/pages/Home";
-import LoanPurchase from "./components/pages/LoanPurchase";
-import CorporativeSales from "./components/pages/CorporativeSales"
+import Home from "./pages/Home";
+import LoanPurchase from "./pages/LoanPurchase";
+import CorporativeSales from "./pages/CorporativeSales"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DoubleGuarantee from "./components/pages/DoubleGuarantee";
-import Brands from "./components/pages/Brands";
-import AboutUs from "./components/pages/AboutUs";
-import ServiceCenters from "./components/pages/ServiceCenters";
-import DeliveryandBilling from "./components/pages/DeliveryandBilling";
+import DoubleGuarantee from "./pages/DoubleGuarantee";
+import Brands from "./pages/Brands";
+import AboutUs from "./pages/AboutUs";
+import ServiceCenters from "./pages/ServiceCenters";
+import DeliveryandBilling from "./pages/DeliveryandBilling";
+import ProductList from "./components/ProductList";
+import ProductDetails from "./components/ProductDetails";
 
 
 
@@ -26,6 +28,8 @@ const App = () => {
         <Route path="/brands" element={<Brands />}></Route>
         <Route path="/service-centers" element={<ServiceCenters />}></Route>
         <Route path="/delivery-and-billing" element={<DeliveryandBilling />}></Route>
+        <Route path="/products" element={<ProductList />} />
+        <Route path="/products/:id" element={<ProductDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>

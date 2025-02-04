@@ -3,13 +3,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
-import { FaPlay } from "react-icons/fa";
 
-function VideoRollSlider() {
+function NewsSlider() {
     const settings = {
         dots: false,
         infinite: true,
-        slidesToShow: 3,
+        slidesToShow: 2,
         slidesToScroll: 1,
         autoplay: true,
         speed: 500,
@@ -26,13 +25,13 @@ function VideoRollSlider() {
     };
 
     return (
-        <div className="video roll-area">
+        <div className="news roll-area">
             <div className="area-head">
                 <div className="text">
-                    <p>Youtube kanalımız</p>
-                    <h3>Texno icmallarla düzgün seçim et!</h3>
+                    <p>Bloq və xəbərlər</p>
+                    <h3>Ən son yeniliklərdən xəbərdar ol!</h3>
                 </div>
-                <Link to="https://www.youtube.com/user/BakuElectronicsMMC" target="_blank">Kanalımıza keçid et</Link>
+                <Link to="№" target="_blank">Xəbərlərə keçid et</Link>
             </div>
             <div className="slider-container">
                 <Slider {...settings}>
@@ -41,7 +40,7 @@ function VideoRollSlider() {
                             <img src="https://i.ytimg.com/vi/HrKMwkDrXpg/hqdefault.jpg?sqp=-oaymwFBCNACELwBSFryq4qpAzMIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB8AEB-AH-DoACuAiKAgwIABABGH8gEygWMA8=&rs=AOn4CLAUp3hCcnct222wY84pfqjcunDXbA" />
                             <div className="overlay">
                                 <Link>
-                                    <FaPlay />
+                                    Ətraflı
                                 </Link>
                             </div>
                         </div>
@@ -52,7 +51,7 @@ function VideoRollSlider() {
                             <img src="https://i.ytimg.com/vi/UhB9hl0t3qI/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBdWB4xQGxTR6-zin5n7FAkZiY9Bg" />
                             <div className="overlay">
                                 <Link>
-                                    <FaPlay />
+                                    Ətraflı
                                 </Link>
                             </div>
                         </div>
@@ -63,7 +62,7 @@ function VideoRollSlider() {
                             <img src="https://i.ytimg.com/vi/QYNtcvbVcBM/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB6WafVgKdABDcdTvHOU9jFXJq0Iw" />
                             <div className="overlay">
                                 <Link>
-                                    <FaPlay />
+                                    Ətraflı
                                 </Link>
                             </div>
                         </div>
@@ -74,7 +73,7 @@ function VideoRollSlider() {
                             <img src="https://i.ytimg.com/vi/5rBtxGWC5-E/hqdefault.jpg?sqp=-oaymwEnCOADEI4CSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLB1IuRlpzMzWCaY6Oc-PUPh3jigdg" />
                             <div className="overlay">
                                 <Link>
-                                    <FaPlay />
+                                    Ətraflı
                                 </Link>
                             </div>
                         </div>
@@ -85,7 +84,7 @@ function VideoRollSlider() {
                             <img src="https://i.ytimg.com/vi/MtoMAweURhk/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLCl1JhhJaLX2sM1dxDtEeL9g0m_aA" />
                             <div className="overlay">
                                 <Link>
-                                    <FaPlay />
+                                    Ətraflı
                                 </Link>
                             </div>
                         </div>
@@ -96,7 +95,7 @@ function VideoRollSlider() {
                             <img src="https://i.ytimg.com/vi/60AUJAZnhNY/hq720.jpg?sqp=-oaymwEnCNAFEJQDSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBbEs1pMSXzsB-VeM1V2FDaXvqr1Q" />
                             <div className="overlay">
                                 <Link>
-                                    <FaPlay />
+                                    Ətraflı
                                 </Link>
                             </div>
                         </div>
@@ -109,4 +108,4 @@ function VideoRollSlider() {
     );
 }
 
-export default VideoRollSlider;
+export default NewsSlider;

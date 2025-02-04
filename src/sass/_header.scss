@@ -78,7 +78,7 @@
                 .dropdown{
                     top: 20px;
                     width:110px;
-                    z-index: 999;
+                    z-index: 1001 !important;
                     position: absolute;
                     padding: 10px;
                     background-color: $main-light;

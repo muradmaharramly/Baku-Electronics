@@ -1,0 +1,17 @@
+.products-container{
+    padding: 30px 9.5%;
+    display: flex;
+    flex-direction: column;
+    .area-head{
+        margin: 20px 0 40px 0;
+        p{
+            color: $red;
+        }
+    }
+    .product-list{
+        padding: 20px 0 !important;
+    }
+}
+.product-list{
+    padding: 40px 9.5%;
+}

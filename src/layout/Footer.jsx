@@ -56,21 +56,21 @@ const Footer = () => {
                     <div className="social">
                         <p>Bizi sosial mediada izləyin:</p>
                         <div className="footer-icons">
-                            <FaFacebookF />
-                            <FaTelegramPlane />
-                            <FaLinkedinIn />
-                            <FaInstagram />
-                            <FaYoutube />
+                            <Link to="https://www.facebook.com/bakuelectronics.mmc" target="_blank"><FaFacebookF /></Link>
+                            <Link to="https://t.me/baku_electronics" target="_blank"><FaTelegramPlane /></Link>
+                            <Link to="https://www.linkedin.com/company/bakuelectronics/" target="_blank"><FaLinkedinIn /></Link>
+                            <Link to="https://www.instagram.com/bakuelectronics.az/" target="_blank"><FaInstagram /></Link>
+                            <Link to="https://www.youtube.com/user/BakuElectronicsMMC" target="_blank"><FaYoutube /></Link>
                         </div>
                     </div>
-                    <div className="footer-call">
+                    <Link to="tel:143" className="footer-call">
                         <h1><FiPhoneCall />143</h1>
-                    </div>
+                    </Link>
                 </div>
                 <div className="footer-info">
                     <div className="footer-apps">
-                        <div className="img play"></div>
-                        <div className="img apple"></div>
+                        <Link to="https://play.google.com/store/apps/details?id=com.bakuelectronics&hl=en&pli=1" className="img play" target="_blank"></Link>
+                        <Link to="https://apps.apple.com/us/app/baku-electronics/id6444839980" className="img apple" target="_blank"></Link>
                     </div>
                 </div>
             </div>
