@@ -12,6 +12,8 @@ import ServiceCenters from "./pages/ServiceCenters";
 import DeliveryandBilling from "./pages/DeliveryandBilling";
 import ProductList from "./components/ProductList";
 import ProductDetails from "./components/ProductDetails";
+import Cart from "./pages/Cart";
+import Wishlist from "./pages/Wishlist";
 
 
 
@@ -29,7 +31,9 @@ const App = () => {
         <Route path="/service-centers" element={<ServiceCenters />}></Route>
         <Route path="/delivery-and-billing" element={<DeliveryandBilling />}></Route>
         <Route path="/products" element={<ProductList />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/products/:slug" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -11,7 +11,7 @@ const LoanPurchase = () => {
 
     return (
         <div className="loan-container">
-            <div className="breadcrumb"><Link>Ana səhifə</Link><RiArrowRightDoubleFill /><span>Nisyə alış</span></div>
+            <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Nisyə alış</span></div>
             <h1 className="top-h1">Nisyə alış</h1>
             <div className="inner-container">
                 <div className="content-box">

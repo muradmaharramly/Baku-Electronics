@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 const DoubleGuarantee = () => {
     return (
         <div className='double-guarantee'>
-            <div className="breadcrumb"><Link>Ana səhifə</Link><RiArrowRightDoubleFill /><span>İkiqat zəmanət</span></div>
+            <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>İkiqat zəmanət</span></div>
             <div className='img-area'>
                 <img src='https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fflat_page%2F2qat-slider.jpg&w=1920&q=75'></img>
             </div>

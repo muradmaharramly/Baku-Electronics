@@ -54,7 +54,7 @@ const Brands = () => {
 
     return (
         <div className="brands-page">
-            <div className="breadcrumb"><Link>Ana səhifə</Link><RiArrowRightDoubleFill /><span>Brendlər</span></div>
+            <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Brendlər</span></div>
             <h2>Brendlər</h2>
             <div className="brands">
                 {currentBrands.map((brand) => (

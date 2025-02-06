@@ -12,6 +12,9 @@ import { FiSun } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { ThemeContext } from "../context/ThemeContext";
 import { Link, NavLink } from "react-router-dom";
+import { Badge } from "antd";
+import { useCart } from "react-use-cart";
+import { useWishlist } from "../context/WishlistContext";
 
 const categories = [
     {
@@ -128,6 +131,17 @@ const Header = () => {
         }
     }, [theme]);
 
+    const {
+        cartTotal,
+        isEmpty,
+        totalUniqueItems,
+        items,
+        updateItemQuantity,
+        removeItem,
+    } = useCart();
+
+    const { wishlist, removeFromWishlist } = useWishlist();
+
     return (
         <header className={`header ${isScrolled ? "fixed" : ""}`}>
             <div className={`top-navbar ${showTopNavbar ? "visible" : "hidden"}`}>
@@ -191,8 +205,12 @@ const Header = () => {
                 </div>
                 <div className="actions">
                     <button><RiScalesFill /></button>
-                    <button><LuShoppingCart /></button>
-                    <button><FaRegHeart /></button>
+                    <Badge count={totalUniqueItems} showZero>
+                        <Link to="/cart"><button><LuShoppingCart /></button></Link>
+                    </Badge>
+                    <Badge count={wishlist.length} showZero>
+                        <Link to="/wishlist"><button><FaRegHeart /></button></Link>
+                    </Badge>
                     <button><FaRegUser /></button>
                 </div>
             </div>

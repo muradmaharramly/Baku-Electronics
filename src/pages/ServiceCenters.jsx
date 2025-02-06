@@ -43,7 +43,7 @@ const ServiceCenters = () => {
 
     return (
         <div className="service-centers">
-            <div className="breadcrumb"><Link>Ana səhifə</Link><RiArrowRightDoubleFill /><span>Servis mərkəzləri</span></div>
+            <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Servis mərkəzləri</span></div>
             <div className="filter-line">
                 <h2>Servis mərkəzləri</h2>
                 <div className="filters">

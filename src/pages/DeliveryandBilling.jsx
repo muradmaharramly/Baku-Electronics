@@ -13,7 +13,7 @@ const DeliveryandBilling = () => {
 
     return (
         <div className="delivery-billing-container">
-            <div className="breadcrumb"><Link>Ana səhifə</Link><RiArrowRightDoubleFill /><span>Çatdırılma və ödəniş</span></div>
+            <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Çatdırılma və ödəniş</span></div>
             <h1>Çatdırılma və ödəniş</h1>
             <div className="tabs">
                 <button
