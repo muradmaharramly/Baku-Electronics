@@ -469,5 +469,95 @@
         }
 }
 }
-       
+.product-card{
+  background-color: $box-dark;
+  a{
+      text-decoration: none;
+      color: white;
+  }
+  .details{
+      svg{
+          margin: 0 3px;
+      }
+      .rate{
+        color: $white;
+          svg{
+              color: $red;
+          }
+      }
+      .review-count{
+        color: $white;
+          svg{
+              color: $black-2nd;
+              opacity: 0.6;
+          }
+          span{
+              margin-left: 4px;
+          }
+      }
+  }
+  .pricing{
+      div{
+          padding: 5px;
+      }
+      .price{
+          padding-right: 25px;
+          
+          .current-price{
+              color: $white;
+          }
+      }
+      .divide{
+          p{
+              color: $white;
+          }
+      }
+  }
+  .card-ending{
+      button{
+          @include transition();
+          background-color: $box-hover-dark;
+          color: $white;
+          &:hover{
+              background-color: $red;
+              color: $white;
+          }
+          svg{
+              font-size: 18px;
+          }
+}
+  }
+}
+.products-container{
+  .area-head{
+      p{
+          color: $white-2nd;
+      }
+      h3{
+        color: $white;
+      }
+  }
+}  
+.video.roll-area,
+.news.roll-area{
+    background-color: $box-dark;
+    .area-head{
+        p{
+            color: $white-2nd;
+        }
+        h3{
+          color: $white;
+        }
+    }
+      .slide{
+        h4{
+            color: $white;
+        }
+        .img-div{
+            img{
+              border:1px solid $box-dark !important;
+            }
+        }
+      }
+}     
 }

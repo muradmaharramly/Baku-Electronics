@@ -14,7 +14,7 @@ import { ThemeContext } from "../context/ThemeContext";
 import { Link, NavLink } from "react-router-dom";
 import { Badge } from "antd";
 import { useCart } from "react-use-cart";
-import { useWishlist } from "../context/WishlistContext";
+import { useWishlist } from "react-use-wishlist";
 
 const categories = [
     {
@@ -96,6 +96,11 @@ const Header = () => {
 
     const handleClick = () => {
         setIsClicked(!isClicked);
+        if (!isClicked) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "auto";
+        }
     };
 
     const [isPanelActive, setIsPanelActive] = useState(false);
@@ -140,7 +145,11 @@ const Header = () => {
         removeItem,
     } = useCart();
 
-    const { wishlist, removeFromWishlist } = useWishlist();
+    const {
+        isWishlistEmpty,
+        totalWishlistItems,
+        removeWishlistItem,
+    } = useWishlist();
 
     return (
         <header className={`header ${isScrolled ? "fixed" : ""}`}>
@@ -205,12 +214,14 @@ const Header = () => {
                 </div>
                 <div className="actions">
                     <button><RiScalesFill /></button>
-                    <Badge count={totalUniqueItems} showZero>
-                        <Link to="/cart"><button><LuShoppingCart /></button></Link>
-                    </Badge>
-                    <Badge count={wishlist.length} showZero>
-                        <Link to="/wishlist"><button><FaRegHeart /></button></Link>
-                    </Badge>
+                    {totalUniqueItems === 0 ? (<Link to="/cart"><button><LuShoppingCart /></button></Link>) :
+                        (<Badge count={totalUniqueItems} showZero>
+                            <Link to="/cart"><button><LuShoppingCart /></button></Link>
+                        </Badge>)}
+                    {totalWishlistItems === 0 ? (<Link to="/wishlist"><button><FaRegHeart /></button></Link>) :
+                        (<Badge count={totalWishlistItems} showZero>
+                            <Link to="/wishlist"><button><FaRegHeart /></button></Link>
+                        </Badge>)}
                     <button><FaRegUser /></button>
                 </div>
             </div>
@@ -221,12 +232,14 @@ const Header = () => {
                         <button>
                             <RiScalesFill />
                         </button>
-                        <button>
-                            <LuShoppingCart />
-                        </button>
-                        <button>
-                            <FaRegHeart />
-                        </button>
+                        {totalUniqueItems === 0 ? (<Link to="/cart"><button><LuShoppingCart /></button></Link>) :
+                            (<Badge count={totalUniqueItems} showZero>
+                                <Link to="/cart"><button><LuShoppingCart /></button></Link>
+                            </Badge>)}
+                        {totalWishlistItems === 0 ? (<Link to="/wishlist"><button><FaRegHeart /></button></Link>) :
+                            (<Badge count={totalWishlistItems} showZero>
+                                <Link to="/wishlist"><button><FaRegHeart /></button></Link>
+                            </Badge>)}
                     </div>
                     <nav className="mobile-navbar-menu">
                         <ul>

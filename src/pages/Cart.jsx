@@ -1,6 +1,7 @@
 import React from "react";
 import { CgTrashEmpty } from "react-icons/cg";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa6";
 import { RiArrowRightDoubleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
@@ -39,9 +40,10 @@ const Cart = () => {
     return (
         <div className="cart-area">
             <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Səbət</span></div>
+            <h2 className="cart-title mb"><Link to="/"><FaArrowLeft /></Link>  Səbətim</h2>
             <div className="cart-container">
                 <div className="cart-content">
-                    <h2 className="cart-title">Səbətim</h2>
+                    <h2 className="cart-title dt">Səbətim</h2>
                     {items.map((item, index) => (
                         <div className="cart-item">
                             <div className="cart-item-image">
@@ -95,6 +97,7 @@ const Cart = () => {
                         <span className="total-price">${cartTotal.toFixed(2)}</span>
                     </div>
                 </div>
+                <button className="checkout-btn mobile">Sifarişi rəsmiləşdir</button>
             </div>
         </div>
     );
