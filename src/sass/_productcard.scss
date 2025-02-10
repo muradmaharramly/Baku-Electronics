@@ -296,6 +296,10 @@
                 svg{
                     font-size: 14px;
                 }
+                &:hover{
+                    background-color: $box-hover-light;
+                    color: $black;
+                }
     }
             .add-to-cart-btn{
                 .desktop-text{
