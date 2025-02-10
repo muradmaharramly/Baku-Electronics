@@ -28,7 +28,7 @@ const MobileTabBar = () => {
     <div className="mobile-tab-bar">
       <div
         className="active-indicator"
-        style={{ left: `${(tabs.indexOf(activeTab) * 19) + 6.8}%` }}
+        style={{ left: `${(tabs.indexOf(activeTab) * 19) + 6.7}%` }}
       ></div>
 
 <Link to="/">
