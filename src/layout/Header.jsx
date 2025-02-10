@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { RiScalesFill } from "react-icons/ri";
-import { LuShoppingCart } from "react-icons/lu";
-import { FaRegHeart } from "react-icons/fa6";
+import { RiScalesFill, RiShoppingCart2Line } from "react-icons/ri";
+import { FaArrowLeft, FaRegHeart } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { IoTvOutline } from "react-icons/io5";
@@ -94,13 +93,22 @@ const Header = () => {
 
     const [isClicked, setIsClicked] = useState(false);
 
-    const handleClick = () => {
+    const handleBurgerClick = () => {
         setIsClicked(!isClicked);
         if (!isClicked) {
             document.body.style.overflow = "hidden";
         } else {
             document.body.style.overflow = "auto";
         }
+    };
+
+    const [isOtherNav, setIsOtherNav] = useState(false);
+
+    const handleOtherNavClick = () => {
+        setIsOtherNav(!isOtherNav);
+    };
+    const handleOtherNavClickOff = () => {
+        setIsOtherNav(!isOtherNav);
     };
 
     const [isPanelActive, setIsPanelActive] = useState(false);
@@ -136,26 +144,40 @@ const Header = () => {
         }
     }, [theme]);
 
+    useEffect(() => {
+        const handleLinkClick = () => {
+          window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); 
+          setTimeout(() => {
+            window.location.reload(); 
+          }, 100);
+        };
+    
+        const links = document.querySelectorAll(".mobile-navbar-menu a, .mobile-navbar-top-icons a");
+    
+        links.forEach((link) => {
+          link.addEventListener("click", handleLinkClick);
+        });
+    
+        return () => {
+          links.forEach((link) => {
+            link.removeEventListener("click", handleLinkClick);
+          });
+        };
+      }, []);
+
     const {
-        cartTotal,
-        isEmpty,
         totalUniqueItems,
-        items,
-        updateItemQuantity,
-        removeItem,
     } = useCart();
 
     const {
-        isWishlistEmpty,
         totalWishlistItems,
-        removeWishlistItem,
     } = useWishlist();
 
     return (
         <header className={`header ${isScrolled ? "fixed" : ""}`}>
             <div className={`top-navbar ${showTopNavbar ? "visible" : "hidden"}`}>
                 <nav>
-                    <div className={`burger ${isClicked ? "clicked" : ""}`} onClick={handleClick}>
+                    <div className={`burger ${isClicked ? "clicked" : ""}`} onClick={handleBurgerClick}>
                         <ion-icon name={isClicked ? "close-outline" : "menu-outline"}></ion-icon>
                     </div>
                     <ul>
@@ -213,16 +235,16 @@ const Header = () => {
                     <button className="search-icon"><ion-icon name="search-outline"></ion-icon></button>
                 </div>
                 <div className="actions">
-                    <button><RiScalesFill /></button>
-                    {totalUniqueItems === 0 ? (<Link to="/cart"><button><LuShoppingCart /></button></Link>) :
-                        (<Badge count={totalUniqueItems} showZero>
-                            <Link to="/cart"><button><LuShoppingCart /></button></Link>
+                    <NavLink to="/scale"><button><RiScalesFill /></button></NavLink>
+                    {totalUniqueItems === 0 ? (<NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>) :
+                        (<Badge count={totalUniqueItems} className="custom-badge" showZero>
+                            <NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>
                         </Badge>)}
-                    {totalWishlistItems === 0 ? (<Link to="/wishlist"><button><FaRegHeart /></button></Link>) :
-                        (<Badge count={totalWishlistItems} showZero>
-                            <Link to="/wishlist"><button><FaRegHeart /></button></Link>
+                    {totalWishlistItems === 0 ? (<NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>) :
+                        (<Badge count={totalWishlistItems} className="custom-badge" showZero>
+                            <NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>
                         </Badge>)}
-                    <button><FaRegUser /></button>
+                    <NavLink to="/user"><button><FaRegUser /></button></NavLink>
                 </div>
             </div>
             <div className={`mobile-navbar ${isClicked ? "active" : ""}`}>
@@ -232,13 +254,13 @@ const Header = () => {
                         <button>
                             <RiScalesFill />
                         </button>
-                        {totalUniqueItems === 0 ? (<Link to="/cart"><button><LuShoppingCart /></button></Link>) :
-                            (<Badge count={totalUniqueItems} showZero>
-                                <Link to="/cart"><button><LuShoppingCart /></button></Link>
+                        {totalUniqueItems === 0 ? (<NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>) :
+                            (<Badge count={totalUniqueItems} className="custom-badge" showZero>
+                                <NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>
                             </Badge>)}
-                        {totalWishlistItems === 0 ? (<Link to="/wishlist"><button><FaRegHeart /></button></Link>) :
-                            (<Badge count={totalWishlistItems} showZero>
-                                <Link to="/wishlist"><button><FaRegHeart /></button></Link>
+                        {totalWishlistItems === 0 ? (<NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>) :
+                            (<Badge count={totalWishlistItems} className="custom-badge" showZero>
+                                <NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>
                             </Badge>)}
                     </div>
                     <nav className="mobile-navbar-menu">
@@ -249,9 +271,9 @@ const Header = () => {
                                 </a>
                             </li>
                             <li>
-                                <a>
+                                <Link to="/corporative-sales">
                                     Korporativ satışlar <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a>
@@ -263,9 +285,33 @@ const Header = () => {
                                     Aylıq ödəniş <ion-icon name="chevron-forward-outline"></ion-icon>
                                 </a>
                             </li>
+                            <li onClick={handleOtherNavClick}>
+                                <p>
+                                    Digər <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </p>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div className={`mobile-navbar other ${isOtherNav && isClicked ? "active" : ""}`}>
+                <div className="mobile-menu-content">
+                    <h4><button onClick={handleOtherNavClickOff}><FaArrowLeft /></button>  Digər linklər</h4>
+                    <nav className="mobile-navbar-menu">
+                        <ul>
                             <li>
                                 <a>
-                                    Digər <ion-icon name="chevron-forward-outline"></ion-icon>
+                                    Arxayın al <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Müştəri kartı <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </a>
+                            </li>
+                            <li>
+                                <a>
+                                    Zəmanət <ion-icon name="chevron-forward-outline"></ion-icon>
                                 </a>
                             </li>
                         </ul>

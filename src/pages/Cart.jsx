@@ -5,6 +5,7 @@ import { FaArrowLeft } from "react-icons/fa6";
 import { RiArrowRightDoubleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
+import slugify from "slugify";
 
 const Cart = () => {
     const {
@@ -31,26 +32,30 @@ const Cart = () => {
     }, 0);
 
     const handleRemoveItem = (itemId) => {
-        removeItem(itemId); 
-    
+        removeItem(itemId);
+
         localStorage.removeItem(`clicked-${itemId}`);
-    
+
     };
 
     return (
         <div className="cart-area">
             <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Səbət</span></div>
-            <h2 className="cart-title mb"><Link to="/"><FaArrowLeft /></Link>  Səbətim</h2>
+            <h2 className="cart-title mb"><Link onClick={() => window.history.back()}><FaArrowLeft /></Link>  Səbətim</h2>
             <div className="cart-container">
                 <div className="cart-content">
                     <h2 className="cart-title dt">Səbətim</h2>
                     {items.map((item, index) => (
                         <div className="cart-item">
-                            <div className="cart-item-image">
-                                <img src={item.image} alt={item.title} />
-                            </div>
+                            <Link to={`/products/${slugify(item.title, { lower: true })}`}>
+                                <div className="cart-item-image">
+                                    <img src={item.image} alt={item.title} />
+                                </div>
+                            </Link>
                             <div className="cart-item-info">
-                                <h6>{item.title}</h6>
+                                <Link to={`/products/${slugify(item.title, { lower: true })}`}>
+                                    <h6>{item.title}</h6>
+                                </Link>
                                 {item.discount > 0 && <p className="old-price">${item.price}</p>}
                                 <p className="new-price">
                                     ${(item.price - (item.price * item.discount) / 100).toFixed(2)}
@@ -84,7 +89,7 @@ const Cart = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <p className="summary-quantity">{item.quantity}</p>
+                                <p className="summary-quantity">{item.quantity} ədəd</p>
                             </div>
                         ))}
                     </div>

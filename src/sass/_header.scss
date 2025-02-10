@@ -378,25 +378,35 @@
         display: flex;
         gap: 10px;
   
-        button {
-          padding: 12px 14px;
-          border: none;
-          color: $black;
-          font-size: 20px;
-          cursor: pointer;
-          background-color: $box-light;
-          border-radius: 12px;
-          -webkit-border-radius: 12px;
-          -moz-border-radius: 12px;
-          -ms-border-radius: 12px;
-          -o-border-radius: 12px;
-          @include transition();
-          svg{
-            margin-bottom: -4px;
+        a {
+          button{
+            padding: 12px 14px;
+            border: none;
+            color: $black;
             font-size: 20px;
-          }
-          &:hover{
-            background-color: $box-hover-light;
+            cursor: pointer;
+            background-color: $box-light;
+            border-radius: 12px;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            -ms-border-radius: 12px;
+            -o-border-radius: 12px;
+            @include transition();
+            svg{
+              margin-bottom: -4px;
+              font-size: 20px;
+            }
+            &:hover{
+              background-color: $box-hover-light;
+            }
+            }
+          &.active{
+            button{
+              background-color: $red;
+              svg{
+                color: $white;
+              }
+            }
           }
 }
       }
@@ -463,7 +473,8 @@
             li {
               margin-bottom: 8px;
       
-              a {
+              a,p {
+                text-decoration: none;
                 width:100%;
                 display: flex;
                 justify-content: space-between;
@@ -495,6 +506,36 @@
         }
       }
       .mobile-navbar.active{
+        left: 0;
+      }
+      .mobile-navbar.other{
+        z-index: 1001;
+        left: 100%;
+        h4{
+          margin-bottom: 10px;
+          font-weight: bold;
+          text-align: left;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          button{
+            border: none;
+            color: $black;
+            background-color: $box-light;
+            padding: 10px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            svg{
+                font-size: 16px;
+                margin-bottom: -4px;
+            }
+        }
+        }
+      }
+      .mobile-navbar.other.active{
         left: 0;
       }
   }

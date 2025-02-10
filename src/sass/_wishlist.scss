@@ -33,6 +33,7 @@
         font-weight: 500;
     }
     .desc{
+        font-weight: 500;
         color: $black-2nd;
         font-size: 12px;
     }
@@ -57,3 +58,8 @@
       }
 }
   }
+@media (max-width: 768px){
+    .wishlist-page{
+        padding: 10px 15px;
+    }
+}

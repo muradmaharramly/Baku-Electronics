@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
-import { RiArrowRightDoubleFill, RiScalesFill } from "react-icons/ri";
+import { RiArrowRightDoubleFill, RiScalesFill, RiShoppingCart2Line } from "react-icons/ri";
 import slugify from "slugify";
-import { LuShoppingCart } from "react-icons/lu";
 import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
 
@@ -97,7 +96,7 @@ const Wishlist = () => {
                         </Link>
                         <div className="card-ending">
                             <button className={`add-to-cart-btn ${clickClass[item.id] || ""}`} onClick={() => handleAddClick(item)}>
-                                <LuShoppingCart /><span className="desktop-text">Səbətə əlavə et</span><span className="mobile-text">Səbətə at</span><span className="added-text">Səbətə keç</span>
+                                <RiShoppingCart2Line /><span className="desktop-text">Səbətə əlavə et</span><span className="mobile-text">Səbətə at</span><span className="added-text">Səbətə keç</span>
                             </button>
                             <button className="add-to-wish-btn clicked" onClick={() => handleRemoveWishlistItem(item.id)}>
                                 <FaRegHeart />

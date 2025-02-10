@@ -101,11 +101,21 @@
                   }
             }
             .actions {
-                button {
-                  color: $white;
-                  background-color: $box-dark;
-                  &:hover{
-                    background-color: $box-hover-dark;
+                a {
+                  button{
+                    color: $white;
+                    background-color: $box-dark;
+                    svg{
+                      color: $white;
+                    }
+                    &:hover{
+                      background-color: $box-hover-dark;
+                    }
+                  }
+                  &.active{
+                      button{
+                        background-color: $red;
+                      }
                   }
         }
               }
@@ -559,5 +569,20 @@
             }
         }
       }
-}     
+}  
+.cart-empty,
+.wishlist-empty{
+  p{
+      color: $white;
+  }
+  .desc{
+      color: $white-2nd;
+      font-weight: bold;
+  }
+} 
+.not-found-page{
+  h2{
+    color: $white;
+  }
+}  
 }

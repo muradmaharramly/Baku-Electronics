@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
-import { LuShoppingCart } from "react-icons/lu";
-import { RiScalesFill } from "react-icons/ri";
+import { RiScalesFill, RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
@@ -76,7 +75,7 @@ function ProductCard({ product }) {
             </Link>
             <div className="card-ending">
                 <button className={`add-to-cart-btn ${clickClass}`} onClick={handleAddClick}>
-                    <LuShoppingCart /><span className="desktop-text">Səbətə əlavə et</span><span className="mobile-text">Səbətə at</span><span className="added-text">Səbətə keç</span>
+                    <RiShoppingCart2Line /><span className="desktop-text">Səbətə əlavə et</span><span className="mobile-text">Səbətə at</span><span className="added-text">Səbətə keç</span>
                 </button>
                 <button className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
                     <FaRegHeart />
