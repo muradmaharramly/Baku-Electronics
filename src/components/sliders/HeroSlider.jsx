@@ -32,7 +32,7 @@ function HeroSlider() {
       slidesToShow: 1,
       slidesToScroll: 1,
       autoplay: true,
-      speed: 1000,
+      speed: 500,
       autoplaySpeed: 3000,
       cssEase: "linear",
       nextArrow: <NextArrow />,
