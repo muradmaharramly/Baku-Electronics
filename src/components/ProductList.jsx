@@ -1,19 +1,18 @@
-import React, { useEffect, useState } from "react";
-import store from "../tools/store/store";
+import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { fetchProducts } from "../tools/request/fetchProducts";
 import ProductCard from "./PorductCard";
+import PreLoader from "./PreLoader";
 
 function ProductList() {
-    const [products, setProducts] = useState(store.getState());
+    const { products, loading, error } = useSelector((state) => state.products);
 
     useEffect(() => {
-        fetchProducts();
-        const unsubscribe = store.subscribe(() => {
-            setProducts(store.getState());
-        });
-
-        return () => unsubscribe();
+        fetchProducts(); 
     }, []);
+
+    if (loading) return <PreLoader />;
+    if (error) return <p>Xəta: {error}</p>;
 
     return (
         <div className="product-list">

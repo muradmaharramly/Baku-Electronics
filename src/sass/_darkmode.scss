@@ -906,5 +906,139 @@ border-bottom: 2px solid $white;
       }
   }
 }
+.news-details-page{
+  .page-head{
+      span{
+        color: $soft-white;
+      }
+      h1{
+          color: $white;
+      }
+  }
+  .news-container{
+      .detailed-news{
+          .desc{
+              color: $white;
+          }
+      }
+      .right-content{
+          .most-viewed{
+            background-color: $box-dark;
+              p{
+                  color: $white-2nd;
+              }
+              .items{
+                  .item{
+                      .text{
+                          p{
+                              color: $white;
+                          }
+                          span{
+                              color: $white-2nd;
+                          }
+                      }
+                  }
+              }
+          }
+          .subscribe-area{
+              background-color: $box-dark;
+              h5{
+                color: $white;
+              }
+              form{
+                  input{
+                      background-color: $box-hover-dark;
+                      &::placeholder{
+                        color: $white-2nd;
+                      }
+                  }
+                  button{
+                      background-color: $white;
+                      color: $black;
+                      box-shadow: none;
+                  }
+              }
+          }
+}
+  }
+}
+.news-card{
+  background-color: $main-dark;
+  h5{
+      color: $white;
+  }
+  p{
+      color: $white-2nd;
+  }
+  .card-ending{
+      span{
+          color: $white;
+      }
+      a{
+          color: $white;
+      }
+  }
+  &:hover{
+      box-shadow: 0px 10px 40px 5px rgba(0, 0, 0, 0.07);
+  }
+}
+.news-list-con{
+  background-color: $box-dark;
+  .area-head{
+      p{
+          color: $white-2nd;
+      }
+      h3{
+        color: $white;
+      }
+  }
+}
+.pagination {
+  .numbers{
+    background-color: $box-hover-dark !important;
+    span{
+        color: $white-2nd;
+        &:hover {
+          color: $white !important;
+      }
+        &.active {
+            color: $white !important;
+        }
+    }
+}
+  button {
+    background-color: $box-hover-dark !important;
+    &:hover {
+      background-color: $red;
+      color: $white;
+    }
 
+    &:disabled {
+      background-color: #2f2f2f !important;
+    }
+  }
+}
+.news-and-blogs-page{
+  h2{
+    color: $white;
+  }
+  .slide{
+    img{
+      border: 1px solid $main-dark;
+    }
+  }
+  .info-div{
+    background-color: $black;
+    span{
+        color: $white;
+    }
+    h1{
+        color: $white;
+    }
+    a{
+        background-color: $box-hover-dark;
+        color: $white;
+}
+}
+}
 }

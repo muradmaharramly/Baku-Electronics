@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import store from "../tools/store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts } from "../tools/request/fetchProducts"; // API çağırışı üçün action
 import slugify from "slugify";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -11,21 +12,36 @@ import { LuShoppingCart } from "react-icons/lu";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { HiOutlinePercentBadge } from "react-icons/hi2";
 import { HiOutlineCursorClick } from "react-icons/hi";
+import PreLoader from "../components/PreLoader";
 
 function ProductDetails() {
     const { slug } = useParams();
     const [product, setProduct] = useState(null);
+    const { products, loading } = useSelector((state) => state.products);
 
     useEffect(() => {
-        const foundProduct = store.getState().find(
-            (p) => slugify(p.title, { lower: true }) === slug
-        );
-        setProduct(foundProduct);
-    }, [slug]);
+        if (products.length === 0) {
+            fetchProducts(); 
+        }
+    }, [products.length]);
+
+    useEffect(() => {
+        if (products.length > 0) {
+            const foundProduct = products.find(
+                (p) => slugify(p.title, { lower: true }) === slug
+            );
+            setProduct(foundProduct);
+        }
+    }, [slug, products]);
+
+    if (loading) {
+        return <PreLoader />;
+    }
 
     if (!product) {
         return <p>Product not found!</p>;
     }
+
     const settings = {
         customPaging: function (i) {
             return (
@@ -44,7 +60,7 @@ function ProductDetails() {
 
     return (
         <div className="product-details-container">
-            <div className="breadcrumb"><Link>Ana səhifə</Link><RiArrowRightDoubleFill /><span>{product.title}</span></div>
+            <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>{product.title}</span></div>
             <div className="product-details">
                 <div className="product-images">
                     <span className="free-shipping">Pulsuz çatdırılma</span>

@@ -16,6 +16,10 @@
 @import 'wishlist';
 @import 'mobiletabbar';
 @import 'notfoundpage';
+@import 'newsdetails';
+@import 'newslist';
+@import 'newscard';
+@import 'newsandblogs';
 @import 'darkmode';
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Orbitron:wght@400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 *{
@@ -30,6 +34,74 @@ body{
     box-sizing: border-box;
     .custom-badge .ant-badge-count {
       background-color: $red !important;
+    }
+    .preloader{
+      height: 50vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .pagination {
+      display: flex;
+      gap: 10px;
+      margin: 0 auto;
+      margin-top: 30px;
+      .numbers{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background-color: #FEEAEA;
+        padding: 8px 20px;
+        border-radius: 12px;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        -ms-border-radius: 12px;
+        -o-border-radius: 12px;
+        span{
+            font-size: 14px;
+            cursor: pointer;
+            @include transition();
+            &:hover {
+              color: $red;
+              font-weight: bold;
+          }
+            &.active {
+                color: $red;
+                font-weight: bold;
+            }
+        }
+}
+      button {
+        padding: 8px 10px;
+        border: none;
+        background-color: #FEEAEA;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: $red;
+        -webkit-border-radius: 12px;
+        -moz-border-radius: 12px;
+        -ms-border-radius: 12px;
+        -o-border-radius: 12px;
+        svg{
+            font-size: 26px;
+            margin-bottom: -2px;
+        }
+  
+        &:hover {
+          background-color: $red;
+          color: $white;
+        }
+  
+        &:disabled {
+          background-color: #feeaea8b;
+          cursor: not-allowed;
+          color: #ea232a89;
+          &:hover{
+            color: #ea232a89;
+          }
+        }
+      }
     }
     h1 {
         font-size: 26px;
@@ -134,5 +206,32 @@ body{
 @media (max-width: 768px){
     .breadcrumb{
         display: none;
+    }
+    .pagination {
+      .numbers{
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 8px 10px;
+        border-radius: 8px !important;
+        -webkit-border-radius: 8px !important;
+        -moz-border-radius: 8px !important;
+        -ms-border-radius: 8px !important;
+        -o-border-radius: 8px !important;
+        span{
+            font-size: 12px !important;
+        }
+}
+      button {
+        padding: 4px 6px !important;
+        border-radius: 8px !important;
+        -webkit-border-radius: 8px !important;
+        -moz-border-radius: 8px !important;
+        -ms-border-radius: 8px !important;
+        -o-border-radius: 8px !important;
+        svg{
+            font-size: 20px !important;
+        } 
+      }
     }
 }

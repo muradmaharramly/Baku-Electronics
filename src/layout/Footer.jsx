@@ -37,7 +37,7 @@ const Footer = () => {
                             <li>Kampaniyalar</li>
                             <li>Müştəri kartı</li>
                             <li><Link to="/brands">Brendlər</Link></li>
-                            <li>Bloq və xəbərlər</li>
+                            <li><Link to="/news">Bloq və xəbərlər</Link></li>
                             <li>Zəmanət</li>
                         </ul>
                     </div>

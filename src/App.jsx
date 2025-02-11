@@ -11,12 +11,14 @@ import AboutUs from "./pages/AboutUs";
 import ServiceCenters from "./pages/ServiceCenters";
 import DeliveryandBilling from "./pages/DeliveryandBilling";
 import ProductList from "./components/ProductList";
-import ProductDetails from "./components/ProductDetails";
+import ProductDetails from "./pages/ProductDetails";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import MobileTabBar from "./components/MobileTabBar";
 import ScrollToTop from "./components/ScrollToTop";
 import NotFoundPage from "./pages/NotFoundPage";
+import NewsDetails from "./pages/NewsDetails";
+import NewsAndBlogs from "./pages/NewsAndBlogs";
 
 
 const App = () => {
@@ -38,6 +40,8 @@ const App = () => {
         <Route path="/products/:slug" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wishlist" element={<Wishlist />} />
+        <Route path="/news" element={<NewsAndBlogs />} />
+        <Route path="/news/:slug" element={<NewsDetails />} />
       </Routes>
       <MobileTabBar />
       <Footer />

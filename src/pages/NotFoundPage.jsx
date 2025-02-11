@@ -1,6 +1,6 @@
-import React from 'react'
-import { RiArrowRightDoubleFill } from 'react-icons/ri'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { RiArrowRightDoubleFill } from 'react-icons/ri';
+import { Link } from 'react-router-dom';
 
 const NotFoundPage = () => {
   return (
