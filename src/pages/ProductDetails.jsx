@@ -16,6 +16,7 @@ import { HiOutlineCursorClick } from "react-icons/hi";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { IoIosArrowDown } from "react-icons/io";
 import { FiPlus } from "react-icons/fi";
+import { MdDone } from "react-icons/md";
 
 function ProductDetails() {
     const { slug } = useParams();
@@ -111,6 +112,10 @@ function ProductDetails() {
                         ))}
                     </Slider>
                     {product.discount > 0 && <p className="discount">{product.discount}%</p>}
+                    <div className="mobile-actions">
+                        <Link className="scale-btn"><RiScalesFill /></Link>
+                        <Link className="share-btn"><IoShareSocialOutline /></Link>
+                    </div>
                 </div>
                 <div className="product-info">
                     <div className="details">
@@ -179,9 +184,15 @@ function ProductDetails() {
                                 {product.discount > 0 && <p className="old-price">${product.price}</p>}
                                 <p className="current-price">${discountPrice.toFixed(2)}</p>
                             </div>
-                            <Link className="add-to-cart-btn" onClick={handleAddClick}>
-                                <RiShoppingCart2Line /><span>Səbətə at</span>
-                            </Link>
+                            {inCart(product.id) ? (
+                                <Link to="/cart" className="add-to-cart-btn clicked">
+                                    <RiShoppingCart2Fill />Səbətə keç
+                                </Link>
+                            ) : (
+                                <Link className="add-to-cart-btn" onClick={handleAddClick}>
+                                    <RiShoppingCart2Line />Səbətə at
+                                </Link>
+                            )}
                         </div>
                         <form>
                             <input type="text" placeholder="Ad Soyad" />
@@ -241,7 +252,35 @@ function ProductDetails() {
                             </div>
                         </div>
                     </div>
+                    <div className="buy-together">
+                        <p>Məhsulun yanında al</p>
+                        {products.filter(item => item.id !== product.id && item.category == product.category && item.price < product.price).slice(0, 3).map((buyTogether) => (
+                            <div className="item" key={buyTogether.id}>
+                                <div className="con">
+                                    <div className="img-div">
+                                        <img src={buyTogether.image} />
+                                    </div>
+                                    <div className="item-info">
+                                        <p>{buyTogether.title.substring(0, 80)}...</p>
+                                        <div className="price-info">
+                                            <h3>${(buyTogether.price - (buyTogether.price * buyTogether.discount) / 100).toFixed(2)}</h3>
+                                            <h3>${((buyTogether.price - (buyTogether.price * buyTogether.discount) / 100) / 24).toFixed(2)} <span>24 ay</span></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                {inCart(buyTogether.id) ? (
+                                    <Link className="add clicked"><span className="tick"><MdDone /></span><span>Əlavə edildi</span></Link>
+                                ) : (
+                                    <Link className="add" onClick={() => {
+                                        if (!inCart(buyTogether.id)) {
+                                            addItem(buyTogether);
+                                        }
+                                    }}><FiPlus /> <span>Birlikdə al</span></Link>
+                                )}
+                            </div>
+                        ))}
 
+                    </div>
                 </div>
             </div>
         </div>
