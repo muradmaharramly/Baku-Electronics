@@ -138,14 +138,14 @@
         justify-content: space-between;
         align-items: center;
         gap: 10px;
-        button{
-            @include transition();
+        a{
+            transition: all .1s ease;
             cursor: pointer;
             position: relative;
             font-size: 13px;
             font-weight: bold;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
             align-items: center;
             padding: 14px 4px;
             background-color: $box-hover-light;
@@ -155,6 +155,10 @@
             -moz-border-radius: 12px;
             -ms-border-radius: 12px;
             -o-border-radius: 12px;
+            -webkit-transition: all .1s ease;
+            -moz-transition: all .1s ease;
+            -ms-transition: all .1s ease;
+            -o-transition: all .1s ease;
             &:hover{
                 background-color: $red;
                 color: $white;
@@ -164,6 +168,7 @@
             }
 }
         .add-to-cart-btn{
+            position: relative;
             flex: 4;
             .desktop-text{
                 display: inline-block;
@@ -171,21 +176,26 @@
             .mobile-text{
                 display: none;
             }
-            .added-text{
-                display: none;
-            }
-            svg{
-                left: 10px;
-
-            }
             &.clicked{
                 background-color: $red;
                 color: $white;
-                .desktop-text{
-                    display: none;
+            }
+            svg{
+                position: absolute;
+                left: 15px;
+                @include transition();
+            }
+            span{
+                margin-right: -30px;
+                @include transition();
+            }
+            &:hover{
+                svg{
+                    left: 150px;
                 }
-                .added-text{
-                    display: inline-block;
+                span{
+                    margin-right: 0;
+                    margin-left: -30px;
                 }
             }
         }
@@ -194,6 +204,18 @@
             &.clicked{
                 background-color: $red;
                 color: $white;
+            }
+            svg{
+                @include transition();
+            }
+            &:hover{
+                svg{
+                    transform: scale(1.2);
+                    -webkit-transform: scale(1.2);
+                    -moz-transform: scale(1.2);
+                    -ms-transform: scale(1.2);
+                    -o-transform: scale(1.2);
+}
             }
         }
     }
@@ -285,7 +307,7 @@
         }
         .card-ending{
             gap: 5px;
-            button{
+            a{
                 font-size: 10px;
                 padding: 8px 4px;
                 border-radius: 10px;
@@ -310,15 +332,29 @@
                 }
                 svg{
                     left: 10px;
-    
                 }
-                &.clicked{
-                    .mobile-text{
-                        display: none;
+                span{
+                    margin-right: -15px;
+                }
+                &:hover{
+                    svg{
+                        left: 10px;
                     }
-                    .added-text{
-                        display: inline-block;
+                    span{
+                        margin-right: -15px;
+                        margin-left: 0;
                     }
+                }
+            }
+            .add-to-wish-btn{
+                &:hover{
+                    svg{
+                        transform: scale(1);
+                        -webkit-transform: scale(1);
+                        -moz-transform: scale(1);
+                        -ms-transform: scale(1);
+                        -o-transform: scale(1);
+}
                 }
             }
         }

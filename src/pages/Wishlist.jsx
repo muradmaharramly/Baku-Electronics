@@ -1,29 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
-import { RiArrowRightDoubleFill, RiScalesFill, RiShoppingCart2Line } from "react-icons/ri";
+import { RiArrowRightDoubleFill, RiScalesFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
 import slugify from "slugify";
 import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
 
 const Wishlist = () => {
-    const {
-         isWishlistEmpty,
-         items,
-         removeWishlistItem
-    } = useWishlist();
-    
-    const { addItem } = useCart();
+    const { isWishlistEmpty, items, removeWishlistItem } = useWishlist();
+    const { addItem, inCart } = useCart();
 
     const [clickClass, setClickClass] = useState({});
 
     useEffect(() => {
         const storedClickStates = {};
         items.forEach((item) => {
-            const storedClass = localStorage.getItem(`clicked-${item.id}`);
-            if (storedClass) {
-                storedClickStates[item.id] = storedClass;
-            }
+            storedClickStates[item.id] = localStorage.getItem(`clicked-${item.id}`) || "";
         });
         setClickClass(storedClickStates);
     }, [items]);
@@ -95,12 +87,20 @@ const Wishlist = () => {
                             </div>
                         </Link>
                         <div className="card-ending">
-                            <button className={`add-to-cart-btn ${clickClass[item.id] || ""}`} onClick={() => handleAddClick(item)}>
-                                <RiShoppingCart2Line /><span className="desktop-text">Səbətə əlavə et</span><span className="mobile-text">Səbətə at</span><span className="added-text">Səbətə keç</span>
-                            </button>
-                            <button className="add-to-wish-btn clicked" onClick={() => handleRemoveWishlistItem(item.id)}>
+                            {inCart(item.id) ? (
+                                <Link to="/cart" className="add-to-cart-btn clicked">
+                                    <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                                </Link>
+                            ) : (
+                                <Link className={`add-to-cart-btn ${clickClass[item.id] || ""}`} onClick={() => handleAddClick(item)}>
+                                    <RiShoppingCart2Line />
+                                    <span className="desktop-text">Səbətə əlavə et</span>
+                                    <span className="mobile-text">Səbətə at</span>
+                                </Link>
+                            )}
+                            <Link className="add-to-wish-btn clicked" onClick={() => handleRemoveWishlistItem(item.id)}>
                                 <FaRegHeart />
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 ))}

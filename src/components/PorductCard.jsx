@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
-import { RiScalesFill, RiShoppingCart2Line } from "react-icons/ri";
+import { RiScalesFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
@@ -18,16 +18,16 @@ function ProductCard({ product }) {
         if (!inCart(product.id)) {
             addItem(product);
             setClickClass("clicked");
-            localStorage.setItem(`clicked-${product.id}`, "clicked"); 
+            localStorage.setItem(`clicked-${product.id}`, "clicked");
         }
     };
 
     useEffect(() => {
         const savedClickState = localStorage.getItem(`clicked-${product.id}`);
-        if (savedClickState) {
+        if (savedClickState || inCart(product.id)) {
             setClickClass("clicked");
         }
-    }, [product.id]);
+    }, [product.id, inCart]);
 
     const [wishClass, setWishClass] = useState(() => {
         return inWishlist(product.id) ? "clicked" : "";
@@ -74,12 +74,20 @@ function ProductCard({ product }) {
                 </div>
             </Link>
             <div className="card-ending">
-                <button className={`add-to-cart-btn ${clickClass}`} onClick={handleAddClick}>
-                    <RiShoppingCart2Line /><span className="desktop-text">Səbətə əlavə et</span><span className="mobile-text">Səbətə at</span><span className="added-text">Səbətə keç</span>
-                </button>
-                <button className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
+                {inCart(product.id) ? (
+                    <Link to="/cart" className="add-to-cart-btn clicked">
+                        <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                    </Link>
+                ) : (
+                    <Link className="add-to-cart-btn" onClick={handleAddClick}>
+                        <RiShoppingCart2Line />
+                        <span className="desktop-text">Səbətə əlavə et</span>
+                        <span className="mobile-text">Səbətə at</span>
+                    </Link>
+                )}
+                <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
                     <FaRegHeart />
-                </button>
+                </Link>
             </div>
         </div>
     );

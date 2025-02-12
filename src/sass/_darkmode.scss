@@ -536,7 +536,7 @@
       }
   }
   .card-ending{
-      button{
+      a{
           @include transition();
           background-color: $box-hover-dark;
           color: $white;
@@ -616,7 +616,7 @@
       }
       .card-ending{
           gap: 5px;
-          button{
+          a{
               font-size: 10px;
               padding: 8px 4px;
               border-radius: 10px;
