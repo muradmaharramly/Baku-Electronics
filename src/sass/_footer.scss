@@ -211,6 +211,23 @@
         h5{
             text-align: center;
         }
+        input{
+          padding: 8px 15px !important;
+          border-radius: 12px !important;
+          -webkit-border-radius: 12px !important;
+          -moz-border-radius: 12px !important;
+          -ms-border-radius: 12px !important;
+          -o-border-radius: 12px !important;
+        }
+        button{
+          font-size: 14px !important;
+          padding: 8px 20px !important;
+          border-radius: 12px !important;
+          -webkit-border-radius: 12px !important;
+          -moz-border-radius: 12px !important;
+          -ms-border-radius: 12px !important;
+          -o-border-radius: 12px !important;
+        }
       }
       .footer-social{
         flex-wrap: wrap;

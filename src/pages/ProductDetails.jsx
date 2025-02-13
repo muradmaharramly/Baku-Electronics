@@ -14,19 +14,41 @@ import { useWishlist } from "react-use-wishlist";
 import { HiOutlinePercentBadge } from "react-icons/hi2";
 import { HiOutlineCursorClick } from "react-icons/hi";
 import { IoShareSocialOutline } from "react-icons/io5";
-import { IoIosArrowDown } from "react-icons/io";
-import { FiPlus } from "react-icons/fi";
+import { IoIosArrowBack, IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
+import { FiMinus, FiPlus } from "react-icons/fi";
 import { MdDone } from "react-icons/md";
+import { LuClipboardList } from "react-icons/lu";
+
+function NextArrow(props) {
+    const { className, onClick } = props;
+    return (
+        <div
+            className={`${className} custom-arrow next`}
+            onClick={onClick}
+        ><IoIosArrowForward /></div>
+    );
+}
+
+function PrevArrow(props) {
+    const { className, onClick } = props;
+    return (
+        <div
+            className={`${className} custom-arrow prev`}
+            onClick={onClick}
+        ><IoIosArrowBack /></div>
+    );
+}
 
 function ProductDetails() {
     const { slug } = useParams();
-    const dispatch = useDispatch();
     const { products, loading } = useSelector((state) => state.products);
     const [product, setProduct] = useState(null);
     const [quickBuyOpen, setQuickBuyOpen] = useState(false);
     const [divideBuyOpen, setDivideBuyOpen] = useState(false);
     const [months, setMonths] = useState(3);
     const [initialPayment, setInitialPayment] = useState(0);
+    const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
+    const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 
     useEffect(() => {
         if (products.length === 0) {
@@ -74,9 +96,11 @@ function ProductDetails() {
         dots: true,
         dotsClass: "slick-dots slick-thumb",
         infinite: true,
-        speed: 500,
+        speed: 300,
         slidesToShow: 1,
         slidesToScroll: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     };
 
     const handleMonthsChange = (e) => {
@@ -279,6 +303,59 @@ function ProductDetails() {
                                 )}
                             </div>
                         ))}
+
+                    </div>
+                    <div className="features-container">
+                        <p>Məlumat</p>
+                        <div className="features-box">
+                            <div className="box-items">
+                                <div className="icon">
+                                    <LuClipboardList />
+                                </div>
+                                <div className="content">
+                                    <h3>Xüsusiyyətlər</h3>
+                                    <p>{isFeaturesOpen ? "Kiçiltmək üçün kliklə" : "Baxmaq üçün kliklə"}</p>
+                                </div>
+                                <button className="toggle-btn" onClick={() => setIsFeaturesOpen(!isFeaturesOpen)}>
+                                    {isFeaturesOpen ? <FiMinus /> : <FiPlus />}
+                                </button>
+                            </div>
+                            {isFeaturesOpen && (
+                                <ul className="features-list">
+                                    <li><span>Brend</span><span>Brend</span></li>
+                                    <li><span>Zəmanət</span><span>1 il</span></li>
+                                    <li><span>Qablaşdırma</span><span>Var</span></li>
+                                    <li><span>Məhsul kodu</span><span>{product.productCode}</span></li>
+                                    <li><span>Stok</span><span>{product.count} ədəd</span></li>
+                                </ul>
+                            )}
+                        </div>
+                        <div className="features-box">
+                            <div className="box-items">
+                                <div className="icon">
+                                    <LuClipboardList />
+                                </div>
+                                <div className="content">
+                                    <h3>Rəylər</h3>
+                                    <p>{isCommentsOpen ? "Kiçiltmək üçün kliklə" : "Baxmaq üçün kliklə"}</p>
+                                </div>
+                                <button className="toggle-btn" onClick={() => setIsCommentsOpen(!isCommentsOpen)}>
+                                    {isCommentsOpen ? <FiMinus /> : <FiPlus />}
+                                </button>
+                            </div>
+                            {isCommentsOpen && (
+                                <div className="features-list comment">
+                                    <div className="headline">
+                                        <h4>Rəyini bildir</h4>
+                                        <span><FaStar /><FaStar /><FaStar /><FaStar /><FaStar /></span>
+                                    </div>
+                                    <form>
+                                        <textarea type="text" placeholder="Fikirləriniz" />
+                                        <button type="submit">Göndər</button>
+                                    </form>
+                                </div>
+                            )}
+                        </div>
 
                     </div>
                 </div>
