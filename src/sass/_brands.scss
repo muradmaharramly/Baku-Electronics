@@ -25,7 +25,7 @@
         padding: 20px;
         overflow: hidden;
         border-radius: 20px;
-        box-shadow: 0px 0px 5px 1px rgba(60, 60, 60, 0.03);
+        box-shadow: 0px 0px 5px 1px rgba(60, 60, 60, 0.063);
         text-align: center;
         @include transition();
         -webkit-border-radius: 20px;
@@ -44,33 +44,27 @@
           -webkit-filter: grayscale(100%);
           @include transition();
 }
-  
-        p {
-          margin-top: 10px;
-          font-size: 14px;
-          font-weight: bold;
-          color: #333;
-        }
       }
       .brand-card:hover img{
         filter: none;
         -webkit-filter: none;
 }
     }
-    @media (max-width: 768px){
-        .brands-page{
-            padding: 10px 5px;
+    
+  }
+  @media (max-width: 768px){
+    .brands-page{
+        padding: 10px 15px !important;
+    }
+    .brands{
+        justify-content: space-between !important;
+        gap: 10px !important;
+        .brand-card{
+            width: calc(50% - 10px) !important;
+            padding: 5px !important;
+            height: 90px !important;
         }
-        .brands{
-            justify-content: space-between;
-            gap: 10px;
-            .brand-card{
-                width: 150px;
-                padding: 5px;
-                height: 80px;
-            }
-        }
-      }
+    }
   }
   
   

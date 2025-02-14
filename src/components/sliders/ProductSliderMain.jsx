@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -25,7 +25,25 @@ function PrevArrow(props) {
     );
 }
 
-function ProductSliderMain({products}) {
+function ProductSliderMain({ item }) {
+    const [recentProducts, setRecentProducts] = useState([]);
+
+    useEffect(() => {
+        if (item) {
+            let viewedProducts = JSON.parse(localStorage.getItem("viewedProducts")) || [];
+
+            viewedProducts = viewedProducts.filter((p) => p.id !== item.id);
+            viewedProducts.unshift({ id: item.id, title: item.title, image: item.image });
+
+            if (viewedProducts.length > 10) {
+                viewedProducts.pop();
+            }
+
+            localStorage.setItem("viewedProducts", JSON.stringify(viewedProducts));
+
+            setRecentProducts(viewedProducts);
+        }
+    }, [item]);
 
     const settings = {
         dots: false,
@@ -40,21 +58,37 @@ function ProductSliderMain({products}) {
             {
                 breakpoint: 768,
                 settings: {
+                    slidesToShow: 3,
+                },
+            },
+            {
+                breakpoint: 576,
+                settings: {
                     slidesToShow: 2,
-                }
-            }
+                },
+            },
         ],
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     };
 
     return (
-        <div className="slider-container">
-            <Slider {...settings}>
-                    {products.map((product) => (
+        <div>
+        {recentProducts.length > 1 && (
+        <div className="also-like-con">
+            <div className="area-head">
+                <p>Ən son baxdıqlarınız</p>
+                <h3>Bu məhsullara yenidən göz at!</h3>
+            </div>
+            <div className="slider-container">
+                <Slider {...settings}>
+                    {recentProducts.map((product) => (
                         <ProductCard key={product.id} product={product} />
-                    ))}  
-            </Slider>
+                    ))}
+                </Slider>
+            </div>
+        </div>
+        )}
         </div>
     );
 }

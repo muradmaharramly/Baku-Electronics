@@ -22,6 +22,9 @@
         padding: 20px 0;
         padding-bottom: 40px;
         border-bottom: 1px solid #dddddd6c;
+        .mobile-back{
+            display: none;
+        }
     
         .product-images {
             position: relative;
@@ -981,8 +984,35 @@
                 display: block;
             }
         }
-        padding: 10px 15px;
+        .product-card{
+            width: calc(100% - 5px);
+        }
+        padding: 5px 15px !important;
         .product-details{
+            padding: 5px 0 !important;
+            .mobile-back{
+                font-weight: bold;
+                text-align: left;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                button{
+                    border: none;
+                    color: $black;
+                    background-color: $box-light;
+                    padding: 12px;
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                    svg{
+                        font-size: 16px;
+                        margin-bottom: -4px;
+                    }
+                }
+
+            }
             .product-images{
                 .free-shipping{
                     font-size: 12px;  
@@ -1350,10 +1380,44 @@
   }
                       }
                     }
-                  }
+                }
                 
             }
 
+        }
+        .also-like-con{
+            .custom-arrow {
+                width: 30px;
+                height: 30px;
+                border-radius: 8px;
+                -webkit-border-radius: 8px;
+                -moz-border-radius: 8px;
+                -ms-border-radius: 8px;
+                -o-border-radius: 8px;
+                svg{
+                    font-size: 19px;
+                }
+              }  
+              .next {
+                right: 1%;
+                svg{
+                    margin-left: -19px;
+                    margin-top: -2px;
+                }
+              }
+              
+              .prev {
+                left: 80%;
+                svg{
+                    margin-left: -19px;
+                    margin-top: -2px;
+                }
+              }
         }     
     }     
-}     
+} 
+@media (max-width: 650px){
+    .product-details{
+        flex-direction: column !important;
+    }
+}   

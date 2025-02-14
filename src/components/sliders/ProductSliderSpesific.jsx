@@ -25,7 +25,9 @@ function PrevArrow(props) {
     );
 }
 
-function ProductSliderSpesific({products, product}) {
+function ProductSliderSpesific({ products, product }) {
+
+    const filteredSliderProducts = products.filter(item => item.id !== product.id && item.category === product.category);
 
     const settings = {
         dots: false,
@@ -40,22 +42,39 @@ function ProductSliderSpesific({products, product}) {
             {
                 breakpoint: 768,
                 settings: {
+                    slidesToShow: 3,
+                },
+            },
+            {
+                breakpoint: 576,
+                settings: {
                     slidesToShow: 2,
-                }
-            }
+                },
+            },
         ],
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     };
 
     return (
-        <div className="slider-container">
-            <Slider {...settings}>
-                    {products.filter(item => item.id !== product.id && item.category == product.category).map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}  
-            </Slider>
+        <div>
+            {filteredSliderProducts.length > 0 && (
+            <div className="also-like-con">
+                <div className="area-head">
+                    <p>Oxşar məhsullar</p>
+                    <h3>Bunları da bəyənəcəksən!</h3>
+                </div>
+                <div className="slider-container">
+                    <Slider {...settings}>
+                        {filteredSliderProducts.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </Slider>
+                </div>
+            </div>
+            )}
         </div>
+
     );
 }
 

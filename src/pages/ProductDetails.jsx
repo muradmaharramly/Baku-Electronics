@@ -7,7 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { RiArrowRightDoubleFill, RiScalesFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
-import { FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
+import { FaArrowLeft, FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
 import PreLoader from "../components/PreLoader";
 import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
@@ -129,6 +129,7 @@ function ProductDetails() {
                 <span>{product.title}</span>
             </div>
             <div className="product-details">
+                <h3 className="mobile-back"><button onClick={() => window.history.back()}><FaArrowLeft /></button>{product.title.substring(0, 30)}...</h3>
                 <div className="product-images">
                     <span className="free-shipping">Pulsuz çatdırılma</span>
                     <Slider {...settings} className="main-slider">
@@ -377,20 +378,10 @@ function ProductDetails() {
                     </div>
                 </div>
             </div>
-            <div className="also-like-con">
-                 <div className="area-head">
-                    <p>Oxşar məhsullar</p>
-                    <h3>Bunları da bəyənəcəksən!</h3>
-                 </div>
-                 <ProductSliderSpesific products = {products} product={product}/>
-            </div>
-            <div className="also-like-con">
-                 <div className="area-head">
-                    <p>Oxşar məhsullar</p>
-                    <h3>Bu məhsullara yenidən göz at!</h3>
-                 </div>
-                 <ProductSliderMain products = {products}/>
-            </div>
+            <ProductSliderSpesific products = {products} product={product}/>
+            
+            <ProductSliderMain item={product}/>
+            
         </div>
     );
 }

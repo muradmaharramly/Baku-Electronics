@@ -278,6 +278,12 @@
         }
         .product-title{
             font-size: 12px;
+            line-clamp: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 1; 
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .pricing{
             gap: 10px;

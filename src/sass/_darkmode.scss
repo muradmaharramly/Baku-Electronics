@@ -1409,6 +1409,16 @@ border-bottom: 2px solid $white;
           
       }
   }
+  .also-like-con{
+    .area-head{
+      p{
+          color: $white-2nd;
+      }
+      h3{
+        color: $white;
+      }
+  }
+}
 }
 @media (max-width: 768px){
   .product-details-container{
@@ -1740,5 +1750,17 @@ border-bottom: 2px solid $white;
 
       }     
   }     
-}     
+} 
+.brands-page{
+  h2{
+      color: $white;
+  }
+
+  .brands {
+    .brand-card {
+      background-color: $main-light;
+    }
+  }
+  
+}    
 }
