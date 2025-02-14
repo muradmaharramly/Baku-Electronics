@@ -183,7 +183,7 @@ const Header = () => {
                     <ul>
                         <li><NavLink>Kampaniyalar</NavLink></li>
                         <li><NavLink to="/corporative-sales">Korporativ satışlar</NavLink></li>
-                        <li>Mağazalar</li>
+                        <li><NavLink to="/shops">Mağazalar</NavLink></li>
                         <li>Aylıq ödəniş</li>
                         <li className="droped">Digər<ion-icon name="chevron-down-outline"></ion-icon>
                             <ul className="dropdown">
@@ -276,9 +276,9 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a>
+                                <Link to="/shops">
                                     Mağazalar <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <a>

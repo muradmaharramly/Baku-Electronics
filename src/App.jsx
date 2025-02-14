@@ -19,6 +19,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import NotFoundPage from "./pages/NotFoundPage";
 import NewsDetails from "./pages/NewsDetails";
 import NewsAndBlogs from "./pages/NewsAndBlogs";
+import Shops from "./pages/Shops";
 
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/news" element={<NewsAndBlogs />} />
         <Route path="/news/:slug" element={<NewsDetails />} />
+        <Route path="/shops" element={<Shops />} />
       </Routes>
       <MobileTabBar />
       <Footer />

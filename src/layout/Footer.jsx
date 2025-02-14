@@ -24,7 +24,7 @@ const Footer = () => {
                         <h5>Alıcılara</h5>
                         <ul>
                             <li><Link to="/loan-purchase">Nisyə alış</Link></li>
-                            <li>Mağazalar</li>
+                            <li><Link to="/shops">Mağazalar</Link></li>
                             <li><Link to="/service-centers">Servis mərkəzləri</Link></li>
                             <li><Link to="/delivery-and-billing">Çatdırılma və ödəniş</Link></li>
                             <li><Link to="/double-guarantee">İkiqat zəmanət</Link></li>

@@ -391,7 +391,8 @@
     }
   }
 
-  .service-centers {
+  .service-centers,
+  .shops {
     .filter-line{
       h2{
         color: $white;
@@ -426,7 +427,7 @@
       .center-box {
         background: $box-hover-dark;
         &:hover{
-            box-shadow: 0px 0px 10px rgba(239, 239, 239, 0.212);
+          box-shadow: 0px 5px 1px 2px $red;
         }
   
         h3 {
@@ -1429,6 +1430,14 @@ border-bottom: 2px solid $white;
       }
       padding: 10px 15px;
       .product-details{
+        .mobile-back{
+          color: $white;
+          button{
+            background-color: $box-dark;
+            color: $white;
+          }
+
+          }
           .product-images{
               .free-shipping{
                   font-size: 12px;  
