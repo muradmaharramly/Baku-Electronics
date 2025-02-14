@@ -15,9 +15,12 @@ import { HiOutlinePercentBadge } from "react-icons/hi2";
 import { HiOutlineCursorClick } from "react-icons/hi";
 import { IoShareSocialOutline } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
-import { FiMinus, FiPlus } from "react-icons/fi";
+import { FiMinus, FiPhoneCall, FiPlus } from "react-icons/fi";
 import { MdDone } from "react-icons/md";
 import { LuClipboardList } from "react-icons/lu";
+import { BiCommentDetail } from "react-icons/bi";
+import ProductSliderMain from "../components/sliders/ProductSliderMain";
+import ProductSliderSpesific from "../components/sliders/ProductSliderSpesific";
 
 function NextArrow(props) {
     const { className, onClick } = props;
@@ -333,7 +336,7 @@ function ProductDetails() {
                         <div className="features-box">
                             <div className="box-items">
                                 <div className="icon">
-                                    <LuClipboardList />
+                                    <BiCommentDetail />
                                 </div>
                                 <div className="content">
                                     <h3>Rəylər</h3>
@@ -356,9 +359,37 @@ function ProductDetails() {
                                 </div>
                             )}
                         </div>
+                        <div className="features-box">
+                            <div className="box-items">
+                                <div className="icon">
+                                    <FiPhoneCall />
+                                </div>
+                                <div className="content tel">
+                                    <h3>Sualınız var?</h3>
+                                    <p>Zəng edin soruşun</p>
+                                </div>
+                                <Link to="tel:143" className="toggle-btn tel">
+                                    Zəng et
+                                </Link>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
+            </div>
+            <div className="also-like-con">
+                 <div className="area-head">
+                    <p>Oxşar məhsullar</p>
+                    <h3>Bunları da bəyənəcəksən!</h3>
+                 </div>
+                 <ProductSliderSpesific products = {products} product={product}/>
+            </div>
+            <div className="also-like-con">
+                 <div className="area-head">
+                    <p>Oxşar məhsullar</p>
+                    <h3>Bu məhsullara yenidən göz at!</h3>
+                 </div>
+                 <ProductSliderMain products = {products}/>
             </div>
         </div>
     );

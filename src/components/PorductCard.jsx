@@ -57,7 +57,7 @@ function ProductCard({ product }) {
                 <p className="review-count"><FaCommentDots />{product.reviewCount}<span>rəy</span></p>
             </div>
             <Link to={`/products/${slugify(product.title, { lower: true })}`}>
-                <p className="product-title">{product.title.substring(0, 30)}...</p>
+                <p className="product-title">{product.title.substring(0, 25)}...</p>
             </Link>
             <Link to={`/products/${slugify(product.title, { lower: true })}`}>
                 <div className="pricing">
