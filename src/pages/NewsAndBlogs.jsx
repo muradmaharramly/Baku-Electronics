@@ -22,9 +22,9 @@ const NewsAndBlogs = () => {
 
     const totalPages = Math.ceil(newsCount / newsPerPage);
 
-    const indexOfLastBrand = currentPage * newsPerPage;
-    const indexOfFirstBrand = indexOfLastBrand - newsPerPage;
-    const currentNews = news.slice(indexOfFirstBrand, indexOfLastBrand);
+    const indexOfLastNews = currentPage * newsPerPage;
+    const indexOfFirstNews = indexOfLastNews - newsPerPage;
+    const currentNews = news.slice(indexOfFirstNews, indexOfLastNews);
 
     const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
     const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);

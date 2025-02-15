@@ -158,6 +158,10 @@
         -moz-border-radius: 0 !important;
         -ms-border-radius: 0 !important;
         -o-border-radius: 0 !important;
+        a{
+            color: $black;
+            text-decoration: none;
+        }
 }
       .slide{
         width: 94% !important;

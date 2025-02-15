@@ -220,6 +220,12 @@
             }
         }
     }
+    .listed-details{
+        display: none;
+    }
+    .listed-ending{
+        display: none;
+    }
 }
 @media (max-width: 768px) {
     .product-card{

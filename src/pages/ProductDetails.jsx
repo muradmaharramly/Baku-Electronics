@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../tools/request/fetchProducts";
 import slugify from "slugify";
 import Slider from "react-slick";
@@ -21,6 +20,7 @@ import { LuClipboardList } from "react-icons/lu";
 import { BiCommentDetail } from "react-icons/bi";
 import ProductSliderMain from "../components/sliders/ProductSliderMain";
 import ProductSliderSpesific from "../components/sliders/ProductSliderSpesific";
+import { useSelector } from "react-redux";
 
 function NextArrow(props) {
     const { className, onClick } = props;
@@ -72,7 +72,7 @@ function ProductDetails() {
     const { addWishlistItem, removeWishlistItem, inWishlist } = useWishlist();
 
     if (loading) return <PreLoader />;
-    if (!product) return <p>Product not found!</p>;
+    if (!product) return <p>Məhsul tapılmadı!</p>;
 
     const handleAddClick = () => {
         if (!inCart(product.id)) {

@@ -43,22 +43,24 @@ function NewsSlider() {
                 </div>
                 <Link to="№" target="_blank">Xəbərlərə keçid et</Link>
             </div>
-            <div className="slider-container"> 
-                    <Slider {...settings} >
+            <div className="slider-container">
+                <Slider {...settings} >
                     {news.map((item) => (
-                        <div className="slide" key={item.id}>
-                            <div className="img-div">
-                                <img src={item.image} />
-                                <div className="overlay">
-                                    <Link to={`/news/${slugify(item.title, { lower: true })}`}>
-                                        Ətraflı
-                                    </Link>
+                        <Link to={`/news/${slugify(item.title, { lower: true })}`}>
+                            <div className="slide" key={item.id}>
+                                <div className="img-div">
+                                    <img src={item.image} />
+                                    <div className="overlay">
+                                        <Link to={`/news/${slugify(item.title, { lower: true })}`}>
+                                            Ətraflı
+                                        </Link>
+                                    </div>
                                 </div>
+                                <h4>{item.title.substring(0, 50)}...</h4>
                             </div>
-                            <h4>{item.title.substring(0,50)}...</h4>
-                        </div>
+                        </Link>
                     ))}
-                    </Slider>       
+                </Slider>
             </div>
             <Link className="mobile-href-btn" to="https://www.youtube.com/user/BakuElectronicsMMC" target="_blank">Kanalımıza keçid et</Link>
         </div>

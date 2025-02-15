@@ -1771,5 +1771,182 @@ border-bottom: 2px solid $white;
     }
   }
   
-}    
+}  
+.products-page{
+  .page-head{
+      h2{
+          color: $white;
+          span{
+              color: $white-2nd;
+          }
+          a{
+              color: $white;
+              background-color: $box-dark;
+          }
+      }
+      .filter-area{
+          .filter{
+              background-color: $box-dark;
+              .filter-item{
+                  color: $white-2nd;
+                  &::after{
+                      background-color: $white-2nd;
+                  }
+                  &:hover{
+                      color: $white-2nd;
+                      &::after{
+                          background-color: $white-2nd;
+                      }
+                  }
+                  &.selected{
+                      color: $main-light;
+                      &:hover{
+                          &::after{
+                              background-color: $main-light;
+                          }
+                      }
+                  }
+              }
+          }
+          .grid,
+          .list{
+              background-color: $box-dark;
+              color: $white;
+              &:hover{
+                  background-color: $box-hover-dark;
+              }
+              &.active{
+                  background-color: $box-hover-dark;
+              }
+}
+      }
+  }
+  .product-container{
+      .sidebar {
+          background: $box-dark;          
+          .inner{
+              &::-webkit-scrollbar-track {
+                background: #888; 
+                border-radius: 10px;
+              }
+              &::-webkit-scrollbar-thumb {
+                background: #f0f0f0; 
+                border-radius: 10px;
+              }
+              &::-webkit-scrollbar-thumb:hover {
+                background: $white;
+              }
+              &* {
+                scrollbar-width: thin;
+                scrollbar-color: #f0f0f0 #888; 
+              }
+              
+          }
+          .btns{
+              .reset-btn,
+              .apply-btn {
+                  background: $red;
+                  color: $white;
+                  &:hover{
+                      background-color: $red-hover;
+                  }
+              }
+              .apply-btn{
+                  background-color: $white;
+                  color: $black;
+                  &:hover{
+                      background-color: $white-2nd;
+                  }
+              }
+          }
+            
+            .filter-section {            
+              h6 {
+                  color: $white;
+              }
+            
+              .price-range {
+                input{
+                  background-color: #343434;
+                  color: $white;
+                  &:focus{
+                      outline: none;
+                      border-color: #ccc;
+                  }
+  
+                }
+              }
+            }
+            
+            form{
+              .search-input {
+                  background-color: #343434;
+                  color: $white;
+                  &::placeholder{
+                    color: $white-2nd;
+                  }
+              }
+              svg{
+                  color: $white;
+              }
+            }
+            
+            .category-list,
+            .stock-list {
+              label {
+                color: $white;
+              }
+            }
+        }
+        
+       
+  }
+}
+@media (max-width: 768px){
+  .products-page{
+      .page-head{
+          .filter-area{
+              .filter-clicker{
+                  background: $red;
+                  color: $white;
+              }
+              .custom-filter {
+                  .selected-option {
+                      background: $red;
+                      color: $white;
+}
+              
+                  .dropdown-list {
+                      background: $box-dark;
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.241);
+                      @include transition();
+                      .dropdown-item {
+                          color: $white;
+                          &:hover {
+                              background: $box-hover-dark;
+                          }
+}
+}
+              }
+              .grid,
+              .list{
+                  display: none;
+               }
+          }
+      }
+      .product-container{
+          .sidebar{     
+              .inner{
+                  .back{
+                      color: $white;
+                      button{
+                          color: $white;
+                          background-color: $box-hover-dark;
+                      }
+                  }
+              }
+          }
+      }
+  }
+}  
 }
