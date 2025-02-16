@@ -380,7 +380,7 @@ function ProductDetails() {
             </div>
             <ProductSliderSpesific products = {products} product={product}/>
             
-            <ProductSliderMain item={product}/>
+            <ProductSliderMain currentProduct={product}/>
             
         </div>
     );

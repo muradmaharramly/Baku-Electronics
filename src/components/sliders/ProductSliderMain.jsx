@@ -25,15 +25,15 @@ function PrevArrow(props) {
     );
 }
 
-function ProductSliderMain({ item }) {
+function ProductSliderMain({ currentProduct }) {
     const [recentProducts, setRecentProducts] = useState([]);
 
     useEffect(() => {
-        if (item) {
+        if (currentProduct) {
             let viewedProducts = JSON.parse(localStorage.getItem("viewedProducts")) || [];
 
-            viewedProducts = viewedProducts.filter((p) => p.id !== item.id);
-            viewedProducts.unshift({ id: item.id, title: item.title, image: item.image });
+            viewedProducts = viewedProducts.filter((p) => p.id !== currentProduct.id);
+            viewedProducts.unshift({ id: currentProduct.id, title: currentProduct.title, image: currentProduct.image, price: currentProduct.price, discount: currentProduct.discount, rating: currentProduct.rating, reviewCount: currentProduct.reviewCount, category: currentProduct.category, productCode: currentProduct.productCode });
 
             if (viewedProducts.length > 10) {
                 viewedProducts.pop();
@@ -43,7 +43,7 @@ function ProductSliderMain({ item }) {
 
             setRecentProducts(viewedProducts);
         }
-    }, [item]);
+    }, [currentProduct]);
 
     const settings = {
         dots: false,
