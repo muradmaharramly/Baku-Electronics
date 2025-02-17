@@ -45,7 +45,7 @@ const Footer = () => {
                         <h5>Haqqımızda</h5>
                         <ul>
                             <li><Link to="/about-us">Haqqımızda</Link></li>
-                            <li>Vakansiyalar</li>
+                            <li><Link to="https://careers.bakuelectronics.az/az/">Vakansiyalar</Link></li>
                             <li><Link to="/corporative-sales">Korporativ satışlar</Link></li>
                         </ul>
                     </div>
