@@ -9,9 +9,10 @@ import ProductCard from '../components/PorductCard';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../tools/request/fetchProducts';
 import PreLoader from '../components/PreLoader';
-import { MdDone, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { FiFilter } from 'react-icons/fi';
+import { PiEmpty } from 'react-icons/pi';
 
 const categories = ['electronic', 'smartphone', 'TV', 'smartwatch'];
 
@@ -85,12 +86,11 @@ const Products = () => {
         .sort((a, b) => {
             if (filterType === 'ucuzdan-bahaya') return a.price - b.price;
             if (filterType === 'bahadan-ucuza') return b.price - a.price;
+            if (filterType === 'popular') return b.rating - a.rating;
+            if (filterType === 'endirim') return b.discount - a.discount;
+            if (filterType === 'A-Z') return a.title.localeCompare(b.title);
+            if (filterType === 'Z-A') return b.title.localeCompare(a.title);
             return 0;
-        })
-        .filter((product) => {
-            if (filterType === 'popular') return product.rating > 4;
-            if (filterType === 'endirim') return product.discount > 0;
-            return true;
         })
         .filter((product) => {
             if (stockFilter === 'inStock') return product.count > 0;
@@ -98,7 +98,7 @@ const Products = () => {
             return true;
         });
 
-    const options = ["standart", "popular", "endirim", "ucuzdan-bahaya", "bahadan-ucuza"];
+    const options = ["standart", "popular", "endirim", "ucuzdan-bahaya", "bahadan-ucuza", "A-Z", "Z-A"];
 
     const handleSelect = (type) => {
         setFilterType(type);
@@ -115,7 +115,7 @@ const Products = () => {
                 <h2><Link onClick={() => window.history.back()}><FaArrowLeft /></Link>Məhsullar<span>({productCount} məhsul)</span></h2>
                 <div className='filter-area'>
                     <div className="filter">
-                        {['standart', 'popular', 'endirim', 'ucuzdan-bahaya', 'bahadan-ucuza'].map((type) => (
+                        {['standart', 'popular', 'endirim', 'ucuzdan-bahaya', 'bahadan-ucuza', 'A-Z', 'Z-A'].map((type) => (
                             <span
                                 key={type}
                                 onClick={() => setFilterType(type)}
@@ -155,7 +155,6 @@ const Products = () => {
                         <h4 className='back'><button onClick={handlePanel}><FaArrowLeft /></button>Filter</h4>
                         <div className='btns'>
                             <button className='reset-btn' onClick={resetFilters}><CgTrashEmpty /> Seçimi sıfırla</button>
-                            <button className='apply-btn'>Tətbiq et<MdDone /></button>
                         </div>
                         <div className='filter-section'>
                             <h6>Qiymət</h6>
@@ -221,12 +220,20 @@ const Products = () => {
                     </div>
                 </div>
                 <div className='page'>
-                    <div className={`product-list ${isListed ? "listed" : ""}`}>
-                        {filteredProducts.map((product) => (
-                            <ProductCard key={product.id} product={product} />
-                        ))}
-                    </div>
-                    {totalPages > 1 && (
+                    {filteredProducts.length === 0 ? (
+                        <div className='empty-area'>
+                            <div className='icon'><PiEmpty /></div>
+                            <p>Uyğun məhsul tapılmadı.</p>
+                            <button className='reset-btn' onClick={resetFilters}><CgTrashEmpty /> Filtrləri sıfırla</button>
+                        </div>
+                    ) : (
+                        <div className={`product-list ${isListed ? "listed" : ""}`}>
+                            {filteredProducts.map((product) => (
+                                <ProductCard key={product.id} product={product} />
+                            ))}
+                        </div>
+                    )}
+                    {totalPages > 1 && filteredProducts.length !== 0 && (
                         <div className="pagination">
                             <button onClick={handlePrevPage} disabled={currentPage === 1}>
                                 <MdOutlineKeyboardArrowLeft />

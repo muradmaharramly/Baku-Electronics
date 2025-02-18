@@ -106,11 +106,15 @@
                 align-items: center;
             }
             
-            .main-image img {
-                width: 100%;
-                max-width: 100%;
-                height: auto;
-                border-radius: 10px;
+            .main-image {
+                padding: 15px;
+                img{
+                    width:98%;
+                    max-width: 100%;
+                    height: auto;
+                    border-radius: 10px;
+                }
+                
             }
             
             .slick-thumb {

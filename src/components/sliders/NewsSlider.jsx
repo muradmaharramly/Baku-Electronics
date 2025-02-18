@@ -41,7 +41,7 @@ function NewsSlider() {
                     <p>Bloq və xəbərlər</p>
                     <h3>Ən son yeniliklərdən xəbərdar ol!</h3>
                 </div>
-                <Link to="№" target="_blank">Xəbərlərə keçid et</Link>
+                <Link to="/news">Xəbərlərə keçid et</Link>
             </div>
             <div className="slider-container">
                 <Slider {...settings} >

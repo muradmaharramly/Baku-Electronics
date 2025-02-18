@@ -98,7 +98,89 @@
                 }
                 button {
                     color: $white-2nd;
+                }
+                .search-panel{
+                  background-color: $box-dark;
+                  box-shadow: 0px 5px 15px 5px rgba(0, 0, 0, 0.353);
+                  color: $white;
+                  a{
+                    color: $white;
                   }
+                  .left{
+                    background-color: #414141;
+                    ul{
+                      &::-webkit-scrollbar {
+                        width: 4px; 
+                        height: 6px; 
+                      }
+                      &::-webkit-scrollbar-track {
+                        background: #888; 
+                        border-radius: 10px;
+                      }
+                      &::-webkit-scrollbar-thumb {
+                        background: #f0f0f0; 
+                        border-radius: 10px;
+                      }
+                      &::-webkit-scrollbar-thumb:hover {
+                        background: #555;
+                      }
+                      &* {
+                        scrollbar-width: thin;
+                        scrollbar-color: #f0f0f0 #888 ; 
+                      }
+                      .not-found{
+                        background-color:  #444;
+                      }
+                      a{
+                        border: 1px solid transparent;
+                        border-bottom: 1px solid #dcdbdb37;
+                        color: $white-2nd;
+                        &:hover{
+                          color: $white;
+                          border: 1px solid #dcdbdb37;
+                          background-color: #343434;
+                          svg{
+                            color: $white;
+                          }
+                        }
+                      }
+                    }
+        }
+                  .right{
+                    .searched-products{
+                      flex: 2;
+                      background-color: #414141;
+                      .searched-list{
+                        &::-webkit-scrollbar {
+                          width: 4px; 
+                          height: 6px; 
+                        }
+                        &::-webkit-scrollbar-track {
+                          background: #888; 
+                          border-radius: 10px;
+                        }
+                        &::-webkit-scrollbar-thumb {
+                          background: #f0f0f0; 
+                          border-radius: 10px;
+                        }
+                        &::-webkit-scrollbar-thumb:hover {
+                          background: #555;
+                        }
+                        &* {
+                          scrollbar-width: thin;
+                          scrollbar-color: #f0f0f0 #888 ; 
+                        }
+                      }
+                      .not-found{
+                        background-color: #444;
+                      }
+                      .product-box{
+                        background-color: $box-dark;
+        }
+                    }
+                  }
+                }
+
             }
             .actions {
                 a {
@@ -1822,6 +1904,11 @@ border-bottom: 2px solid $white;
       }
   }
   .product-container{
+    .empty-area{
+      p{
+          color: $white;
+      }
+  }
       .sidebar {
           background: $box-dark;          
           .inner{
@@ -1843,19 +1930,11 @@ border-bottom: 2px solid $white;
               
           }
           .btns{
-              .reset-btn,
-              .apply-btn {
+              .reset-btn{
                   background: $red;
                   color: $white;
                   &:hover{
                       background-color: $red-hover;
-                  }
-              }
-              .apply-btn{
-                  background-color: $white;
-                  color: $black;
-                  &:hover{
-                      background-color: $white-2nd;
                   }
               }
           }

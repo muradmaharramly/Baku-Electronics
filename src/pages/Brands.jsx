@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdArrowBackIos, MdArrowForwardIos, MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { RiArrowRightDoubleFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 

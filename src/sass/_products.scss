@@ -171,8 +171,7 @@
             .btns{
                 display: flex;
                 justify-content: space-between;
-                .reset-btn,
-                .apply-btn {
+                .reset-btn{
                     background: #fdd;
                     border: none;
                     padding:8px 10px;
@@ -192,16 +191,6 @@
                     }
                     &:hover{
                         background-color: rgb(255, 181, 181);
-                    }
-                }
-                .apply-btn{
-                    background-color: $black;
-                    color: $white;
-                    &:hover{
-                        background-color: #3a3a3a;
-                    }
-                    svg{
-                        margin-left: 2px;
                     }
                 }
             }
@@ -339,6 +328,55 @@
             flex: 3.3;
             display: flex;
             flex-direction: column;
+            .empty-area{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                margin: auto;
+                gap: 15px;
+                height: 40vh;
+                .icon{
+                    padding: 23px 25px;
+                    border-radius: 50%;
+                    -webkit-border-radius: 50%;
+                    -moz-border-radius: 50%;
+                    -ms-border-radius: 50%;
+                    -o-border-radius: 50%;
+                    background-color: #FDEEEE;
+                    svg{
+                        font-size: 5rem;
+                        margin-bottom: -4px;
+                        color: $red;
+                    }
+                }
+                p{
+                    font-size: 16px;
+                    font-weight: 500;
+                }
+                .reset-btn{
+                    background:$red;
+                    border: none;
+                    padding:10px 15px;
+                    cursor: pointer;
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                    color: $white;
+                    font-weight: 500;
+                    font-size: 15px;
+                    @include transition();
+                    svg{
+                        font-size: 20px;
+                        margin-bottom: -3px;
+                    }
+                    &:hover{
+                        background-color: $red-hover;
+                    }
+                }
+            }
             .product-list{
                 padding: 0 !important;
                 justify-content: left;
