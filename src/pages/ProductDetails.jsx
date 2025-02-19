@@ -12,7 +12,7 @@ import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
 import { HiOutlinePercentBadge } from "react-icons/hi2";
 import { HiOutlineCursorClick } from "react-icons/hi";
-import { IoShareSocialOutline } from "react-icons/io5";
+import { IoBan, IoShareSocialOutline } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { FiMinus, FiPhoneCall, FiPlus } from "react-icons/fi";
 import { MdDone } from "react-icons/md";
@@ -121,7 +121,7 @@ function ProductDetails() {
     const totalPrice = initialPayment + months * monthlyPayment;
 
     return (
-        <div className="product-details-container">
+        <div className={`product-details-container ${product.count === 0 ? "outofstock" : ""}`}>
             <div className={`overlay ${quickBuyOpen || divideBuyOpen ? "clicked" : ""}`}></div>
             <div className="breadcrumb">
                 <Link to="/">Ana səhifə</Link>
@@ -135,6 +135,12 @@ function ProductDetails() {
                     <Slider {...settings} className="main-slider">
                         {Array(4).fill(null).map((_, index) => (
                             <div key={index} className="main-image">
+                                {product.count === 0 &&
+                                    <div className="stock-overlay">
+                                        <IoBan />
+                                        <h5>Stokda yoxdur</h5>
+                                    </div>
+                                }
                                 <img src={product.image} alt={`slide-${index}`} />
                             </div>
                         ))}
@@ -161,14 +167,22 @@ function ProductDetails() {
                         <p className="current-price">${discountPrice.toFixed(2)}</p>
                     </div>
                     <div className="btns-div">
-                        {inCart(product.id) ? (
-                            <Link to="/cart" className="add-to-cart-btn clicked">
-                                <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                        {product.count === 0 ? (
+                            <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
+                                <RiShoppingCart2Line /><span>Stokda yoxdur</span>
                             </Link>
                         ) : (
-                            <Link className="add-to-cart-btn" onClick={handleAddClick}>
-                                <RiShoppingCart2Line /><span>Səbətə əlavə et</span>
-                            </Link>
+                            inCart(product.id) ? (
+                                <Link to="/cart" className="add-to-cart-btn clicked">
+                                    <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                                </Link>
+                            ) : (
+                                <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
+                                    <RiShoppingCart2Line />
+                                    <span className="desktop-text">Səbətə əlavə et</span>
+                                    <span className="mobile-text">Səbətə at</span>
+                                </Link>
+                            )
                         )}
                         <Link className="share-btn"><IoShareSocialOutline />Paylaş</Link>
                         <Link className="scale-btn"><RiScalesFill /></Link>
@@ -176,31 +190,32 @@ function ProductDetails() {
                             <FaRegHeart />
                         </Link>
                     </div>
-                    <div className="actions">
-                        <button className={`quick-buy ${quickBuyOpen ? "clicked" : ""}`}
-                            onClick={() => {
-                                setQuickBuyOpen(!quickBuyOpen);
-                                if (divideBuyOpen) setDivideBuyOpen(false);
-                            }}>
-                            <div className="icon"><HiOutlineCursorClick /></div>
-                            <div>
-                                <h3>Bir kliklə al</h3>
-                                <p>Sürətli sifariş</p>
-                            </div>
-                        </button>
-                        <button className={`installment ${divideBuyOpen ? "clicked" : ""}`}
-                            onClick={() => {
-                                setDivideBuyOpen(!divideBuyOpen);
-                                if (quickBuyOpen) setQuickBuyOpen(false);
-                            }}>
-                            <div className="icon"><HiOutlinePercentBadge /></div>
-                            <div>
-                                <h3>Hissə-hissə ödə</h3>
-                                <p>${(discountPrice / 6).toFixed(2)} / 6 ay</p>
-                            </div>
-                        </button>
-                    </div>
-
+                    {product.count && (
+                        <div className="actions">
+                            <button className={`quick-buy ${quickBuyOpen ? "clicked" : ""}`}
+                                onClick={() => {
+                                    setQuickBuyOpen(!quickBuyOpen);
+                                    if (divideBuyOpen) setDivideBuyOpen(false);
+                                }}>
+                                <div className="icon"><HiOutlineCursorClick /></div>
+                                <div>
+                                    <h3>Bir kliklə al</h3>
+                                    <p>Sürətli sifariş</p>
+                                </div>
+                            </button>
+                            <button className={`installment ${divideBuyOpen ? "clicked" : ""}`}
+                                onClick={() => {
+                                    setDivideBuyOpen(!divideBuyOpen);
+                                    if (quickBuyOpen) setQuickBuyOpen(false);
+                                }}>
+                                <div className="icon"><HiOutlinePercentBadge /></div>
+                                <div>
+                                    <h3>Hissə-hissə ödə</h3>
+                                    <p>${(discountPrice / 6).toFixed(2)} / 6 ay</p>
+                                </div>
+                            </button>
+                        </div>
+                    )}
                     <div className={`quick-buy-area ${quickBuyOpen ? "clicked" : ""}`}>
                         <button className="hide-btn" onClick={() => {
                             setQuickBuyOpen(!quickBuyOpen);
@@ -280,35 +295,36 @@ function ProductDetails() {
                             </div>
                         </div>
                     </div>
-                    <div className="buy-together">
-                        <p>Məhsulun yanında al</p>
-                        {products.filter(item => item.id !== product.id && item.category == product.category && item.price < product.price).slice(0, 3).map((buyTogether) => (
-                            <div className="item" key={buyTogether.id}>
-                                <div className="con">
-                                    <div className="img-div">
-                                        <img src={buyTogether.image} />
-                                    </div>
-                                    <div className="item-info">
-                                        <p>{buyTogether.title.substring(0, 80)}...</p>
-                                        <div className="price-info">
-                                            <h3>${(buyTogether.price - (buyTogether.price * buyTogether.discount) / 100).toFixed(2)}</h3>
-                                            <h3>${((buyTogether.price - (buyTogether.price * buyTogether.discount) / 100) / 24).toFixed(2)} <span>24 ay</span></h3>
+                    {product.count && (
+                        <div className="buy-together">
+                            <p>Məhsulun yanında al</p>
+                            {products.filter(item => item.id !== product.id && item.category == product.category && item.price < product.price).slice(0, 3).map((buyTogether) => (
+                                <div className="item" key={buyTogether.id}>
+                                    <div className="con">
+                                        <div className="img-div">
+                                            <img src={buyTogether.image} />
+                                        </div>
+                                        <div className="item-info">
+                                            <p>{buyTogether.title.substring(0, 80)}...</p>
+                                            <div className="price-info">
+                                                <h3>${(buyTogether.price - (buyTogether.price * buyTogether.discount) / 100).toFixed(2)}</h3>
+                                                <h3>${((buyTogether.price - (buyTogether.price * buyTogether.discount) / 100) / 24).toFixed(2)} <span>24 ay</span></h3>
+                                            </div>
                                         </div>
                                     </div>
+                                    {inCart(buyTogether.id) ? (
+                                        <Link className="add clicked"><span className="tick"><MdDone /></span><span>Əlavə edildi</span></Link>
+                                    ) : (
+                                        <Link className="add" onClick={() => {
+                                            if (!inCart(buyTogether.id)) {
+                                                addItem(buyTogether);
+                                            }
+                                        }}><FiPlus /> <span>Birlikdə al</span></Link>
+                                    )}
                                 </div>
-                                {inCart(buyTogether.id) ? (
-                                    <Link className="add clicked"><span className="tick"><MdDone /></span><span>Əlavə edildi</span></Link>
-                                ) : (
-                                    <Link className="add" onClick={() => {
-                                        if (!inCart(buyTogether.id)) {
-                                            addItem(buyTogether);
-                                        }
-                                    }}><FiPlus /> <span>Birlikdə al</span></Link>
-                                )}
-                            </div>
-                        ))}
-
-                    </div>
+                            ))}
+                        </div>
+                    )}
                     <div className="features-container">
                         <p>Məlumat</p>
                         <div className="features-box">
@@ -378,10 +394,10 @@ function ProductDetails() {
                     </div>
                 </div>
             </div>
-            <ProductSliderSpesific products = {products} product={product}/>
-            
-            <ProductSliderMain currentProduct={product}/>
-            
+            <ProductSliderSpesific products={products} product={product} />
+
+            <ProductSliderMain currentProduct={product} />
+
         </div>
     );
 }

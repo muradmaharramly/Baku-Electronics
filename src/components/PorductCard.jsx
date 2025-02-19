@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
+import { IoBan } from "react-icons/io5";
 import { RiScalesFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
@@ -44,9 +45,14 @@ function ProductCard({ product }) {
     };
 
     return (
-        <div className="product-card">
+        <div className={`product-card ${product.count === 0 ? "outofstock" : ""}`}>
             <Link to={`/products/${slugify(product.title, { lower: true })}`}>
                 <div className="img-div">
+                    {product.count === 0 &&
+                        <div className="stock-overlay">
+                            <IoBan />
+                        </div>
+                    }
                     <img src={product.image} alt={product.title} />
                     {product.discount > 0 && <p className="discount">${product.discount}%</p>}
                     <button><RiScalesFill /></button>
@@ -55,6 +61,9 @@ function ProductCard({ product }) {
             <div className="details">
                 <p className="rate"><FaStar />{product.rating}</p>
                 <p className="review-count"><FaCommentDots />{product.reviewCount}<span>rəy</span></p>
+                {product.count === 0 &&
+                    <p className="stock-info">Stokda yoxdur</p>
+                }
             </div>
             <Link to={`/products/${slugify(product.title, { lower: true })}`}>
                 <p className="product-title">{product.title.substring(0, 25)}...</p>
@@ -74,17 +83,24 @@ function ProductCard({ product }) {
                 </div>
             </Link>
             <div className="card-ending">
-                {inCart(product.id) ? (
-                    <Link to="/cart" className="add-to-cart-btn clicked">
-                        <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                {product.count === 0 ? (
+                    <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
+                        <RiShoppingCart2Line /><span>Stokda yoxdur</span>
                     </Link>
                 ) : (
-                    <Link className="add-to-cart-btn" onClick={handleAddClick}>
-                        <RiShoppingCart2Line />
-                        <span className="desktop-text">Səbətə əlavə et</span>
-                        <span className="mobile-text">Səbətə at</span>
-                    </Link>
+                    inCart(product.id) ? (
+                        <Link to="/cart" className="add-to-cart-btn clicked">
+                            <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                        </Link>
+                    ) : (
+                        <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
+                            <RiShoppingCart2Line />
+                            <span className="desktop-text">Səbətə əlavə et</span>
+                            <span className="mobile-text">Səbətə at</span>
+                        </Link>
+                    )
                 )}
+
                 <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
                     <FaRegHeart />
                 </Link>
@@ -96,6 +112,9 @@ function ProductCard({ product }) {
                 <div className="details">
                     <p className="rate"><FaStar />{product.rating}</p>
                     <p className="review-count"><FaCommentDots />{product.reviewCount}<span>rəy</span></p>
+                    {product.count !== 0 &&
+                        <p className="stock-info">Stokda yoxdur</p>
+                    }
                 </div>
             </div>
             <div className="listed-ending">
@@ -114,16 +133,22 @@ function ProductCard({ product }) {
                     </div>
                 </Link>
                 <div className="card-ending">
-                    {inCart(product.id) ? (
-                        <Link to="/cart" className="add-to-cart-btn clicked">
-                            <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                    {product.count !== 0 ? (
+                        <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
+                            <RiShoppingCart2Line /><span>Stokda yoxdur</span>
                         </Link>
                     ) : (
-                        <Link className="add-to-cart-btn" onClick={handleAddClick}>
-                            <RiShoppingCart2Line />
-                            <span className="desktop-text">Səbətə əlavə et</span>
-                            <span className="mobile-text">Səbətə at</span>
-                        </Link>
+                        inCart(product.id) ? (
+                            <Link to="/cart" className="add-to-cart-btn clicked">
+                                <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                            </Link>
+                        ) : (
+                            <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
+                                <RiShoppingCart2Line />
+                                <span className="desktop-text">Səbətə əlavə et</span>
+                                <span className="mobile-text">Səbətə at</span>
+                            </Link>
+                        )
                     )}
                     <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
                         <FaRegHeart />

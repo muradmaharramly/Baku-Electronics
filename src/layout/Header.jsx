@@ -6,7 +6,7 @@ import { FaArrowLeft, FaRegHeart } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
 import { IoPhonePortraitOutline } from "react-icons/io5";
 import { IoTvOutline } from "react-icons/io5";
-import { PiLaptop } from "react-icons/pi";
+import { PiEmpty, PiLaptop } from "react-icons/pi";
 import { FiSun } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
 import { ThemeContext } from "../context/ThemeContext";
@@ -19,6 +19,7 @@ import { useSelector } from "react-redux";
 import { fetchProducts } from "../tools/request/fetchProducts";
 import PreLoader from "../components/PreLoader";
 import slugify from "slugify";
+import { GoHistory } from "react-icons/go";
 
 const categories = [
     {
@@ -102,14 +103,18 @@ const Header = () => {
         if (error) return console.error(`Error: ${error}`);
 
         const storedViewed = JSON.parse(localStorage.getItem("viewedProducts")) || [];
-        setViewedProducts(storedViewed.slice(-3));
+        const filteredStoredViewed = storedViewed.filter(product => product.count > 0).slice(-3);
+        setViewedProducts(filteredStoredViewed);
 
-        const popular = products.filter(product => product.rating > 4).slice(0, 3);
+        const availableProducts = products.filter(product => product.count > 0);
+
+        const popular = availableProducts.filter(product => product.rating > 4).slice(0, 3);
         setPopularProducts(popular);
 
-        const discounted = products.filter(product => product.discount > 15).slice(0, 3);
+        const discounted = availableProducts.filter(product => product.discount > 15).slice(0, 3);
         setDiscountedProducts(discounted);
     }, [products, loading, error]);
+
 
     useEffect(() => {
         if (searchTerm) {
@@ -211,30 +216,30 @@ const Header = () => {
     const handleInputClick = () => {
         setIsSearchOpen(true);
     };
-    
+
     const handleSearchLinkClick = () => {
         setIsSearchOpen(false);
         if (inputRef.current) {
-            setSearchTerm(""); 
+            setSearchTerm("");
         }
     }
-    
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (
-          inputRef.current &&
-          !inputRef.current.contains(event.target) &&
-          panelRef.current &&
-          !panelRef.current.contains(event.target)
-        ) {
-          setIsSearchOpen(false);
-        }
-      };
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (
+                inputRef.current &&
+                !inputRef.current.contains(event.target) &&
+                panelRef.current &&
+                !panelRef.current.contains(event.target)
+            ) {
+                setIsSearchOpen(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, []);
 
     return (
@@ -308,131 +313,136 @@ const Header = () => {
                     </button>
                     {isSearchOpen && (
                         <div className="search-panel" ref={panelRef}>
-                        <div className="left">
-                            <h6>Ən son baxılan</h6>
-                            {searchTerm.length > 0 ? (
-                                <ul>
-                                    {filteredProducts.length > 0 ? (
-                                        filteredProducts.map((product) => (
-                                            <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
-                                                <IoIosSearch />
-                                                <li>{product.title.substring(0, 25)}...</li>
-                                            </Link>
-                                        ))
-                                    ) : (
-                                        <li className="not-found">Nəticə tapılmadı!</li>
-
-                                    )}
-                                </ul>
-
-                            ) : (
-                                <ul>
-                                    {viewedProducts.length > 0 ? (
-                                        viewedProducts.map((product) => (
-                                            <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
-                                                <IoIosSearch />
-                                                <li>{product.title.substring(0, 25)}...</li>
-                                            </Link>
-                                        ))
-                                    ) : (
-                                        <li className="not-found">Nəticə tapılmadı!</li>
-                                    )}
-                                </ul>
-
-                            )}
-
-                            <h6>Populyar</h6>
-                            {searchTerm.length > 0 ? (
-                                <ul>
-                                    {popularFilteredProducts.length > 0 ? (
-                                        popularFilteredProducts.map((product) => (
-                                            <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
-                                                <IoIosSearch />
-                                                <li>{product.title.substring(0, 25)}...</li>
-                                            </Link>
-                                        ))
-                                    ) : (
-                                        <li className="not-found">Nəticə tapılmadı!</li>
-                                    )}
-                                </ul>
-                            ) : (
-                                <ul>
-                                    {popularProducts.length > 0 ? (
-                                        popularProducts.map((product) => (
-                                            <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
-                                                <IoIosSearch />
-                                                <li>{product.title.substring(0, 25)}...</li>
-                                            </Link>
-                                        ))
-                                    ) : (
-                                        <li className="not-found">Nəticə tapılmadı!</li>
-                                    )}
-                                </ul>
-                            )}
-                        </div>
-                        <div className="right">
-                            <div className="searched-products">
-                                <h6>Məhsullar</h6>
+                            <div className="left">
                                 {searchTerm.length > 0 ? (
-                                    <div className="searched-list">
-                                        {filteredProducts.length > 0 ? (
-                                            filteredProducts.map((product) => (
-                                                <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} className="product-box" onClick={handleSearchLinkClick}>
-                                                    <div className="img-div">
-                                                        <img src={product.image} alt={product.title} />
-                                                    </div>
-                                                    <div className="details">
-                                                        <span>{product.category}</span>
-                                                        <p>{product.title.substring(0, 25)}...</p>
-                                                    </div>
-                                                    <Link className="pricing" onClick={handleSearchLinkClick}>
-                                                        {product.discount > 0 && <p className="old-price">${product.price}</p>}
-                                                        <p className="current-price">{(product.price - (product.price * product.discount) / 100).toFixed(2)}$</p>
+                                    <>
+                                        <h6>Standart</h6>
+                                        <ul>
+                                            {filteredProducts.length > 0 ? (
+                                                filteredProducts.map((product) => (
+                                                    <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
+                                                        <IoIosSearch />
+                                                        <li>{product.title.substring(0, 25)}...</li>
                                                     </Link>
-                                                </Link>
+                                                ))
+                                            ) : (
+                                                <li className="not-found"><span>Nəticə tapılmadı!</span><PiEmpty /></li>
 
-                                            ))
-                                        ) : (
-                                            <p className="not-found">Məhsul tapılmadı!</p>
-                                        )}
+                                            )}
+                                        </ul>
+                                    </>
 
-                                    </div>
                                 ) : (
-                                    <div>
-                                        {discountedProducts.length > 0 ? (
-                                            discountedProducts.map((product) => (
-                                                <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} className="product-box" onClick={handleSearchLinkClick}>
-                                                    <div className="img-div">
-                                                        <img src={product.image} alt={product.title} />
-                                                    </div>
-                                                    <div className="details">
-                                                        <span>{product.category}</span>
-                                                        <p>{product.title.substring(0, 25)}...</p>
-                                                    </div>
-                                                    <Link className="pricing" onClick={handleSearchLinkClick}>
-                                                        {product.discount > 0 && <p className="old-price">${product.price}</p>}
-                                                        <p className="current-price">{(product.price - (product.price * product.discount) / 100).toFixed(2)}$</p>
+                                    <>
+                                        <h6>Ən son baxılan</h6>
+                                        <ul>
+                                            {viewedProducts.length > 0 ? (
+                                                viewedProducts.map((product) => (
+                                                    <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
+                                                        <GoHistory />
+                                                        <li>{product.title.substring(0, 25)}...</li>
                                                     </Link>
-                                                </Link>
+                                                ))
+                                            ) : (
+                                                <li className="not-found"><span>Nəticə tapılmadı!</span><PiEmpty /></li>
+                                            )}
+                                        </ul>
+                                    </>
 
-                                            ))
-                                        ) : (
-                                            <p className="not-found">Məhsul tapılmadı!</p>
-                                        )}
-
-
-                                    </div>
                                 )}
 
-
+                                <h6>Populyar</h6>
+                                {searchTerm.length > 0 ? (
+                                    <ul>
+                                        {popularFilteredProducts.length > 0 ? (
+                                            popularFilteredProducts.map((product) => (
+                                                <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
+                                                    <IoIosSearch />
+                                                    <li>{product.title.substring(0, 25)}...</li>
+                                                </Link>
+                                            ))
+                                        ) : (
+                                            <li className="not-found"><span>Nəticə tapılmadı!</span><PiEmpty /></li>
+                                        )}
+                                    </ul>
+                                ) : (
+                                    <ul>
+                                        {popularProducts.length > 0 ? (
+                                            popularProducts.map((product) => (
+                                                <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} onClick={handleSearchLinkClick}>
+                                                    <IoIosSearch />
+                                                    <li>{product.title.substring(0, 25)}...</li>
+                                                </Link>
+                                            ))
+                                        ) : (
+                                            <li className="not-found"><span>Nəticə tapılmadı!</span><PiEmpty /></li>
+                                        )}
+                                    </ul>
+                                )}
                             </div>
-                            <div className="campaign-img">
-                                <img src="https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fdefault_search_result_banner%2F1240x400-sevenspace.webp&w=1920&q=75" />
+                            <div className="right">
+                                <div className="searched-products">
+                                    <h6>Məhsullar</h6>
+                                    {searchTerm.length > 0 ? (
+                                        <div className="searched-list">
+                                            {filteredProducts.length > 0 ? (
+                                                filteredProducts.map((product) => (
+                                                    <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} className="product-box" onClick={handleSearchLinkClick}>
+                                                        <div className="img-div">
+                                                            <img src={product.image} alt={product.title} />
+                                                        </div>
+                                                        <div className="details">
+                                                            <span>{product.category}</span>
+                                                            <p>{product.title.substring(0, 20)}...</p>
+                                                        </div>
+                                                        <Link className="pricing" onClick={handleSearchLinkClick}>
+                                                            {product.discount > 0 && <p className="old-price">${product.price}</p>}
+                                                            <p className="current-price">{(product.price - (product.price * product.discount) / 100).toFixed(2)}$</p>
+                                                        </Link>
+                                                    </Link>
+
+                                                ))
+                                            ) : (
+                                                <p className="not-found"><span>Məhsul tapılmadı!</span><PiEmpty /></p>
+                                            )}
+
+                                        </div>
+                                    ) : (
+                                        <div>
+                                            {discountedProducts.length > 0 ? (
+                                                discountedProducts.map((product) => (
+                                                    <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} className="product-box" onClick={handleSearchLinkClick}>
+                                                        <div className="img-div">
+                                                            <img src={product.image} alt={product.title} />
+                                                        </div>
+                                                        <div className="details">
+                                                            <span>{product.category}</span>
+                                                            <p>{product.title.substring(0, 20)}...</p>
+                                                        </div>
+                                                        <Link className="pricing" onClick={handleSearchLinkClick}>
+                                                            {product.discount > 0 && <p className="old-price">${product.price}</p>}
+                                                            <p className="current-price">{(product.price - (product.price * product.discount) / 100).toFixed(2)}$</p>
+                                                        </Link>
+                                                    </Link>
+
+                                                ))
+                                            ) : (
+                                                <p className="not-found">Məhsul tapılmadı!</p>
+                                            )}
+
+
+                                        </div>
+                                    )}
+
+
+                                </div>
+                                <div className="campaign-img">
+                                    <img src="https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fdefault_search_result_banner%2F1240x400-sevenspace.webp&w=1920&q=75" />
+                                </div>
                             </div>
                         </div>
-                    </div>
                     )}
-                    
+
                 </div>
                 <div className="actions">
                     <NavLink to="/scale"><button><RiScalesFill /></button></NavLink>

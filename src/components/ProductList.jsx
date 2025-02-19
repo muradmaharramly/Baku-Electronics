@@ -16,7 +16,7 @@ function ProductList() {
 
     return (
         <div className="product-list">
-            {products.map((product) => (
+            {products.slice(0, 8).map((product) => (
                 <ProductCard key={product.id} product={product} />
             ))}
         </div>

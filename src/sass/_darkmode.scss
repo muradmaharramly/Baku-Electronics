@@ -746,6 +746,31 @@
       h3{
         color: $white;
       }
+      &.filtered{
+        .filter{
+          background-color: $box-dark;
+          .filter-item{
+              color: $white-2nd;
+              &::after{
+                  background-color: $white-2nd;
+              }
+              &:hover{
+                  color: $white-2nd;
+                  &::after{
+                      background-color: $white-2nd;
+                  }
+              }
+              &.selected{
+                  color: $main-light;
+                  &:hover{
+                      &::after{
+                          background-color: $main-light;
+                      }
+                  }
+              }
+          }
+      }
+      }
   }
 }  
 .video.roll-area,
@@ -770,6 +795,29 @@
         }
       }
 }  
+.preorder-container{
+  .card{
+      border: 1px solid #cccccc5b;
+      .left{
+          .text{
+              span{
+                  color: $white-2nd;
+              }
+              h1{
+                  color: $white;
+              }
+          }
+          a{
+              color: $white;
+              padding: 10px 22px;
+              background-color: $box-dark;
+              &:hover{
+                  background-color: #414141;
+              }
+          }
+      }
+}
+}
 .cart-empty,
 .wishlist-empty{
   p{

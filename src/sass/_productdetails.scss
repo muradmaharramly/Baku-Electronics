@@ -1,6 +1,37 @@
 .product-details-container{
     padding: 20px 9.5%;
     position: relative;
+    &.outofstock{
+        .main-image{
+            .stock-overlay{
+                border: 1px solid $red;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                margin: 0 auto;
+                width: 98%;
+                height: 98%;
+                border-radius: 25px;
+                -webkit-border-radius: 25px;
+                -moz-border-radius: 25px;
+                -ms-border-radius: 25px;
+                -o-border-radius: 25px;
+                background-color: rgba(255, 40, 40, 0.248);
+                svg{
+                    font-size: 4rem;
+                    color: $red;
+                }
+                h5{
+                    color: $red;
+                }
+            }
+        }
+    }
     .overlay{
         display: none;
         position: absolute;
@@ -20,7 +51,7 @@
         flex-wrap: wrap;
         gap: 10px;
         padding: 20px 0;
-        padding-bottom: 40px;
+        padding-bottom: 120px;
         border-bottom: 1px solid #dddddd6c;
         .mobile-back{
             display: none;
@@ -107,12 +138,15 @@
             }
             
             .main-image {
+                overflow: hidden;
+                position: relative;
                 padding: 15px;
                 img{
                     width:98%;
                     max-width: 100%;
-                    height: auto;
+                    height: 100%;
                     border-radius: 10px;
+                    object-fit: cover;
                 }
                 
             }
@@ -983,6 +1017,13 @@
 }
 @media (max-width: 768px){
     .product-details-container{
+        &.outofstock{
+            .main-image{
+                .stock-overlay{
+                    width: 97%;
+                }
+            }
+        }
         .overlay{
             &.clicked{
                 display: block;

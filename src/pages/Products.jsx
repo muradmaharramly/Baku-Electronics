@@ -13,6 +13,7 @@ import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-i
 import { FaArrowLeft } from 'react-icons/fa6';
 import { FiFilter } from 'react-icons/fi';
 import { PiEmpty } from 'react-icons/pi';
+import { SlRefresh } from 'react-icons/sl';
 
 const categories = ['electronic', 'smartphone', 'TV', 'smartwatch'];
 
@@ -75,6 +76,7 @@ const Products = () => {
         setMaxPrice(23999);
         setSearchTerm('');
         setFilterType('standart');
+        setStockFilter(null)
     };
 
     const filteredProducts = currentProducts
@@ -224,7 +226,7 @@ const Products = () => {
                         <div className='empty-area'>
                             <div className='icon'><PiEmpty /></div>
                             <p>Uyğun məhsul tapılmadı.</p>
-                            <button className='reset-btn' onClick={resetFilters}><CgTrashEmpty /> Filtrləri sıfırla</button>
+                            <button className='reset-btn' onClick={resetFilters}><SlRefresh /> Filtrləri sıfırla</button>
                         </div>
                     ) : (
                         <div className={`product-list ${isListed ? "listed" : ""}`}>

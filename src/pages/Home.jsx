@@ -7,6 +7,8 @@ import { LuClipboardList } from 'react-icons/lu'
 import { BsCalendar4Week } from 'react-icons/bs'
 import NewsSlider from '../components/sliders/NewsSlider'
 import ProductList from '../components/ProductList'
+import FilteredProductList from '../components/FilteredProductList'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
@@ -40,8 +42,35 @@ const Home = () => {
                 <h3>Ən çox satılanlar</h3>
             </div>
             <ProductList />
-        </div>
+      </div>
+      <FilteredProductList />
       <VideoRollSlider />
+      <div className='preorder-container'>
+        <div className='card'>
+          <div className='left'>
+            <div className='text'>
+              <span>Yeniliklər</span>
+              <h1>Yeni MOTOROLA G75 modeli</h1>
+            </div>
+            <Link>İndi al</Link>
+          </div>
+          <div className='right'>
+            <img src='https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fnews%2F65331-motorola-moto-g75-3.jpg&w=1920&q=75' />
+          </div>
+        </div>
+        <div className='card'>
+          <div className='left'>
+            <div className='text'>
+              <span>Kampaniya</span>
+              <h1>Ev heyvanları üçün məhsul</h1>
+            </div>
+            <Link>Burada</Link>
+          </div>
+          <div className='right'>
+            <img src='https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fnews%2Fanimal-bag-breezy-2-smart-cat-carrier-green-p7704-green-3_AcrWJ0G.jpg&w=1920&q=75' />
+          </div>
+        </div>
+      </div>
       <NewsSlider />
     </div>
   )
