@@ -2075,5 +2075,45 @@ border-bottom: 2px solid $white;
           }
       }
   }
-}  
+} 
+.campaigns-page{
+  .page-title{
+      color: $white;
+      a{
+          color: $white;
+          background-color: $box-dark;
+      }
+  }
+  .campaign-card{
+    h2{
+      color: $white;
+    }
+      .img-div{
+          .overlay{
+              a{
+                  background-color: $box-dark;
+                  color: $white;
+              }
+          }
+      }
+  }
+} 
+.campaign-details{
+  .details-container{
+    h1{
+      color: $white;
+    }
+    p{
+      color: $white;
+    }
+  }
+  .page-title{
+    color: $white;
+    a{
+        color: $white;
+        background-color: $box-dark;
+    }
+}
+
+}
 }

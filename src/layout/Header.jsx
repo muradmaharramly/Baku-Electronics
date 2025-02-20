@@ -250,7 +250,7 @@ const Header = () => {
                         <ion-icon name={isClicked ? "close-outline" : "menu-outline"}></ion-icon>
                     </div>
                     <ul>
-                        <li><NavLink>Kampaniyalar</NavLink></li>
+                        <li><NavLink to="/campaigns" >Kampaniyalar</NavLink></li>
                         <li><NavLink to="/corporative-sales">Korporativ satışlar</NavLink></li>
                         <li><NavLink to="/shops">Mağazalar</NavLink></li>
                         <li>Aylıq ödəniş</li>
@@ -476,9 +476,9 @@ const Header = () => {
                     <nav className="mobile-navbar-menu">
                         <ul>
                             <li>
-                                <a>
+                                <Link to="/campaigns">
                                     Kampaniyalar <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
+                                </Link>
                             </li>
                             <li>
                                 <Link to="/corporative-sales">

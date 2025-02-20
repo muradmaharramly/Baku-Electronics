@@ -20,6 +20,8 @@ import NewsDetails from "./pages/NewsDetails";
 import NewsAndBlogs from "./pages/NewsAndBlogs";
 import Shops from "./pages/Shops";
 import Products from "./pages/Products";
+import Campaigns from "./pages/Campaigns";
+import CampaignDetails from "./pages/CampaignDetails";
 
 
 const App = () => {
@@ -44,6 +46,8 @@ const App = () => {
         <Route path="/news" element={<NewsAndBlogs />} />
         <Route path="/news/:slug" element={<NewsDetails />} />
         <Route path="/shops" element={<Shops />} />
+        <Route path="/campaigns" element={<Campaigns />} />
+        <Route path="/campaigns/:slug" element={<CampaignDetails />} />
       </Routes>
       <MobileTabBar />
       <Footer />

@@ -53,7 +53,7 @@ function NewsPageSlider({news}) {
       <div className="slider-container">
         <Slider {...settings}>
         {news.map((item) => (
-            <div className="slide">
+            <div className="slide" key={item.id}>
              <img src={item.image} alt={item.title}/>
              <div className="info-div">
                 <span>{item.date.slice(0, 10)}</span>
