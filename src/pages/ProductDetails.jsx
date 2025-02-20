@@ -179,8 +179,7 @@ function ProductDetails() {
                             ) : (
                                 <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
                                     <RiShoppingCart2Line />
-                                    <span className="desktop-text">Səbətə əlavə et</span>
-                                    <span className="mobile-text">Səbətə at</span>
+                                    <span>Səbətə əlavə et</span>
                                 </Link>
                             )
                         )}

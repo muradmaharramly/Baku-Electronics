@@ -10,7 +10,8 @@ const categories = [
     { id: "electronic", label: "Elektronika" },
     { id: "smartphone", label: "Smartfonlar" },
     { id: "tv", label: "Televizorlar" },
-    { id: "smartwatch", label: "Ağıllı saatlar" }
+    { id: "smartwatch", label: "Ağıllı saatlar" },
+    { id: "computer", label: "Kompüter" }
 ];
 
 function ProductList() {

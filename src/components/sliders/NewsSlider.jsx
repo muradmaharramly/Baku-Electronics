@@ -44,23 +44,27 @@ function NewsSlider() {
                 <Link to="/news">Xəbərlərə keçid et</Link>
             </div>
             <div className="slider-container">
-                <Slider {...settings} >
-                    {news.map((item) => (
-                        <Link to={`/news/${slugify(item.title, { lower: true })}`}>
-                            <div className="slide" key={item.id}>
-                                <div className="img-div">
-                                    <img src={item.image} />
-                                    <div className="overlay">
-                                        <Link to={`/news/${slugify(item.title, { lower: true })}`}>
-                                            Ətraflı
-                                        </Link>
+                <Slider {...settings}>
+                    {news
+                        .sort((a, b) => new Date(b.date) - new Date(a.date)) 
+                        .slice(0, 8) 
+                        .map((item) => (
+                            <Link key={item.id} to={`/news/${slugify(item.title, { lower: true })}`}>
+                                <div className="slide">
+                                    <div className="img-div">
+                                        <img src={item.image} alt={item.title} />
+                                        <div className="overlay">
+                                            <Link to={`/news/${slugify(item.title, { lower: true })}`}>
+                                                Ətraflı
+                                            </Link>
+                                        </div>
                                     </div>
+                                    <h4>{item.title.substring(0, 50)}...</h4>
                                 </div>
-                                <h4>{item.title.substring(0, 50)}...</h4>
-                            </div>
-                        </Link>
-                    ))}
+                            </Link>
+                        ))}
                 </Slider>
+
             </div>
             <Link className="mobile-href-btn" to="https://www.youtube.com/user/BakuElectronicsMMC" target="_blank">Kanalımıza keçid et</Link>
         </div>

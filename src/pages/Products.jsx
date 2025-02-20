@@ -15,7 +15,7 @@ import { FiFilter } from 'react-icons/fi';
 import { PiEmpty } from 'react-icons/pi';
 import { SlRefresh } from 'react-icons/sl';
 
-const categories = ['electronic', 'smartphone', 'TV', 'smartwatch'];
+const categories = ['electronic', 'smartphone', 'TV', 'smartwatch', 'computer'];
 
 const Products = () => {
     const { products, productCount, loading, error } = useSelector((state) => state.products);
