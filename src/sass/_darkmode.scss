@@ -15,6 +15,12 @@
                     &:hover {
                         color: $white;
                     }
+                    a{
+                      color: $white-2nd;
+                      &:hover {
+                        color: $white;
+                    }
+                    }
                 }
                 .active{
                     color: $white;
