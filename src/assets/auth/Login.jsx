@@ -93,7 +93,8 @@ const Login = () => {
 
         setLocalMessage('Giriş uğurlu oldu!');
         dispatch(loginSuccess(email));
-
+        
+        localStorage.setItem('email', email); 
         setTimeout(() => {
             navigate('/');
         }, 1500);
