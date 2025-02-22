@@ -154,7 +154,7 @@ const Register = () => {
                         </div>
                         <button className='submit-btn' type='submit'>Qeydiyyatdan keçin</button>
                     </form>
-                    <p>Hazırda hesabınız var? <Link to="/auth/register">Daxil ol</Link></p>
+                    <p>Hazırda hesabınız var? <Link to="/auth/login">Daxil ol</Link></p>
                 </div>
             </div>
         </div>
