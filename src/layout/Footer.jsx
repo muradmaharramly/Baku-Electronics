@@ -34,7 +34,7 @@ const Footer = () => {
                     <div>
                         <h5>Məlumat</h5>
                         <ul>
-                            <li>Kampaniyalar</li>
+                            <li><Link to="/campaigns">Kampaniyalar</Link></li>
                             <li>Müştəri kartı</li>
                             <li><Link to="/brands">Brendlər</Link></li>
                             <li><Link to="/news">Bloq və xəbərlər</Link></li>

@@ -17,7 +17,8 @@ const MobileTabBar = () => {
     const tabs = {
         "/": "home",
         "/wishlist": "wishlist",
-        "/cart": "cart"
+        "/cart": "cart",
+        "/auth/register": "auth/register"
     };
 
     return (
@@ -41,8 +42,8 @@ const MobileTabBar = () => {
                 </button>
             </Link>
             <Link to="/">
-                <button className={activeTab === "/" ? "clicked" : ""}>
-                    {activeTab === "/" ? <HiViewGrid /> : <HiOutlineViewGrid />}
+                <button>
+                    <HiOutlineViewGrid />
                 </button>
             </Link>
 
@@ -53,9 +54,9 @@ const MobileTabBar = () => {
                     </Badge>
                 </button>
             </Link>
-            <Link to="/">
-                <button className={activeTab === "/" ? "clicked" : ""}>
-                    {activeTab === "/" ? <FaUser /> : <FaRegUser />}
+            <Link to="/auth/register">
+                <button className={activeTab === "/auth/register" ? "clicked" : ""}>
+                    {activeTab === "/auth/register" ? <FaUser /> : <FaRegUser />}
                 </button>
             </Link>
         </div>
