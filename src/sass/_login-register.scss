@@ -140,6 +140,9 @@
 }
                     }
                     .pass-hider{
+                        border: none;
+                        background-color: transparent;
+                        position: absolute;
                         cursor: pointer;
                     }
                     svg{
@@ -151,7 +154,6 @@
                     }
                 }
                 .forgot-pass{
-                    margin-top: -20px;
                     display: flex;
                     justify-content: right;
                     align-items: flex-end;
@@ -225,9 +227,6 @@
                         .form-group{
                             flex: 1;
                         }
-                    }
-                    .forgot-pass{
-                        margin-top: -30px;
                     }
                     .code-text{
                         font-size: 12px;
