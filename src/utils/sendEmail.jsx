@@ -3,7 +3,7 @@ import emailjs from '@emailjs/browser';
 export const sendEmail = (email, code) => {
   const templateParams = {
     to_email: email,
-    message: {code}
+    message: code
   };
 
   emailjs.send(

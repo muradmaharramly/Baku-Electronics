@@ -13,6 +13,8 @@ const MobileTabBar = () => {
     const { totalWishlistItems } = useWishlist();
     const location = useLocation();
 
+    const userEmail = localStorage.getItem("email");
+
     const activeTab = location.pathname;
     const tabs = {
         "/": "home",
@@ -54,7 +56,7 @@ const MobileTabBar = () => {
                     </Badge>
                 </button>
             </Link>
-            <Link to="/auth/register">
+            <Link to={userEmail ? "/user-profile" : "/auth/register"}>
                 <button className={activeTab === "/auth/register" ? "clicked" : ""}>
                     {activeTab === "/auth/register" ? <FaUser /> : <FaRegUser />}
                 </button>

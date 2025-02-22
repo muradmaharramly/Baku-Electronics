@@ -3,13 +3,13 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../../services/supabaseClient';
 
-const ConfirmEmail = () => {
+const ConfirmReset = () => {
     const [code, setCode] = useState("");
     const [isCodeFocused, setIsCodeFocused] = useState(false);
     const [isCodeVisible, setIsCodeVisible] = useState(false);
     const [localError, setLocalError] = useState(null);
     const [localMessage, setLocalMessage] = useState(null);
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (localError || localMessage) {
@@ -41,30 +41,30 @@ const ConfirmEmail = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const userEmail = localStorage.getItem('email'); 
+        const userEmail = localStorage.getItem('email');
         if (!userEmail) {
             return setLocalError('Email tapılmadı. Yenidən qeydiyyatdan keçin.');
         }
 
         const { data, error } = await supabase
             .from('users')
-            .select('verificationCode')
+            .select('resetCode')
             .eq('email', userEmail)
             .single();
 
-        if (error || !data || data.verificationCode !== code) {
+        if (error || !data || data.resetCode !== code) {
             return setLocalError('Yanlış təsdiq kodu');
         }
 
         await supabase
             .from('users')
-            .update({ emailConfirmed: true, verificationCode: null })
+            .update({ resetCodeConfirmed: true })
             .eq('email', userEmail);
 
-        setLocalMessage('Hesab uğurla təsdiqləndi!');
+        setLocalMessage('Kod doğrulandı!');
 
         setTimeout(() => {
-            navigate('/auth/login');
+            navigate('/auth/set-password');
         }, 2000);
     };
 
@@ -87,7 +87,7 @@ const ConfirmEmail = () => {
             </div>
             <div className='right'>
                 {localError && <div className="error-popup">{localError}</div>}
-                {localMessage && <div className="success-popup">{localMessage}</div>} 
+                {localMessage && <div className="success-popup">{localMessage}</div>}
                 <div className='links'>
                     <Link to="/">Ana səhifə</Link>
                     <Link to="/delivery-and-billing">Çatdırılma və ödəniş</Link>
@@ -116,7 +116,7 @@ const ConfirmEmail = () => {
                             </button>
                         </div>
                         <span className='code-text'>Təsdiq kodunu daxil etmək üçün maili yoxlayın.</span>
-                        <button className='submit-btn' type='submit'>Hesab yaradın</button>
+                        <button className='submit-btn' type='submit'>Şifrəni dəyiş</button>
                     </form>
                 </div>
             </div>
@@ -124,4 +124,4 @@ const ConfirmEmail = () => {
     )
 }
 
-export default ConfirmEmail;
+export default ConfirmReset;

@@ -1,77 +1,70 @@
-import React, { useState } from 'react'
-import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa6'
-import { MdOutlineEmail } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa6';
+import { MdOutlineEmail } from 'react-icons/md';
+import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../../services/supabaseClient';
+import bcrypt from 'bcryptjs';
+import { sendEmail } from '../../utils/sendEmail';
 
 const Register = () => {
-    const [username, setUsername] = useState("");
-    const [isUsernameFocused, setIsUsernameFocused] = useState(false);
-    const [surname, setSurname] = useState("");
-    const [isSurnameFocused, setIsSurnameFocused] = useState(false);
+    const [firstName, setFirstName] = useState("");
+    const [isFirstNameFocused, setIsFirstNameFocused] = useState(false);
+    const [lastName, setLastName] = useState("");
+    const [isLastNameFocused, setIsLastNameFocused] = useState(false);
     const [email, setEmail] = useState("");
     const [isEmailFocused, setIsEmailFocused] = useState(false);
     const [password, setPassword] = useState("");
     const [isPasswordFocused, setIsPasswordFocused] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [localError, setLocalError] = useState(null);
+    const [localMessage, setLocalMessage] = useState(null);
+    const navigate = useNavigate();  
 
-    const handleUsernameFocus = () => {
-        setIsUsernameFocused(true);
-    };
-
-    const handleUsernameBlur = () => {
-        if (!username) {
-            setIsUsernameFocused(false);
+    useEffect(() => {
+        if (localError || localMessage) {
+            const timer = setTimeout(() => {
+                setLocalError(null);
+                setLocalMessage(null);
+            }, 2000);
+            return () => clearTimeout(timer);
         }
-    };
+    }, [localError, localMessage]);
 
-    const handleSurnameChange = (event) => {
-        setSurname(event.target.value);
-    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-    const handleSurnameFocus = () => {
-        setIsSurnameFocused(true);
-    };
-
-    const handleSurnameBlur = () => {
-        if (!surname) {
-            setIsSurnameFocused(false);
+        if (password.length < 8) {
+            return setLocalError('Şifrə ən az 8 simvol olmalıdır');
         }
-    };
 
-    const handleUsernameChange = (event) => {
-        setUsername(event.target.value);
-    };
+        const { data: existingUser } = await supabase
+            .from('users')
+            .select('id')
+            .eq('email', email)
+            .single();
 
-    const handleEmailFocus = () => {
-        setIsEmailFocused(true);
-    };
-
-    const handleEmailBlur = () => {
-        if (!email) {
-            setIsEmailFocused(false);
+        if (existingUser) {
+            return setLocalError('Email artıq istifadə olunub');
         }
-    };
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
+        const hashedPassword = bcrypt.hashSync(password, 10);
+        const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-    const handlePasswordFocus = () => {
-        setIsPasswordFocused(true);
-    };
+        const { error } = await supabase
+            .from('users')
+            .insert([{ firstName, lastName, email, password: hashedPassword, emailConfirmed: false, verificationCode }]);
 
-    const handlePasswordBlur = () => {
-        if (!password) {
-            setIsPasswordFocused(false);
+        if (error) {
+            return setLocalError('Qeydiyyat zamanı xəta baş verdi');
         }
-    };
 
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
-    };
-
-    const togglePasswordVisibility = () => {
-        setIsPasswordVisible(prevState => !prevState);
+        sendEmail(email, verificationCode);
+        setLocalMessage('Təsdiq kodu email adresinizə göndərildi.');
+        
+        localStorage.setItem('email', email); 
+        setTimeout(() => {
+            navigate('/auth/confirm-email');  
+        }, 2000);
     };
 
     return (
@@ -88,6 +81,8 @@ const Register = () => {
                 </div>
             </div>
             <div className='right'>
+                {localError && <div className="error-popup">{localError}</div>}
+                {localMessage && <div className="success-popup">{localMessage}</div>}
                 <div className='links'>
                     <Link to="/">Ana səhifə</Link>
                     <Link to="/delivery-and-billing">Çatdırılma və ödəniş</Link>
@@ -95,32 +90,32 @@ const Register = () => {
                 </div>
                 <div className='form-area'>
                     <h1>Qeydiyyatdan keç</h1>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className='form-double'>
                             <div className='form-group'>
                                 <input
                                     type='text'
-                                    value={username}
-                                    onChange={handleUsernameChange}
-                                    onFocus={handleUsernameFocus}
-                                    onBlur={handleUsernameBlur}
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
+                                    onFocus={() => setIsFirstNameFocused(true)}
+                                    onBlur={() => setIsFirstNameFocused(firstName !== '')}
                                     className="form-control"
                                     required
                                 />
-                                <label className={isUsernameFocused || username ? "clicked" : ""}>Ad</label>
+                                <label className={isFirstNameFocused || firstName ? "clicked" : ""}>Ad</label>
                                 <FaRegUser />
                             </div>
                             <div className='form-group'>
                                 <input
                                     type='text'
-                                    value={surname}
-                                    onChange={handleSurnameChange}
-                                    onFocus={handleSurnameFocus}
-                                    onBlur={handleSurnameBlur}
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
+                                    onFocus={() => setIsLastNameFocused(true)}
+                                    onBlur={() => setIsLastNameFocused(lastName !== '')}
                                     className="form-control"
                                     required
                                 />
-                                <label className={isSurnameFocused || surname ? "clicked" : ""}>Soyad</label>
+                                <label className={isLastNameFocused || lastName ? "clicked" : ""}>Soyad</label>
                                 <FaRegUser />
                             </div>
                         </div>
@@ -128,9 +123,9 @@ const Register = () => {
                             <input
                                 type='email'
                                 value={email}
-                                onChange={handleEmailChange}
-                                onFocus={handleEmailFocus}
-                                onBlur={handleEmailBlur}
+                                onChange={(e) => setEmail(e.target.value)}
+                                onFocus={() => setIsEmailFocused(true)}
+                                onBlur={() => setIsEmailFocused(email !== '')}
                                 className="form-control"
                                 required
                             />
@@ -141,14 +136,14 @@ const Register = () => {
                             <input
                                 type={isPasswordVisible ? 'text' : 'password'}
                                 value={password}
-                                onChange={handlePasswordChange}
-                                onFocus={handlePasswordFocus}
-                                onBlur={handlePasswordBlur}
+                                onChange={(e) => setPassword(e.target.value)}
+                                onFocus={() => setIsPasswordFocused(true)}
+                                onBlur={() => setIsPasswordFocused(password !== '')}
                                 className="form-control"
                                 required
                             />
                             <label className={isPasswordFocused || password ? "clicked" : ""}>Şifrə</label>
-                            <button className='pass-hider' type='button' onClick={togglePasswordVisibility}>
+                            <button className='pass-hider' type='button' onClick={() => setIsPasswordVisible(!isPasswordVisible)}>
                                 {isPasswordVisible ? <FaRegEye /> : <FaRegEyeSlash />}
                             </button>
                         </div>

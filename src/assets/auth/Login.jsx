@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
-import { MdOutlineEmail } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
+import { MdOutlineEmail } from 'react-icons/md';
+import { Link, useNavigate } from 'react-router-dom';
+import bcrypt from 'bcryptjs';
+import { supabase } from '../../services/supabaseClient';
+import { loginSuccess, loginFail } from '../../tools/actions/userActions';
+import { useDispatch } from 'react-redux';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -9,6 +13,21 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [isPasswordFocused, setIsPasswordFocused] = useState(false);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [localError, setLocalError] = useState(null);
+    const [localMessage, setLocalMessage] = useState(null);
+    
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (localError || localMessage) {
+            const timer = setTimeout(() => {
+                setLocalError(null);
+                setLocalMessage(null);
+            }, 2000);
+            return () => clearTimeout(timer);
+        }
+    }, [localError, localMessage]);
 
     const handleEmailFocus = () => {
         setIsEmailFocused(true);
@@ -42,6 +61,44 @@ const Login = () => {
         setIsPasswordVisible(prevState => !prevState);
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        console.log("Giriş prosesi başladı, email:", email);
+
+        const { data, error } = await supabase
+            .from('users')
+            .select('password, emailConfirmed')
+            .eq('email', email)
+            .single();
+
+        console.log("Supabase Cavabı:", data, error);
+
+        if (error || !data) {
+            setLocalError('Email və ya şifrə səhvdir');
+            return dispatch(loginFail(null));  
+        }
+
+        if (!data.emailConfirmed) {
+            setLocalError('Email təsdiqlənməyib');
+            return dispatch(loginFail(null));
+        }
+
+        const isMatch = bcrypt.compareSync(password, data.password);
+        console.log("Şifre Kontrolü:", isMatch);
+        if (!isMatch) {
+            setLocalError('Email və ya şifrə səhvdir');
+            return dispatch(loginFail(null));
+        }
+
+        setLocalMessage('Giriş uğurlu oldu!');
+        dispatch(loginSuccess(email));
+
+        setTimeout(() => {
+            navigate('/');
+        }, 1500);
+    };
+
     return (
         <div className='login-page'>
             <div className='left'>
@@ -56,6 +113,8 @@ const Login = () => {
                 </div>
             </div>
             <div className='right'>
+                {localError && <div className="error-popup">{localError}</div>}
+                {localMessage && <div className="success-popup">{localMessage}</div>}
                 <div className='links'>
                     <Link to="/">Ana səhifə</Link>
                     <Link to="/delivery-and-billing">Çatdırılma və ödəniş</Link>
@@ -63,7 +122,7 @@ const Login = () => {
                 </div>
                 <div className='form-area'>
                     <h1>Daxil ol</h1>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className='form-group'>
                             <input
                                 type='email'
@@ -93,7 +152,7 @@ const Login = () => {
                             </button>
                         </div>
                         <div className='forgot-pass'>
-                            <Link>Şifrəni unutmusan?</Link>
+                            <Link to="/auth/reset-password" >Şifrəni unutmusan?</Link>
                         </div>
                         <button className='submit-btn' type='submit'>Daxil ol</button>
                     </form>

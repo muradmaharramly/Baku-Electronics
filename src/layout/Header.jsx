@@ -93,6 +93,8 @@ const Header = () => {
 
     const { totalUniqueItems } = useCart();
     const { totalWishlistItems } = useWishlist();
+    
+    const userEmail = localStorage.getItem("email");
 
     useEffect(() => {
         fetchProducts();
@@ -454,7 +456,7 @@ const Header = () => {
                         (<Badge count={totalWishlistItems} className="custom-badge" showZero>
                             <NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>
                         </Badge>)}
-                    <NavLink to="/auth/register"><button><FaRegUser /></button></NavLink>
+                    <NavLink to={userEmail ? "/user-profile" : "/auth/register"}><button><FaRegUser /></button></NavLink>
                 </div>
             </div>
             <div className={`mobile-navbar ${isClicked ? "active" : ""}`}>

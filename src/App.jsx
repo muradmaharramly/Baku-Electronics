@@ -24,6 +24,9 @@ import Login from "./assets/auth/Login";
 import Register from "./assets/auth/Register";
 import ScrollToTop from "./components/ScrollToTop";
 import ConfirmEmail from "./assets/auth/CofirmEmail";
+import ResetPassword from "./assets/auth/ResetPassword";
+import ConfirmReset from "./assets/auth/ConfirmReset";
+import SetPassword from "./assets/auth/SetPassword";
 
 const App = () => {
   return (
@@ -55,6 +58,9 @@ const App = () => {
           <Route path="/auth/login" element={<Login />} />
           <Route path="/auth/register" element={<Register />} />
           <Route path="/auth/confirm-email" element={<ConfirmEmail />} />
+          <Route path="/auth/reset-password" element={<ResetPassword />} />
+          <Route path="/auth/confirm-reset" element={<ConfirmReset />} />
+          <Route path="/auth/set-password" element={<SetPassword />} />
         </Route>
       </Routes>
     </BrowserRouter>
