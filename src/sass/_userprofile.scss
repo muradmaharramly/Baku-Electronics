@@ -14,8 +14,13 @@
             flex: 1;
             max-width: 400px;
             form{
-               gap: 5px;
-               margin-bottom: 0;
+               gap: 15px;
+               .pass-hider{
+                border: none;
+                background-color: transparent;
+                position: absolute;
+                cursor: pointer;
+            }
             }
         }
     }
