@@ -15,20 +15,32 @@ const MobileTabBar = () => {
 
     const userEmail = localStorage.getItem("email");
 
-    const activeTab = location.pathname;
     const tabs = {
         "/": "home",
         "/wishlist": "wishlist",
         "/cart": "cart",
-        "/auth/register": "auth/register"
+        "/auth/register": "auth/register",
+        "/user-profile": "user/profile"
+    };
+
+    const activeTab = Object.keys(tabs).includes(location.pathname) ? location.pathname : null;
+
+    const indicatorPositions = {
+        "/": 6.7,
+        "/wishlist": 25.7,
+        "/cart": 64, 
+        "/auth/register": 83,
+        "/user-profile": 83
     };
 
     return (
         <div className="mobile-tab-bar">
-            <div
-                className="active-indicator"
-                style={{ left: `${(Object.values(tabs).indexOf(tabs[activeTab]) * 19) + 6.7}%` }}
-            ></div>
+            {activeTab && (
+                <div
+                    className="active-indicator"
+                    style={{ left: `${indicatorPositions[activeTab] || 6.7}%` }}
+                ></div>
+            )}
 
             <Link to="/">
                 <button className={activeTab === "/" ? "clicked" : ""}>
@@ -43,6 +55,7 @@ const MobileTabBar = () => {
                     </Badge>
                 </button>
             </Link>
+
             <Link to="/">
                 <button>
                     <HiOutlineViewGrid />
@@ -56,9 +69,10 @@ const MobileTabBar = () => {
                     </Badge>
                 </button>
             </Link>
+            
             <Link to={userEmail ? "/user-profile" : "/auth/register"}>
-                <button className={activeTab === "/auth/register" ? "clicked" : ""}>
-                    {activeTab === "/auth/register" ? <FaUser /> : <FaRegUser />}
+                <button className={activeTab === "/user-profile" || activeTab === "/auth/register" ? "clicked" : ""}>
+                    {activeTab === "/user-profile" || activeTab === "/auth/register" ? <FaUser /> : <FaRegUser />}
                 </button>
             </Link>
         </div>
