@@ -1,0 +1,612 @@
+.user-profile {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 9.5%;
+
+  .profile-page{
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+    &.change-password{
+        justify-content: center;
+        .content{
+            flex: 1;
+            max-width: 400px;
+            form{
+               gap: 5px;
+               margin-bottom: 0;
+            }
+        }
+    }
+    .sidebar {
+        min-width: 300px;
+        flex: 0.5;
+        background: $white;
+        padding: 30px;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.048);
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+        .user-info{
+          text-align: center;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: left;
+          border-bottom: 1px solid #ccccccd1;
+          gap: 10px;
+          padding: 10px 0 15px 0;
+    
+          .avatar {
+            padding: 12px 15px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            background-color: $box-light;
+            svg{
+                font-size: 22px;
+            }
+        }
+        .user-details{
+            text-align: left;
+            font-size: 14px;
+            span{
+                font-size: 10px;
+                font-weight: 500;
+                color: $black-2nd;
+            }
+        }
+        }
+    
+        nav {
+          ul {
+            list-style: none;
+            padding: 0;
+    
+            li {
+              display: flex;
+              align-items: center;
+              justify-content: left;
+              gap: 10px;
+              margin: 8px 0;
+              padding: 8px 20px;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              border-radius: 15px;
+              -webkit-border-radius: 15px;
+              -moz-border-radius: 15px;
+              -ms-border-radius: 15px;
+              -o-border-radius: 15px;
+              @include transition();
+              svg{
+              font-size: 15px;
+              }
+              &:hover,
+              &.active{
+                background: $box-light;
+                svg{
+                    color: $red;
+                }
+              }
+            }
+          }
+        }
+    
+        .logout {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          width: 100%;
+          padding: 10px;
+          margin-top: 20px;
+          background: $red;
+          font-weight: bold;
+          color: $white;
+          border: none;
+          cursor: pointer;
+          border-radius: 15px;
+          -webkit-border-radius: 15px;
+          -moz-border-radius: 15px;
+          -ms-border-radius: 15px;
+          -o-border-radius: 15px;
+          @include transition();
+          svg{
+            font-size: 20px;
+          }
+          &:hover{
+            background-color: $red-hover;
+          }
+        }
+      }
+    
+      .content {
+        position: relative;
+        background-color: $white;
+        flex: 4;
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.048);
+        border-radius: 25px;
+        padding: 40px 30px;
+        -webkit-border-radius: 25px;
+        -moz-border-radius: 25px;
+        -ms-border-radius: 25px;
+        -o-border-radius: 25px;
+        .empty{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 9.5%;
+            gap: 15px;
+            text-align: center;
+            img{
+              width: 150px;
+            }
+            p{
+                color: $black;
+                font-size: 16px;
+                font-weight: 500;
+            }
+            .desc{
+                font-weight: 500;
+                color: $black-2nd;
+                font-size: 12px;
+            }
+            .back-home{
+              text-decoration: none;
+              font-size: 12px;
+              color: #fff;
+              background-color: $red;
+              padding: 12px 22px;
+              border-radius: 15px;
+              -webkit-border-radius: 15px;
+              -moz-border-radius: 15px;
+              -ms-border-radius: 15px;
+              -o-border-radius: 15px;
+              transition: all .3s ease;
+              -webkit-transition: all .3s ease;
+              -moz-transition: all .3s ease;
+              -ms-transition: all .3s ease;
+              -o-transition: all .3s ease;
+              &:hover{
+                background-color: $red-hover;
+              }
+        }
+          }
+        .products{
+            padding: 10px 5px;
+            max-height: 500px;
+            overflow-x: hidden;
+                    overflow-y: visible;
+                    scrollbar-width: 4px;
+                    &::-webkit-scrollbar {
+                      width: 4px; 
+                      height: 6px; 
+                    }
+                    &::-webkit-scrollbar-track {
+                      background: #f0f0f0; 
+                      border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                      background: #888; 
+                      border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-thumb:hover {
+                      background: #555;
+                    }
+                    &* {
+                      scrollbar-width: thin;
+                      scrollbar-color: #888 #f0f0f0; 
+                    }
+            .product-list{
+                padding: 0 !important;
+                justify-content: left;
+                gap: 10px;
+               .product-card{
+                   width: calc(100% - 10px);
+                   max-width: 200px;
+                   padding: 10px;
+                   margin-top: 30px;
+                   border-radius: 15px;
+                   -webkit-border-radius: 15px;
+                   -moz-border-radius: 15px;
+                   -ms-border-radius: 15px;
+                   -o-border-radius: 15px;
+                   &.outofstock{
+                       .img-div{
+                           .stock-overlay{
+                               border-radius: 10px;
+                               -webkit-border-radius: 10px;
+                               -moz-border-radius: 10px;
+                               -ms-border-radius: 10px;
+                               -o-border-radius: 10px;
+                               svg{
+                                   font-size: 2rem;
+                               }
+                           }
+                       }
+                       .card-ending{
+                           .add-to-cart-btn{
+                               span{
+                                   color: $red;
+                                   font-size: 9px;
+                                   margin-left: 5px;
+                               }
+                               &:hover{
+                                   color: $red;
+                                   background-color: $box-hover-light;
+                               }
+                           }
+                       }
+                       
+                   }
+                   a{
+                       text-decoration: none;
+                       color: $black;
+                   }
+                   .img-div{
+                       width: calc(100% - 5px);
+                       height: 120px;
+                       margin-top: -30px;
+                       max-width: 200px;
+                       padding: 10px;
+                       border-radius: 10px;
+                       -webkit-border-radius: 10px;
+                       -moz-border-radius: 10px;
+                       -ms-border-radius: 10px;
+                       -o-border-radius: 10px;
+                       img{
+                           width: 100%;
+                           height: 100%;
+                           object-fit: contain;
+                       }
+                       .discount{
+                           top: 10px;
+                           left: 10px;
+                           padding: 3px 6px;
+                           font-size: 10px;
+                           border-radius: 8px;
+                           -webkit-border-radius: 8px;
+                           -moz-border-radius: 8px;
+                           -ms-border-radius: 8px;
+                           -o-border-radius: 8px;
+           }
+                       button{
+                           top: 10px;
+                           right: 10px;
+                           padding: 4px 8px;
+                           @include transition();
+                           svg{
+                               font-size: 12px;
+                           }
+               }
+                   }
+                   .details{
+                       display: none;
+                   }
+                   .product-title{
+                       font-size: 12px;
+                       line-clamp: 1;
+                       display: -webkit-box;
+                       -webkit-line-clamp: 1; 
+                       -webkit-box-orient: vertical;
+                       overflow: hidden;
+                       text-overflow: ellipsis;
+                   }
+                   .pricing{
+                       gap: 10px;
+                       div{
+                           padding: 2px;
+                       }
+                       .price{
+                           padding-right: 10px;
+                           .old-price{
+                               font-size: 10px;
+                           }
+                           .current-price{
+                               font-size: 13px;
+                           }
+                       }
+                       .divide{
+                           .term{
+                               color: $black-2nd;
+                               font-weight: 500;
+                               font-size: 10px;
+                           }
+                           p{
+                               color: $black;
+                               font-size: 12px;
+                               font-weight: bold;
+                           }
+                       }
+                   }
+                   .card-ending{
+                       gap: 5px;
+                       a{
+                           font-size: 10px;
+                           padding: 8px 4px;
+                           border-radius: 10px;
+                           -webkit-border-radius: 10px;
+                           -moz-border-radius: 10px;
+                           -ms-border-radius: 10px;
+                           -o-border-radius: 10px;
+                           svg{
+                               font-size: 14px;
+                           }
+                           &:hover{
+                               background-color: $red;
+                               color: $white;
+                           }
+               }
+                       .add-to-cart-btn{
+                           .desktop-text{
+                               display: none;
+                           }
+                           .mobile-text{
+                               display: inline-block;
+                           }
+                           svg{
+                               left: 10px;
+                           }
+                           span{
+                               margin-right: -15px;
+                           }
+                           &:hover{
+                               svg{
+                                   left: 100px;
+                               }
+                               span{
+                                   margin-right: 0;
+                                   margin-left: -30px;
+                               }
+                           }
+                       }
+                       .add-to-wish-btn{
+                           padding: 10px 4px;
+                           &:hover{
+                               svg{
+                                   transform: scale(1.2);
+                                   -webkit-transform: scale(1.2);
+                                   -moz-transform: scale(1.2);
+                                   -ms-transform: scale(1.2);
+                                   -o-transform: scale(1.2);
+               }
+                           }
+                       }
+                   }
+               }
+           }
+        }
+        .support-form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            .form-double{
+                display: flex;
+                gap: 10px;
+                .form-group{
+                    flex: 1;
+                }
+            }
+            .form-group{
+                position: relative;
+                input, textarea, select{
+                    border: 1px solid $black;
+                    width: 100%;
+                    padding: 10px 35px 10px 15px;
+                    border-radius: 15px;
+                    -webkit-border-radius: 15px;
+                    -moz-border-radius: 15px;
+                    -ms-border-radius: 15px;
+                    -o-border-radius: 15px;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                label{
+                    position: absolute;
+                    left: 15px;
+                    top: 12px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    border-radius:6px;
+                    @include transition();                                                           
+                    -webkit-border-radius:6px;
+                    -moz-border-radius:6px;
+                    -ms-border-radius:6px;
+                    -o-border-radius:6px;
+                    &.clicked{
+                        font-size: 10px;
+                        left: 5px;
+                        padding: 4px 10px;
+                        background-color: $white;
+                        transform: translateY(-25px);
+                        -webkit-transform: translateY(-25px);
+                        -moz-transform: translateY(-25px);
+                        -ms-transform: translateY(-25px);
+                        -o-transform: translateY(-25px);
+}
+                }
+                .pass-hider{
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
+                    cursor: pointer;
+                }
+                svg{
+                    position: absolute;
+                    right: 15px;
+                    top: 12px;
+                    font-size: 18px;
+                    color: $red;
+                }
+            }
+        
+            .buttons {
+                display: flex;
+                gap: 10px;
+        
+                button {
+                    text-decoration: none;
+                    font-weight: 500;
+                    font-size: 13px;
+                    padding: 12px 15px;
+                    cursor: pointer;
+                    border: none;
+                    border-radius: 10px;
+                    -webkit-border-radius: 10px;
+                    -moz-border-radius: 10px;
+                    -ms-border-radius: 10px;
+                    -o-border-radius: 10px;
+                }
+        
+                .submit {
+                    background: $black;
+                    color: $white;
+                }
+        
+                .cancel {
+                    background: $box-light;
+                    color: $black;
+                }
+            }
+        }
+        .error-message{
+            margin: 5px 0;
+            color: $red; 
+            font-weight: 500;    
+        }
+        .success-message{
+            position: absolute;
+            top: -40px;
+            left: 0;
+            transform: translateX(50%);
+            text-align: center;
+            background-color: green;
+            color: $white;
+            font-weight: 500;
+            padding: 6px 15px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            -webkit-transform: translateX(50%);
+            -moz-transform: translateX(50%);
+            -ms-transform: translateX(50%);
+            -o-transform: translateX(50%);
+}
+        form{
+            margin: 30px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .form-group{
+                position: relative;
+                input{
+                    border: 1px solid $black;
+                    width: 100%;
+                    padding: 10px 35px 10px 15px;
+                    border-radius: 15px;
+                    -webkit-border-radius: 15px;
+                    -moz-border-radius: 15px;
+                    -ms-border-radius: 15px;
+                    -o-border-radius: 15px;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                label{
+                    position: absolute;
+                    left: 15px;
+                    top: 12px;
+                    font-size: 12px;
+                    font-weight: 500;
+                    border-radius:6px;
+                    @include transition();                                                           
+                    -webkit-border-radius:6px;
+                    -moz-border-radius:6px;
+                    -ms-border-radius:6px;
+                    -o-border-radius:6px;
+                    &.clicked{
+                        font-size: 10px;
+                        left: 5px;
+                        padding: 4px 10px;
+                        background-color: $white;
+                        transform: translateY(-25px);
+                        -webkit-transform: translateY(-25px);
+                        -moz-transform: translateY(-25px);
+                        -ms-transform: translateY(-25px);
+                        -o-transform: translateY(-25px);
+}
+                }
+                svg{
+                    position: absolute;
+                    right: 15px;
+                    top: 12px;
+                    font-size: 18px;
+                    color: $red;
+                }
+            }            
+        }
+    
+        .buttons {
+          display: flex;
+          gap: 10px;
+          button,
+          a{
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 13px;
+            padding: 12px 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+}
+    
+          .edit,
+          .save {
+            background: $black;
+            color: $white;
+          }
+    
+          .change-password,
+          .cancel {
+            color: $black;
+            background: $box-light;
+          }
+        }
+      }
+  }
+}
+@media (max-width: 768px){
+    .user-profile {
+        padding: 10px 15px;
+        .profile-page{
+           .sidebar{
+            display: none;
+           }          
+            .content {
+              box-shadow: none;
+            }
+        }
+        .content{
+            padding: 10px !important;
+        }
+        .support-form{
+            .form-double{
+                flex-direction: column;
+            }
+        }
+      }
+}

@@ -1,6 +1,6 @@
-export const registerSuccess = (email) => ({
+export const registerSuccess = (user) => ({
     type: 'REGISTER_SUCCESS',
-    payload: email
+    payload: user
 });
 
 export const registerFail = (error) => ({
@@ -17,9 +17,9 @@ export const confirmFail = (error) => ({
     payload: error
 });
 
-export const loginSuccess = (email) => ({
+export const loginSuccess = (user) => ({
     type: 'LOGIN_SUCCESS',
-    payload: email
+    payload: user
 });
 
 export const loginFail = (error) => ({
@@ -55,3 +55,23 @@ export const setPasswordFail = (error) => ({
     type: 'SET_PASSWORD_FAIL',
     payload: error
 });
+
+export const updateUserSuccess = (user) => ({
+    type: 'UPDATE_USER_SUCCESS',
+    payload: user
+});
+
+export const updateUserFail = (error) => ({
+    type: 'UPDATE_USER_FAIL',
+    payload: error
+});
+
+export const changePasswordSuccess = () => ({
+    type: "CHANGE_PASSWORD_SUCCESS",
+});
+
+export const changePasswordFail = (error) => ({
+    type: "CHANGE_PASSWORD_FAIL",
+    payload: error,
+});
+

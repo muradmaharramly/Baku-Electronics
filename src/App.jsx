@@ -27,6 +27,8 @@ import ConfirmEmail from "./assets/auth/CofirmEmail";
 import ResetPassword from "./assets/auth/ResetPassword";
 import ConfirmReset from "./assets/auth/ConfirmReset";
 import SetPassword from "./assets/auth/SetPassword";
+import UserProfile from "./pages/UserProfile";
+import ChangePassword from "./pages/ChangePassword";
 
 const App = () => {
   return (
@@ -51,6 +53,8 @@ const App = () => {
           <Route path="/shops" element={<Shops />} />
           <Route path="/campaigns" element={<Campaigns />} />
           <Route path="/campaigns/:slug" element={<CampaignDetails />} />
+          <Route path="/user-profile" element={<UserProfile />} />
+          <Route path="/user-profile/change-password" element={<ChangePassword />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
 

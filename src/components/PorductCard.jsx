@@ -112,7 +112,7 @@ function ProductCard({ product }) {
                 <div className="details">
                     <p className="rate"><FaStar />{product.rating}</p>
                     <p className="review-count"><FaCommentDots />{product.reviewCount}<span>rəy</span></p>
-                    {product.count !== 0 &&
+                    {product.count === 0 &&
                         <p className="stock-info">Stokda yoxdur</p>
                     }
                 </div>
@@ -133,7 +133,7 @@ function ProductCard({ product }) {
                     </div>
                 </Link>
                 <div className="card-ending">
-                    {product.count !== 0 ? (
+                    {product.count === 0 ? (
                         <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
                             <RiShoppingCart2Line /><span>Stokda yoxdur</span>
                         </Link>

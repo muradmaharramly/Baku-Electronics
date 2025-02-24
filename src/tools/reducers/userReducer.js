@@ -36,6 +36,16 @@ const userReducer = (state = initialState, action) => {
             return { ...state, error: null, message: action.payload, resetCodeConfirmed: false };
         case 'SET_PASSWORD_FAIL':
             return { ...state, error: action.payload, message: null };
+        
+        case 'UPDATE_USER_SUCCESS':
+            return { ...state, user: { ...state.user, ...action.payload }, error: null, message: "Məlumatlar uğurla yeniləndi!" };
+        case 'UPDATE_USER_FAIL':
+            return { ...state, error: action.payload, message: null };
+
+        case 'CHANGE_PASSWORD_SUCCESS':
+            return { ...state, error: null, message: "Şifrə uğurla dəyişdirildi!" };
+        case 'CHANGE_PASSWORD_FAIL':
+            return { ...state, error: action.payload, message: null };
 
         default:
             return state;
