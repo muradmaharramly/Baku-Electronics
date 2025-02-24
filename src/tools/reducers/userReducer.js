@@ -46,6 +46,8 @@ const userReducer = (state = initialState, action) => {
             return { ...state, error: null, message: "Şifrə uğurla dəyişdirildi!" };
         case 'CHANGE_PASSWORD_FAIL':
             return { ...state, error: action.payload, message: null };
+        case "LOGOUT_USER":
+            return { ...state, user: null, error: null, message: null };
 
         default:
             return state;

@@ -6,15 +6,16 @@ import { GrLocation } from "react-icons/gr";
 import { IoBagHandleOutline, IoLogOutOutline } from "react-icons/io5";
 import { LuHistory, LuMessageSquareShare } from "react-icons/lu";
 import { RiArrowRightDoubleFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../services/supabaseClient";
-import { loginSuccess, updateUserSuccess } from "../tools/actions/userActions";
+import { loginSuccess, logoutUser, updateUserSuccess } from "../tools/actions/userActions";
 import ProductCard from "../components/PorductCard";
 import { IoIosArrowDown } from "react-icons/io";
 
 const UserProfile = () => {
     const dispatch = useDispatch();
     const user = useSelector((state) => state.user.user);
+    const navigate = useNavigate();
 
     const [activeTab, setActiveTab] = useState("personal");
     const [tel, setTel] = useState(user?.phoneNumber || "");
@@ -103,6 +104,17 @@ const UserProfile = () => {
         setShowSave(true);
     };
 
+    const handleLogout = () => {
+        dispatch(logoutUser());
+        setTimeout(() => {
+            navigate("/");
+            setTimeout(() => {
+                localStorage.removeItem("email");
+                window.location.reload();
+            }, 100);
+        }, 500);
+    };
+
     useEffect(() => {
         const storedProducts = JSON.parse(localStorage.getItem("viewedProducts")) || [];
         setViewedProducts(storedProducts);
@@ -143,7 +155,7 @@ const UserProfile = () => {
                             ))}
                         </ul>
                     </nav>
-                    <button className="logout"><IoLogOutOutline /> Çıxış</button>
+                    <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button>
                 </aside>
                 <main className="content">
                     {activeTab === "personal" && (

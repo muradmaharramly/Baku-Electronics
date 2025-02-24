@@ -74,4 +74,7 @@ export const changePasswordFail = (error) => ({
     type: "CHANGE_PASSWORD_FAIL",
     payload: error,
 });
+export const logoutUser = () => ({
+    type: "LOGOUT_USER"
+});
 

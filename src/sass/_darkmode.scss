@@ -2122,4 +2122,371 @@ border-bottom: 2px solid $white;
 }
 
 }
+.login-page,
+.register-page,
+.confirm-page,
+.reset-page{
+  h1{
+    color: $white;
+  }
+    .right{
+        background-color: $main-dark;
+        .links{
+            a{
+                color: $white;
+            }
+        }
+        .form-area{
+            box-shadow: 0px 0px 20px 10px rgba(0, 0, 0, 0.116);
+            background-color: $box-dark;
+            form{
+                .form-group{
+                    position: relative;
+                    input{
+                        color: $white;
+                        border: 1px solid $white;
+                        background-color: $box-dark;
+                        &:focus{
+                            outline: none;
+                        }
+                    }
+                    label{
+                        color: $white;
+                        &.clicked{
+                            background-color: $box-dark;
+}
+                    }
+                }
+                .forgot-pass{
+                    a{
+                        color: $white;
+                    }
+                }
+                .code-text{
+                    color: $white-2nd;
+                }
+                .submit-btn{
+                    background-color: $red;
+                    &:hover{
+                        background-color: $red-hover;
+                    }
+                }
+            }
+            p{
+                color: $white;
+                a{
+                    color: $white;
+                }
+            }
+}
+    }
+}
+.user-profile {
+  .profile-page{
+    &.change-password{
+        justify-content: center;
+        .content{
+            flex: 1;
+            max-width: 400px;
+            form{
+               gap: 15px;
+               .pass-hider{
+                border: none;
+                background-color: transparent;
+                position: absolute;
+                cursor: pointer;
+            }
+            }
+        }
+    }
+    .sidebar {
+        background: $box-dark;
+        .user-info{
+    
+          .avatar {
+            background-color: $box-hover-dark;
+            svg{
+                color: $white;
+            }
+        }
+        .user-details{
+            color: $white;
+            span{
+                color: $white-2nd;
+            }
+        }
+        }
+    
+        nav {
+          ul {
+            li {
+              color: $white;
+              svg{
+              font-size: 15px;
+              }
+              &:hover,
+              &.active{
+                background: $box-hover-dark;
+                svg{
+                    color: $red;
+                }
+              }
+            }
+          }
+        }
+      }
+    
+      .content {
+        background-color: $box-dark;
+        h3{
+          color: $white;
+        }
+        .empty{
+            p{
+                color: $white;
+            }
+            .desc{
+                color: $white-2nd;
+            }
+          }
+        .products{
+            padding: 10px 5px;
+            max-height: 500px;
+            overflow-x: hidden;
+                    overflow-y: visible;
+                    scrollbar-width: 4px;
+                    &::-webkit-scrollbar {
+                      width: 4px; 
+                      height: 6px; 
+                    }
+                    &::-webkit-scrollbar-track {
+                      background: #f0f0f0; 
+                      border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-thumb {
+                      background: #888; 
+                      border-radius: 10px;
+                    }
+                    &::-webkit-scrollbar-thumb:hover {
+                      background: #555;
+                    }
+                    &* {
+                      scrollbar-width: thin;
+                      scrollbar-color: #888 #f0f0f0; 
+                    }
+            .product-list{
+                padding: 0 !important;
+                justify-content: left;
+                gap: 10px;
+                .product-card{
+                  border: 1px solid $white;
+                  a{
+                      color: $white;
+                  }
+                  .img-div{
+                      .discount{
+                          top: 10px;
+                          left: 10px;
+                          padding: 3px 6px;
+                          font-size: 10px;
+                          border-radius: 8px;
+                          -webkit-border-radius: 8px;
+                          -moz-border-radius: 8px;
+                          -ms-border-radius: 8px;
+                          -o-border-radius: 8px;
+            }
+                      button{
+                          top: 10px;
+                          right: 10px;
+                          padding: 4px 8px;
+                          @include transition();
+                          svg{
+                              font-size: 12px;
+                          }
+              }
+                  }
+                  .details{
+                      display: none;
+                  }
+                  .product-title{
+                      font-size: 12px;
+                  }
+                  .pricing{
+                      gap: 10px;
+                      div{
+                          padding: 2px;
+                      }
+                      .price{
+                          padding-right: 10px;
+                          .old-price{
+                              font-size: 10px;
+                          }
+                          .current-price{
+                              font-size: 13px;
+                          }
+                      }
+                      .divide{
+                          .term{
+                              color: $white-2nd;
+                              font-weight: 500;
+                              font-size: 10px;
+                          }
+                          p{
+                              color: $white;
+                              font-size: 12px;
+                              font-weight: bold;
+                          }
+                      }
+                  }
+                  .card-ending{
+                      gap: 5px;
+                      a{
+                          font-size: 10px;
+                          padding: 8px 4px;
+                          border-radius: 10px;
+                          -webkit-border-radius: 10px;
+                          -moz-border-radius: 10px;
+                          -ms-border-radius: 10px;
+                          -o-border-radius: 10px;
+                          svg{
+                              font-size: 14px;
+                          }
+                          &:hover{
+                            background-color: $box-hover-dark;
+                            color: $white;
+                        }
+              }
+                      .add-to-cart-btn{
+                          .desktop-text{
+                              display: none;
+                          }
+                          .mobile-text{
+                              display: inline-block;
+                          }
+                          svg{
+                              left: 10px;
+              
+                          }
+                          &.clicked{
+                              .mobile-text{
+                                  display: none;
+                              }
+                              .added-text{
+                                  display: inline-block;
+                              }
+                          }
+                      }
+                  }
+              }
+           }
+        }
+        .support-form {
+            .form-group{
+                position: relative;
+                input, textarea, select{
+                    border: 1px solid $white;
+                    background-color:$box-dark;
+                    color: $white;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                label{
+                    color: $white;
+                    &.clicked{
+                        background-color: $box-dark;
+}
+                }
+            }
+        
+            .buttons {
+        
+                .submit {
+                    background: $white;
+                    color: $black;
+                }
+        
+                .cancel {
+                    background: $box-hover-dark;
+                    color: $white;
+                }
+            }
+        }
+        form{
+            .form-group{
+                input{
+                    border: 1px solid $white;
+                    background-color: $box-dark;
+                    color: $white;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                label{
+                     color: $white;
+                    &.clicked{
+                        background-color: $box-dark;
+}
+                }
+            }            
+        }
+    
+        .buttons {    
+          .edit,
+          .save {
+            background: $white;
+            color: $black;
+          }
+    
+          .change-password,
+          .cancel {
+            color: $white;
+            background: $box-hover-dark;
+          }
+        }
+      }
+  }
+}
+@media (max-width: 768px){
+    .user-profile {
+        padding: 10px 15px;
+        .profile-page{
+           .sidebar{
+            display: none;
+           }          
+            .content {
+              box-shadow: none;
+            }
+        }
+        .content{
+            background-color: transparent !important;
+            padding: 10px !important;
+            form{
+              .form-group{
+                input, select, textarea{
+                  background-color: $main-dark !important;
+                }
+                label{
+                  &.clicked{
+                    background-color: $main-dark !important;
+                  }
+                }
+              }
+            }
+            .support-form{
+              .form-group{
+                input, select, textarea{
+                  background-color: $main-dark !important;                  
+                }
+                label{
+                  &.clicked{
+                    background-color: $main-dark !important;
+                  }
+                }
+              }
+            }
+        }
+      }
+}
+
 }
