@@ -451,7 +451,7 @@
                 svg{
                   font-size: 18px;
                 }
-}
+              }
               a{
                 border: 1px solid transparent;
                 border-bottom: 1px solid #dcdbdb;
@@ -634,6 +634,24 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+              }
+              .not-found{
+                margin: 5px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: $red;
+                background-color: #fdd;
+                padding: 4px 10px;
+                border-radius: 10px;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -ms-border-radius: 10px;
+                -o-border-radius: 10px;
+                border: 1px solid $red;
+                svg{
+                  font-size: 18px;
+                }
               }
 }
           }

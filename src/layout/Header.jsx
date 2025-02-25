@@ -20,6 +20,7 @@ import { fetchProducts } from "../tools/request/fetchProducts";
 import PreLoader from "../components/PreLoader";
 import slugify from "slugify";
 import { GoHistory } from "react-icons/go";
+import { fetchCampaigns } from "../tools/request/fetchCampaigns";
 
 const categories = [
     {
@@ -80,6 +81,7 @@ const Header = () => {
     const [viewedProducts, setViewedProducts] = useState([]);
     const [popularProducts, setPopularProducts] = useState([]);
     const [discountedProducts, setDiscountedProducts] = useState([]);
+    const [filteredCampaigns, setFilteredCampaigns] = useState([]);
     const [showTopNavbar, setShowTopNavbar] = useState(true);
     const [isScrolled, setIsScrolled] = useState(false);
     const [isClicked, setIsClicked] = useState(false);
@@ -93,8 +95,15 @@ const Header = () => {
 
     const { totalUniqueItems } = useCart();
     const { totalWishlistItems } = useWishlist();
-    
+
     const userEmail = localStorage.getItem("email");
+
+    const { campaigns } = useSelector((state) => state.campaigns);
+
+    useEffect(() => {
+        fetchCampaigns();
+    }, []);
+
 
     useEffect(() => {
         fetchProducts();
@@ -143,6 +152,22 @@ const Header = () => {
             setPopularFilteredProducts([]);
         }
     }, [searchTerm, products]);
+
+    useEffect(() => {
+        if (searchTerm) {
+            const filteredCampaigns = campaigns.filter((campaign) => {
+                const isTitleMatch = campaign.title.toLowerCase().includes(searchTerm.toLowerCase());
+                const isFutureDate = new Date(campaign.endDate) > new Date();
+
+                return isTitleMatch && isFutureDate;
+            });
+
+            setFilteredCampaigns(filteredCampaigns);
+        } else {
+            setFilteredCampaigns([]);
+        }
+    }, [searchTerm, campaigns]);
+
 
     useEffect(() => {
         const handleScroll = () => {
@@ -439,8 +464,27 @@ const Header = () => {
 
                                 </div>
                                 <div className="campaign-img">
-                                    <img src="https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fdefault_search_result_banner%2F1240x400-sevenspace.webp&w=1920&q=75" />
+                                    {searchTerm.length > 0 ? (
+                                        filteredCampaigns.length > 0 ? (
+                                            <img src={filteredCampaigns[0].image} alt="Filtered Campaign" />
+                                        ) : (
+                                            <p className="not-found">Kampaniya tapılmadı!</p>
+                                        )
+                                    ) : (
+                                        filteredCampaigns.length > 0 ? (
+                                            <p className="not-found">Kampaniya tapılmadı!</p>
+                                        ) : (
+                                            <img
+                                                src={
+                                                    campaigns.sort((a, b) => new Date(b.endDate) - new Date(a.endDate))[0]?.image
+                                                }
+                                                alt="Latest Campaign"
+                                            />
+                                        )
+                                    )}
                                 </div>
+
+
                             </div>
                         </div>
                     )}

@@ -10,7 +10,7 @@
     .brands {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 15px;
       justify-content: space-between;
   
       .brand-card {
@@ -38,7 +38,7 @@
         img {
           max-width: 40%;
           height: auto;
-          object-fit: contain;
+          object-fit: cover;
           filter: grayscale(100%);
           -webkit-filter: grayscale(100%);
           @include transition();
