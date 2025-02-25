@@ -1,0 +1,26 @@
+.monthly-payment{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px 9.5%;
+    h2{
+        margin: 10px 0;
+    }
+    iframe{
+        height: 70vh;
+        border: none;
+        background-color: $white;
+        
+    }
+}
+@media (max-width: 768px){
+    .monthly-payment{
+        padding: 10px 15px;
+        h2{
+            margin: 0;
+        }
+        iframe{
+            height: 110vh;
+        }
+    }
+}

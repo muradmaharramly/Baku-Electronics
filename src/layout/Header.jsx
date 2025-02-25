@@ -255,7 +255,7 @@ const Header = () => {
                         <li><NavLink to="/campaigns" >Kampaniyalar</NavLink></li>
                         <li><NavLink to="/corporative-sales">Korporativ satışlar</NavLink></li>
                         <li><NavLink to="/shops">Mağazalar</NavLink></li>
-                        <li>Aylıq ödəniş</li>
+                        <li><NavLink to="/monthly-payment">Aylıq ödəniş</NavLink></li>
                         <li className="droped">Digər<ion-icon name="chevron-down-outline"></ion-icon>
                             <ul className="dropdown">
                                 <li>Arxayın al</li>
@@ -493,9 +493,9 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <a>
+                                <Link to="/monthly-payment">
                                     Aylıq ödəniş <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
+                                </Link>
                             </li>
                             <li onClick={handleOtherNavClick}>
                                 <p>

@@ -29,6 +29,7 @@ import ConfirmReset from "./assets/auth/ConfirmReset";
 import SetPassword from "./assets/auth/SetPassword";
 import UserProfile from "./pages/UserProfile";
 import ChangePassword from "./pages/ChangePassword";
+import MonthlyPayment from "./pages/MonthlyPayment";
 
 const App = () => {
   return (
@@ -55,6 +56,7 @@ const App = () => {
           <Route path="/campaigns/:slug" element={<CampaignDetails />} />
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/user-profile/change-password" element={<ChangePassword />} />
+          <Route path="/monthly-payment" element={<MonthlyPayment />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
 

@@ -3,6 +3,32 @@
   flex-direction: column;
   gap: 10px;
   padding: 20px 9.5%;
+  .logout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    background: $red;
+    font-weight: bold;
+    color: $white;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    @include transition();
+    svg{
+      font-size: 20px;
+    }
+    &:hover{
+      background-color: $red-hover;
+    }
+  }
 
   .profile-page{
     margin-top: 10px;
@@ -102,33 +128,6 @@
             }
           }
         }
-    
-        .logout {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 5px;
-          width: 100%;
-          padding: 10px;
-          margin-top: 20px;
-          background: $red;
-          font-weight: bold;
-          color: $white;
-          border: none;
-          cursor: pointer;
-          border-radius: 15px;
-          -webkit-border-radius: 15px;
-          -moz-border-radius: 15px;
-          -ms-border-radius: 15px;
-          -o-border-radius: 15px;
-          @include transition();
-          svg{
-            font-size: 20px;
-          }
-          &:hover{
-            background-color: $red-hover;
-          }
-        }
       }
     
       .content {
@@ -142,6 +141,17 @@
         -moz-border-radius: 25px;
         -ms-border-radius: 25px;
         -o-border-radius: 25px;
+        .head{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            button{
+                width: auto;
+                margin-top: 0;
+                padding: 6px 15px;
+                display: none;
+            }
+        }
         .empty{
             display: flex;
             flex-direction: column;
@@ -402,6 +412,7 @@
             .form-group{
                 position: relative;
                 input, textarea, select{
+                    appearance: none;
                     border: 1px solid $black;
                     width: 100%;
                     padding: 10px 35px 10px 15px;
@@ -602,11 +613,25 @@
             display: none;
            }          
             .content {
+              padding: 10px;
               box-shadow: none;
+              .head{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                button{
+                    width: auto;
+                    margin-top: 0;
+                    padding: 6px 15px;
+                    display: flex;
+                }
             }
-        }
-        .content{
-            padding: 10px !important;
+            .product-list{
+                .product-card{
+                    width: calc(50% - 10px) !important;
+                }
+            }
+            }
         }
         .support-form{
             .form-double{

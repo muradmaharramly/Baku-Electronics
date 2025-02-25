@@ -19,7 +19,7 @@ const UserProfile = () => {
 
     const [activeTab, setActiveTab] = useState("personal");
     const [tel, setTel] = useState(user?.phoneNumber || "");
-    const [fin, setFin] = useState(user?.Fin || "");
+    const [fin, setFin] = useState(user?.fin || "");
     const [isTelFocused, setIsTelFocused] = useState(true);
     const [isFinFocused, setIsFinFocused] = useState(false);
     const [showSave, setShowSave] = useState(false);
@@ -64,7 +64,7 @@ const UserProfile = () => {
 
                 dispatch(loginSuccess(data));
                 setTel(data.phoneNumber || "");
-                setFin(data.Fin || "");
+                setFin(data.fin || "");
             } catch (error) {
                 console.error("Fetch User Data Error:", error.message);
             }
@@ -160,7 +160,7 @@ const UserProfile = () => {
                 <main className="content">
                     {activeTab === "personal" && (
                         <div className="tab-content">
-                            <h3>Şəxsi məlumatlarım</h3>
+                            <div className="head"><h3>Şəxsi məlumatlarım </h3><button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
                             <form>
                                 <div className='form-group'>
                                     <input
@@ -217,7 +217,7 @@ const UserProfile = () => {
                         </div>
                     </div>}
                     {activeTab === "history" && <div className="tab-content">
-                        <h3>Ən Son Baxdıqlarım</h3>
+                        <div className="head"><h3>Ən Son Baxdıqlarım</h3><button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
                         <div className="products">
                             <div className="product-list">
                                 {viewedProducts.length > 0 ? (
@@ -242,7 +242,7 @@ const UserProfile = () => {
                         </div>
                     </div>}
                     {activeTab === "support" && <div className="tab-content">
-                        <h3>Müraciət et</h3>
+                        <div className="head"><h3>Müraciət et</h3><button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
                         <div className="support-form">
                             <div className="form-double">
                                 <div className='form-group'>
