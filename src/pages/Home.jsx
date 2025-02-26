@@ -9,6 +9,7 @@ import NewsSlider from '../components/sliders/NewsSlider'
 import ProductList from '../components/ProductList'
 import FilteredProductList from '../components/FilteredProductList'
 import { Link } from 'react-router-dom'
+import BrandsSlider from '../components/sliders/BrandsSlider'
 
 const Home = () => {
   return (
@@ -72,6 +73,7 @@ const Home = () => {
         </div>
       </div>
       <NewsSlider />
+      <BrandsSlider />
     </div>
   )
 }
