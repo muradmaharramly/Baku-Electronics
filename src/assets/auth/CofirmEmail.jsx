@@ -58,7 +58,7 @@ const ConfirmEmail = () => {
 
         await supabase
             .from('users')
-            .update({ emailConfirmed: true, verificationCode: null })
+            .update({ emailConfirmed: true, verificationCode: code })
             .eq('email', userEmail);
 
         setLocalMessage('Hesab uğurla təsdiqləndi!');

@@ -20,7 +20,7 @@ const UserProfile = () => {
     const [activeTab, setActiveTab] = useState("personal");
     const [tel, setTel] = useState(user?.phoneNumber || "");
     const [fin, setFin] = useState(user?.fin || "");
-    const [isTelFocused, setIsTelFocused] = useState(true);
+    const [isTelFocused, setIsTelFocused] = useState(false);
     const [isFinFocused, setIsFinFocused] = useState(false);
     const [showSave, setShowSave] = useState(false);
     const [isEditable, setIsEditable] = useState(false);
