@@ -84,14 +84,14 @@ const Wishlist = () => {
                         <Link to={`/products/${slugify(item.title, { lower: true })}`}>
                             <div className="pricing">
                                 <div className="price">
-                                    {item.discount > 0 && <p className="old-price">${item.price}</p>}
+                                    {item.discount > 0 && <p className="old-price">{item.price}</p>}₼
                                     <p className="current-price">
-                                        ${(item.price - (item.price * item.discount) / 100).toFixed(2)}
+                                        {(item.price - (item.price * item.discount) / 100).toFixed(2)}₼
                                     </p>
                                 </div>
                                 <div className="divide">
                                     <p className="term">6 ay</p>
-                                    <p>${((item.price - (item.price * item.discount) / 100) / 6).toFixed(2)}</p>
+                                    <p>{((item.price - (item.price * item.discount) / 100) / 6).toFixed(2)}₼</p>
                                 </div>
                             </div>
                         </Link>

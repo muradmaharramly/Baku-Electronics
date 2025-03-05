@@ -1,5 +1,6 @@
 const initialState = {
-    user: null,
+    user: [],
+    userCount:0,
     error: null,
     message: null,
     resetCodeConfirmed: false
@@ -7,6 +8,10 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "SET_LOADING":
+            return { ...state, loading: action.payload };
+        case "SET_USERS":
+            return { ...state, loading: false, user: action.payload }; 
         case 'REGISTER_SUCCESS':
             return { ...state, user: action.payload, error: null, message: "Qeydiyyat uğurla tamamlandı!" };
         case 'REGISTER_FAIL':
@@ -48,6 +53,10 @@ const userReducer = (state = initialState, action) => {
             return { ...state, error: action.payload, message: null };
         case "LOGOUT_USER":
             return { ...state, user: null, error: null, message: null };
+        case "SET_USER_COUNT":  
+            return {...state,loading: false, userCount: action.payload,};  
+        case "SET_ERROR":
+            return { ...state, loading: false, error: action.payload };    
 
         default:
             return state;

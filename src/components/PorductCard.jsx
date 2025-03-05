@@ -71,14 +71,14 @@ function ProductCard({ product }) {
             <Link to={`/products/${slugify(product.title, { lower: true })}`}>
                 <div className="pricing">
                     <div className="price">
-                        {product.discount > 0 && <p className="old-price">${product.price}</p>}
+                        {product.discount > 0 && <p className="old-price">{product.price}₼</p>}
                         <p className="current-price">
-                            ${(product.price - (product.price * product.discount) / 100).toFixed(2)}
+                            {(product.price - (product.price * product.discount) / 100).toFixed(2)}₼
                         </p>
                     </div>
                     <div className="divide">
                         <p className="term">6 ay</p>
-                        <p>${((product.price - (product.price * product.discount) / 100) / 6).toFixed(2)}</p>
+                        <p>{((product.price - (product.price * product.discount) / 100) / 6).toFixed(2)}₼</p>
                     </div>
                 </div>
             </Link>
@@ -121,14 +121,14 @@ function ProductCard({ product }) {
                 <Link to={`/products/${slugify(product.title, { lower: true })}`}>
                     <div className="pricing">
                         <div className="price">
-                            {product.discount > 0 && <p className="old-price">${product.price}</p>}
+                            {product.discount > 0 && <p className="old-price">{product.price}₼</p>}
                             <p className="current-price">
-                                ${(product.price - (product.price * product.discount) / 100).toFixed(2)}
+                                {(product.price - (product.price * product.discount) / 100).toFixed(2)}₼
                             </p>
                         </div>
                         <div className="divide">
                             <p className="term">6 ay</p>
-                            <p>${((product.price - (product.price * product.discount) / 100) / 6).toFixed(2)}</p>
+                            <p>{((product.price - (product.price * product.discount) / 100) / 6).toFixed(2)}₼</p>
                         </div>
                     </div>
                 </Link>

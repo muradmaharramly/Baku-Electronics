@@ -14,7 +14,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const UserProfile = () => {
     const dispatch = useDispatch();
-    const user = useSelector((state) => state.user.user);
+    const {user} = useSelector((state) => state.user);
     const navigate = useNavigate();
 
     const [activeTab, setActiveTab] = useState("personal");

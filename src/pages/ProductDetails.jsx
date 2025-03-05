@@ -163,8 +163,8 @@ function ProductDetails() {
                     <h1>{product.title}</h1>
                     <p className="product-code">Məhsul kodu: <strong>{product.productCode}</strong></p>
                     <div className="price">
-                        {product.discount > 0 && <p className="old-price">${product.price}</p>}
-                        <p className="current-price">${discountPrice.toFixed(2)}</p>
+                        {product.discount > 0 && <p className="old-price">{product.price}₼</p>}
+                        <p className="current-price">{discountPrice.toFixed(2)}₼</p>
                     </div>
                     <div className="btns-div">
                         {product.count === 0 ? (
@@ -223,8 +223,8 @@ function ProductDetails() {
                         <h4>Bir kliklə sifariş et</h4>
                         <div className="mobile-head">
                             <div className="price">
-                                {product.discount > 0 && <p className="old-price">${product.price}</p>}
-                                <p className="current-price">${discountPrice.toFixed(2)}</p>
+                                {product.discount > 0 && <p className="old-price">{product.price}₼</p>}
+                                <p className="current-price">{discountPrice.toFixed(2)}₼</p>
                             </div>
                             {inCart(product.id) ? (
                                 <Link to="/cart" className="add-to-cart-btn clicked">
@@ -249,8 +249,8 @@ function ProductDetails() {
                         }}><IoIosArrowDown /></button>
                         <div className="mobile-head">
                             <div className="price">
-                                {product.discount > 0 && <p className="old-price">${product.price}</p>}
-                                <p className="current-price">${discountPrice.toFixed(2)}</p>
+                                {product.discount > 0 && <p className="old-price">{product.price}₼</p>}
+                                <p className="current-price">{discountPrice.toFixed(2)}₼</p>
                             </div>
                             <div className="btns">
                                 <button onClick={() => {
@@ -306,8 +306,8 @@ function ProductDetails() {
                                         <div className="item-info">
                                             <p>{buyTogether.title.substring(0, 80)}...</p>
                                             <div className="price-info">
-                                                <h3>${(buyTogether.price - (buyTogether.price * buyTogether.discount) / 100).toFixed(2)}</h3>
-                                                <h3>${((buyTogether.price - (buyTogether.price * buyTogether.discount) / 100) / 24).toFixed(2)} <span>24 ay</span></h3>
+                                                <h3>{(buyTogether.price - (buyTogether.price * buyTogether.discount) / 100).toFixed(2)}₼</h3>
+                                                <h3>{((buyTogether.price - (buyTogether.price * buyTogether.discount) / 100) / 24).toFixed(2)}₼ <span>24 ay</span></h3>
                                             </div>
                                         </div>
                                     </div>

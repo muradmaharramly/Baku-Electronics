@@ -15,7 +15,6 @@ import { FiFilter } from 'react-icons/fi';
 import { PiEmpty } from 'react-icons/pi';
 import { SlRefresh } from 'react-icons/sl';
 
-const categories = ['electronic', 'smartphone', 'TV', 'smartwatch', 'computer'];
 
 const Products = () => {
     const { products, productCount, loading, error } = useSelector((state) => state.products);
@@ -43,6 +42,8 @@ const Products = () => {
     if (error) return <p>Xəta baş verdi: {error}</p>;
 
     if (!products) return <p>Məhsul tapılmadı!</p>;
+
+    const categories = [...new Set(products.map(product => product.category))];
 
     const totalPages = Math.ceil(productCount / productPerPage);
 

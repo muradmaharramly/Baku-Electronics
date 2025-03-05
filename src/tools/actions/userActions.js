@@ -77,4 +77,21 @@ export const changePasswordFail = (error) => ({
 export const logoutUser = () => ({
     type: "LOGOUT_USER"
 });
+export const setUsers = (user) => ({
+    type: "SET_USERS",
+    payload: user,
+});
+export const setUserCount = (count) => ({
+  type: "SET_USER_COUNT",
+  payload: count,
+});
+export const setLoading = (loading) => ({
+    type: "SET_LOADING",
+    payload: loading,
+});
+  
+export const setError = (error) => ({
+    type: "SET_ERROR",
+    payload: error,
+});
 

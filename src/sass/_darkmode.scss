@@ -2500,4 +2500,41 @@ border-bottom: 2px solid $white;
       }
   }
 }
+.admin-sidebar{
+  background-color: $main-dark;
+  .admin-logo{
+      h5{
+          color: $white
+}
+  }
+  .sidebar-list{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      button, .icon{
+          color: $white;
+          background-color: #343434;
+          &:hover{
+              background-color: $box-hover-dark;
+          }
+      }
+      a{
+          color: $white;
+          &:hover{
+              .icon{
+                  background-color: $box-hover-dark;
+              }
+          }
+      }
+  }
+}
+@media (max-width: 768px){
+  .admin-sidebar{
+      &.visible{
+          left: 0;
+      }
+
+  }
+}
 }

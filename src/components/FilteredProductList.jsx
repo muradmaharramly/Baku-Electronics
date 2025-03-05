@@ -6,13 +6,6 @@ import PreLoader from "./PreLoader";
 import { PiEmpty } from "react-icons/pi";
 import { SlRefresh } from "react-icons/sl";
 
-const categories = [
-    { id: "electronic", label: "Elektronika" },
-    { id: "smartphone", label: "Smartfonlar" },
-    { id: "tv", label: "Televizorlar" },
-    { id: "smartwatch", label: "Ağıllı saatlar" },
-    { id: "computer", label: "Kompüter" }
-];
 
 function ProductList() {
     const { products, loading, error } = useSelector((state) => state.products);
@@ -24,6 +17,8 @@ function ProductList() {
 
     if (loading) return <PreLoader />;
     if (error) return <p>Xəta: {error}</p>;
+
+    const categories = [...new Set(products.map(product => product.category))];
 
     const filteredProducts = products.filter((product) =>
         selectedCategory === "all" || product.category === selectedCategory
@@ -48,13 +43,13 @@ function ProductList() {
                         >
                             Hamısı
                         </span>
-                        {categories.map(({ id, label }) => (
+                        {categories.map(( category, index ) => (
                             <span
-                                key={id}
-                                onClick={() => setSelectedCategory(id)}
-                                className={`filter-item ${selectedCategory === id ? "selected" : ""}`}
+                                key={index}
+                                onClick={() => setSelectedCategory(category)}
+                                className={`filter-item ${selectedCategory === category ? "selected" : ""}`}
                             >
-                                {label}
+                                {category}
                             </span>
                         ))}
                     </div>

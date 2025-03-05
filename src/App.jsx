@@ -30,6 +30,19 @@ import SetPassword from "./assets/auth/SetPassword";
 import UserProfile from "./pages/UserProfile";
 import ChangePassword from "./pages/ChangePassword";
 import MonthlyPayment from "./pages/MonthlyPayment";
+import DashboardLayout from "./components/Dashboard/DashboardLayout";
+import DashboardPage from "./components/Dashboard/pages/DashboardPage";
+import AdminProducts from "./components/Dashboard/pages/AdminProducts";
+import AdminNews from "./components/Dashboard/pages/AdminNews";
+import AdminCampaigns from "./components/Dashboard/pages/AdminCampaigns";
+import AdminUsers from "./components/Dashboard/pages/AdminUsers";
+import Administrators from "./components/Dashboard/pages/Administrators";
+import AddProduct from "./components/Dashboard/pages/AddProduct";
+import EditProduct from "./components/Dashboard/pages/EditProduct";
+import AddNews from "./components/Dashboard/pages/AddNews";
+import EditNews from "./components/Dashboard/pages/EditNews";
+import AddCampaign from "./components/Dashboard/pages/AddCampaign";
+import EditCampaign from "./components/Dashboard/pages/EditCampaign";
 
 const App = () => {
   return (
@@ -67,6 +80,22 @@ const App = () => {
           <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/auth/confirm-reset" element={<ConfirmReset />} />
           <Route path="/auth/set-password" element={<SetPassword />} />
+        </Route>
+
+        <Route element={<DashboardLayout />}>
+        <Route path="/administrative/dashboard" element={<DashboardPage />} />
+        <Route path="/administrative/products" element={<AdminProducts/>} />
+        <Route path="/administrative/products/addproduct" element={<AddProduct/>} />
+        <Route path="/administrative/products/editproduct/:slug" element={<EditProduct/>} />
+        <Route path="/administrative/news" element={<AdminNews />} />
+        <Route path="/administrative/news/addnews" element={<AddNews/>} />
+        <Route path="/administrative/news/editnews/:slug" element={<EditNews/>} />
+        <Route path="/administrative/campaigns" element={<AdminCampaigns />} />
+        <Route path="/administrative/campaigns/addcampaign" element={<AddCampaign/>} />
+        <Route path="/administrative/campaigns/editcampaign/:slug" element={<EditCampaign/>} />
+        <Route path="/administrative/users" element={<AdminUsers/>} />
+        <Route path="/administrative/users" element={<AdminUsers/>} />
+        <Route path="/administrative/administrators" element={<Administrators/>} />
         </Route>
       </Routes>
     </BrowserRouter>
