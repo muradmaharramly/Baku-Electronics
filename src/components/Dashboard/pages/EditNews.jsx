@@ -40,7 +40,7 @@ const EditNews = () => {
     };
 
     return (
-        <div className='edit-product'>
+        <div className='edit-news'>
             <div className='page-head'>
                 <h3>Xəbər redaktə et</h3>
                 <Link to="/administrative/news"> Xəbərlərə bax</Link>

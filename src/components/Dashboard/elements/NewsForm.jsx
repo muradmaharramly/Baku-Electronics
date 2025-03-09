@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../services/supabaseClient';
 import Swal from 'sweetalert2';
+import { IoText } from 'react-icons/io5';
+import { LuLetterText, LuLink } from 'react-icons/lu';
+import { GrFormView } from 'react-icons/gr';
 
 const categories = ["Xəbər", "Bloq", "Tanıtım" ];
 
@@ -33,10 +36,16 @@ const NewsForm = ({ existingNews, isEditMode }) => {
         if (image && !/^https?:\/\//.test(image)) {
             setImageError('Şəkil linki "http" və ya "https" ilə başlamalıdır');
             isValid = false;
+        }else if(!image.trim()){
+            setImageError('Şəkil linki boş ola bilməz');
+            isValid = false;
         }
 
         if (viewCount && (isNaN(viewCount) || parseFloat(viewCount) <= 0 || !Number.isInteger(parseFloat(viewCount)))) {
             setViewError('Baxış sayı müsbət tam ədəd olmalıdır');
+            isValid = false;
+        }else if(!viewCount.trim()){
+            setViewError('Baxış sayı boş ola bilməz');
             isValid = false;
         }
         return isValid;
@@ -110,11 +119,13 @@ const NewsForm = ({ existingNews, isEditMode }) => {
                     <div className="form-group">
                         <label>Başlıq</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <IoText />
                     </div>                       
                     <div className="form-group">
                         <label>Şəkil linki</label>
                         <input type="text" value={image} onChange={(e) => setImageLink(e.target.value)} />
                         {imageError && <span className="error-message">{imageError}</span>}
+                        <LuLink />
                     </div>
                 </div>
                 <div className="form-double">
@@ -131,12 +142,14 @@ const NewsForm = ({ existingNews, isEditMode }) => {
                         <label>Baxış sayı</label>
                         <input type="text" value={viewCount} onChange={(e) => setViewCount(e.target.value)} />
                         {viewError && <span className="error-message">{viewError}</span>}
+                        <GrFormView />
                     </div>
                 </div>
                 <div className='form-first'>
                     <div className="form-group">
                         <label>Açıqlama</label>
                         <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <LuLetterText />
                     </div>                    
                 </div>
                 <div className="btns">

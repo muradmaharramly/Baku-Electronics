@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../services/supabaseClient';
 import Swal from 'sweetalert2';
+import { IoText } from 'react-icons/io5';
+import { LuLink } from 'react-icons/lu';
+import { BiDollar } from 'react-icons/bi';
+import { TbDiscount } from 'react-icons/tb';
+import { RiStockLine } from 'react-icons/ri';
 
 const categories = ["Elektronika", "Smartfonlar", "Televizorlar", "Smart saatlar", "Kompüterlər"];
 
@@ -39,20 +44,32 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         if (image && !/^https?:\/\//.test(image)) {
             setImageError('Şəkil linki "http" və ya "https" ilə başlamalıdır');
             isValid = false;
+        }else if(!image.trim()){
+            setImageError('Şəkil linki boş ola bilməz');
+            isValid = false;
         }
 
         if (price && (isNaN(price) || parseFloat(price) <= 0)) {
             setPriceError('Qiymət müsbət bir rəqəm olmalıdır');
             isValid = false;
+        }else if(!price.trim()){
+            setPriceError('Qiymət boş ola bilməz');
+            isValid = false;
         }
 
-        if (discount && (isNaN(discount) || parseFloat(discount) < 0 || parseFloat(discount) > 100)) {
+        if (discount && (isNaN(discount) || parseFloat(discount) < 0 || parseFloat(discount) > 100) || !discount.trim()) {
             setDiscountError('Endirim 0 ilə 100 arasında olmalıdır');
+            isValid = false;
+        }else if(!discount.trim()){
+            setDiscountError('Endirim boş ola bilməz');
             isValid = false;
         }
 
         if (count && isNaN(count)) {
             setCountError('Stok sayı yalnız rəqəm olmalıdır');
+            isValid = false;
+        }else if(!count.trim()){
+            setCountError('Stok sayı boş ola bilməz');
             isValid = false;
         }
         return isValid;
@@ -117,6 +134,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
                     <div className="form-group">
                         <label>Başlıq</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <IoText />
                     </div>
                     <div className="form-group">
                         <label>Kateqoriya</label>
@@ -131,6 +149,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
                         <label>Şəkil linki</label>
                         <input type="text" value={image} onChange={(e) => setImageLink(e.target.value)} />
                         {imageError && <span className="error-message">{imageError}</span>}
+                        <LuLink />
                     </div>
                 </div>
                 <div className="form-quater">
@@ -138,16 +157,19 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
                         <label>Qiymət <span>(Endirimsiz)</span></label>
                         <input type="text" value={price} onChange={(e) => setPrice(e.target.value)} />
                         {priceError && <span className="error-message">{priceError}</span>}
+                        <BiDollar />
                     </div>
                     <div className="form-group">
                         <label>Endirim faizi</label>
                         <input type="text" value={discount} onChange={(e) => setDiscount(e.target.value)} />
                         {discountError && <span className="error-message">{discountError}</span>}
+                        <TbDiscount />
                     </div>
                     <div className="form-group">
                         <label>Stok sayı</label>
                         <input type="text" value={count} onChange={(e) => setStock(e.target.value)} />
                         {countError && <span className="error-message">{countError}</span>}
+                        <RiStockLine />
                     </div>
                 </div>
                 <div className="btns">

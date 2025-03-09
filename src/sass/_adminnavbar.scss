@@ -109,11 +109,13 @@
         @include transition();
     }
     .user-icon{
+        border: 1px solid transparent;
         &:hover{
             background-color: $box-hover-light;
         }
     }
     .logout{
+        border: 1px solid #fedddd;
         background-color: #fedddd;
         color: $red;
         svg{

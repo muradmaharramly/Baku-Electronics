@@ -43,6 +43,12 @@ import AddNews from "./components/Dashboard/pages/AddNews";
 import EditNews from "./components/Dashboard/pages/EditNews";
 import AddCampaign from "./components/Dashboard/pages/AddCampaign";
 import EditCampaign from "./components/Dashboard/pages/EditCampaign";
+import EditUser from "./components/Dashboard/pages/EditUser";
+import AddUser from "./components/Dashboard/pages/AddUser";
+import AddAdministrator from "./components/Dashboard/pages/AddAdministrator";
+import EditAdministrator from "./components/Dashboard/pages/EditAdministrator";
+import AdministratorLogin from "./components/Dashboard/auth/AdministratorLogin";
+import AdministratorProfile from "./components/Dashboard/pages/AdministratorProfile";
 
 const App = () => {
   return (
@@ -80,6 +86,7 @@ const App = () => {
           <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/auth/confirm-reset" element={<ConfirmReset />} />
           <Route path="/auth/set-password" element={<SetPassword />} />
+          <Route path="/administrative/auth/login" element={<AdministratorLogin/>} />
         </Route>
 
         <Route element={<DashboardLayout />}>
@@ -94,8 +101,12 @@ const App = () => {
         <Route path="/administrative/campaigns/addcampaign" element={<AddCampaign/>} />
         <Route path="/administrative/campaigns/editcampaign/:slug" element={<EditCampaign/>} />
         <Route path="/administrative/users" element={<AdminUsers/>} />
-        <Route path="/administrative/users" element={<AdminUsers/>} />
+        <Route path="/administrative/users/adduser" element={<AddUser/>} />
+        <Route path="/administrative/users/edituser/:slug" element={<EditUser/>} />
         <Route path="/administrative/administrators" element={<Administrators/>} />
+        <Route path="/administrative/administrators/addadministrator" element={<AddAdministrator/>} />
+        <Route path="/administrative/administrators/editadministrator/:slug" element={<EditAdministrator/>} />
+        <Route path="/administrative/profile" element={<AdministratorProfile/>} />
         </Route>
       </Routes>
     </BrowserRouter>

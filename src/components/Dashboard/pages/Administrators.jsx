@@ -1,95 +1,211 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiEdit } from 'react-icons/fi';
 import { GoPlus } from 'react-icons/go'
-import { IoMdClose } from 'react-icons/io';
 import { IoTrashBin } from 'react-icons/io5';
-import { MdOutlineDone } from 'react-icons/md';
+import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { Link } from 'react-router-dom'
-
-const administrators = [
-  {
-    id: 1,
-    firstName: "Filankes",
-    lastName: "Filankesov",
-    role: "Moderator",
-    email: "filankes@gmail.com",
-    emailConfirmed: true,
-    resetCodeConfirmed: true,
-    PhoneNumber: "5555555555",
-    fin: "7hhw78w",
-    created_at: "12.02.2025"
-  },
-  {
-    id: 2,
-    firstName: "Behmenkes",
-    lastName: "Behmenkesov",
-    role: "Admin",
-    email: "behmenkes@gmail.com",
-    emailConfirmed: false,
-    resetCodeConfirmed: true,
-    PhoneNumber: "5555555555",
-    fin: "7hsgdsj8",
-    created_at: "12.02.2025"
-  },
-];
+import Swal from 'sweetalert2';
+import PreLoader from '../../PreLoader';
+import { PiEmpty } from 'react-icons/pi';
+import { SlRefresh } from 'react-icons/sl';
+import { useSelector } from 'react-redux';
+import { fetchAdministrators } from '../../../tools/request/fetchAdministrators';
+import slugify from 'slugify';
+import { supabase } from '../../../services/supabaseClient';
 
 const Administrators = () => {
+  const { administrators, administratorCount, loading, error } = useSelector((state) => state.administrators);
+  const [currentPage, setCurrentPage] = useState(1);
+  const adminPerPage = 8;
+  const [searchTerm, setSearchTerm] = useState("");
+  const loggedInEmail = localStorage.getItem("email");
+
+  useEffect(() => {
+    fetchAdministrators();
+  }, []);
+
+  if (loading) return <PreLoader />;
+
+  if (error) return <p>Xəta baş verdi: {error}</p>;
+
+  if (!administrators) return <p>Administrator tapılmadı!</p>;
+
+  const filteredAdministrators = administrators
+    .filter(admin => admin.email !== loggedInEmail)
+    .filter(administrator =>
+      [administrator.firstName, administrator.lastName, administrator.email, administrator.fin, administrator.phoneNumber].some((field) =>
+        String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+
+  const sortedAdmins = [...filteredAdministrators].sort(
+    (a, b) => new Date(b.created_at) - new Date(a.created_at)
+  );
+
+  const totalPages = Math.ceil(filteredAdministrators.length / adminPerPage);
+
+  const indexOfLastUser = currentPage * adminPerPage;
+  const indexOfFirstUser = indexOfLastUser - adminPerPage;
+  const currentAdmins = sortedAdmins.slice(indexOfFirstUser, indexOfLastUser);
+
+  const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+  const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+  const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
+
+  const resetFilter = () => {
+    setSearchTerm('');
+  };
+
+  const handleDeleteAdmin = async (id) => {
+
+    Swal.fire({
+      title: "Əminsiniz?",
+      text: "Bu administratoru sildikdən sonra geri qaytara bilməyəcəksiniz!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Bəli, sil!",
+      cancelButtonText: "Ləğv et",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      customClass: {
+        popup: "custom-swal-popup",
+        title: "custom-swal-title",
+        content: "custom-swal-text",
+        confirmButton: "custom-swal-confirm",
+        cancelButton: "custom-swal-cancel",
+        icon: "custom-swal-icon"
+      }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data, error } = await supabase
+          .from("administrators")
+          .delete()
+          .eq("id", id)
+          .single();
+
+        if (error) {
+          Swal.fire({
+            title: "Xəta!",
+            text: "Silinmə zamanı xəta baş verdi!",
+            icon: "error",
+            customClass: {
+              popup: "custom-swal-popup",
+              title: "custom-swal-title",
+              content: "custom-swal-text",
+              confirmButton: "custom-swal-confirm"
+            }
+          });
+          return;
+        }
+
+        Swal.fire({
+          title: "Uğur!",
+          text: "Administrator uğurla silindi!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "custom-swal-popup",
+            title: "custom-swal-title",
+            content: "custom-swal-text"
+          }
+        }).then(() => {
+          window.location.reload();
+        });
+      }
+    });
+  };
+
   return (
     <div className='administrators'>
       <div className='page-head'>
-        <h3>Administrasiya</h3>
+        <h3>Administrasiya<span className='count'>({administratorCount - 1} nəfər)</span></h3>
         <div className='procces'>
-          <div className='search-bar'>
-            <input placeholder='Axtar'/>
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Axtar"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
             <button className="search-icon">
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </div>
-          <Link>Əlavə et <GoPlus /></Link>
+          <Link to="/administrative/administrators/addadministrator">Əlavə et <GoPlus /></Link>
         </div>
       </div>
-      <div className="table-container">
-                    <table className="administrator-table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Ad</th>
-                          <th>Soyad</th>
-                          <th>Rol</th>
-                          <th>Email</th>
-                          <th>Şifrə sıfırlama</th>
-                          <th>Tel</th>
-                          <th>Fin</th>
-                          <th>Yaradılma tarixi</th>
-                          <th>Əməliyyatlar</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {administrators.map((administrator, index) => (
-                          <tr key={administrator.id}>
-                            <td>{index + 1}</td>
-                            <td>{administrator.firstName}</td>
-                            <td>{administrator.lastName}</td>
-                            <td><span className={`role ${administrator.role === "Moderator" ? "moderator" : "admin"}`}>{administrator.role}</span></td>
-                            <td>{administrator.email}<span className={`email-status ${administrator.emailConfirmed === true ? "done" : "not" }`}>{administrator.emailConfirmed === true ? <MdOutlineDone /> : <IoMdClose />}</span></td>
-                            <td className={`reset ${administrator.resetCodeConfirmed=== true ? "done" : "not"}`}>{administrator.resetCodeConfirmed === true ? "Təsdiqlənib" : "Təsdiqlənməyib"}</td>
-                            <td>{administrator.PhoneNumber}</td>
-                            <td>{administrator.fin}</td>
-                            <td>{administrator.created_at}</td>
-                            <td>
-                              <div className="actions">
-                                <button className="edit-btn"><FiEdit /></button>
-                                <button className="delete-btn"><IoTrashBin /></button>
-                              </div>
-            
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
+      {filteredAdministrators.length === 0 ? (
+        <div className='empty-area'>
+          <div className='icon'><PiEmpty /></div>
+          <p>Uyğun administrator tapılmadı.</p>
+          <button className='reset-btn' onClick={resetFilter}><SlRefresh /> Axtarışı sıfırla</button>
+        </div>
+      ) : (
+        <div className="table-container">
+          <table className="administrator-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ad</th>
+                <th>Soyad</th>
+                <th>Rol</th>
+                <th>Email</th>
+                <th>Tel</th>
+                <th>Fin</th>
+                <th>Yaradılma tarixi</th>
+                <th>Əməliyyatlar</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currentAdmins.map((administrator, index) => (
+                <tr key={administrator.id}>
+                  <td>{(currentPage-1)*8 + index + 1}</td>
+                  <td>{administrator.firstName}</td>
+                  <td>{administrator.lastName}</td>
+                  <td>
+                    <span className={`role ${administrator.role === "Moderator" ? "moderator" : administrator.role === "Superadmin" ? "superadmin" : "admin"}`}>
+                      {administrator.role}
+                    </span>
+                  </td>
+                  <td>{administrator.email}</td>
+                  <td>{administrator.phoneNumber}</td>
+                  <td>{administrator.fin}</td>
+                  <td>{administrator.created_at.slice(0, 10)}<span className='create-hour'>{administrator.created_at.slice(11, 16)}</span></td>
+                  <td>
+                    <div className="actions">
+                      <Link to={`/administrative/administrators/editadministrator/${slugify(administrator.email, { lower: true })}`} className="edit-btn"><FiEdit /></Link>
+                      <button className="delete-btn" onClick={() => handleDeleteAdmin(administrator.id)}><IoTrashBin /></button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>)}
+      {totalPages > 1 && filteredAdministrators.length !== 0 && (
+        <div className="pagination">
+          <button onClick={handlePrevPage} disabled={currentPage === 1}>
+            <MdOutlineKeyboardArrowLeft />
+          </button>
+          <div className='numbers'>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <span
+                key={index + 1}
+                className={currentPage === index + 1 ? 'active' : ''}
+                onClick={() => handlePageChange(index + 1)}
+              >
+                {index + 1}
+              </span>
+            ))}
+          </div>
+          <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+            <MdOutlineKeyboardArrowRight />
+          </button>
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 export default Administrators

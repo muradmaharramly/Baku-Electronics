@@ -2501,7 +2501,7 @@ border-bottom: 2px solid $white;
   }
 }
 .admin-sidebar{
-  background-color: $main-dark;
+  background-color: black;
   .admin-logo{
       h5{
           color: $white
@@ -2514,16 +2514,16 @@ border-bottom: 2px solid $white;
       gap: 30px;
       button, .icon{
           color: $white;
-          background-color: #343434;
+          background-color: $box-dark;
           &:hover{
-              background-color: $box-hover-dark;
+              background-color: #343434;
           }
       }
       a{
           color: $white;
           &:hover{
               .icon{
-                  background-color: $box-hover-dark;
+                  background-color: #343434;
               }
           }
       }
@@ -2533,8 +2533,343 @@ border-bottom: 2px solid $white;
   .admin-sidebar{
       &.visible{
           left: 0;
+          .mobile-arrow{
+            color: $red;
+          }
+      }
+      .mobile-arrow{
+        color: $white;
       }
 
   }
+}
+.admin-navbar{
+  background-color: black;
+  .left{
+      h5{
+          color: $white;
+      }
+      span{
+          &.moderator{
+              background-color:transparent;
+              border: 2px solid rgb(255, 166, 0);
+              color: rgb(227, 128, 0);
+          }
+          &.admin{
+              background-color: transparent;
+              border: 2px solid rgb(67, 123, 254);
+              color: rgb(15, 76, 216);
+          }
+          &.superadmin{
+              background-color: transparent;
+              border: 2px solid rgb(0, 183, 70);
+              color: rgb(2, 166, 65);
+          }
+}
+  }
+  .right{
+      .mode-toggle {
+          background-color: $box-dark;
+      }
+      .user-icon,
+      .logout{
+          color: $white;
+          background-color: $box-dark;
+  }
+  .user-icon{
+      &:hover{
+          background-color: #343434;
+      }
+  }
+  .logout{
+      background-color: transparent;
+      border: 1px solid $red;
+      color: $red;
+      svg{
+          margin-right: -2px;
+          @include transition(); 
+      }
+      &:hover{
+          background-color: transparent;
+      }
+  }
+
+  } 
+}
+
+.dashboard-content {
+  background-color: $main-dark;
+}
+.dashboard-container {
+  .top-cards {
+    .stat-card {
+      background: rgba(0, 0, 0, 0.079);
+      border: 1px solid #3d3d3d77;
+      .headline{
+        color: $white;
+        p{
+          color: $white;
+        }
+        .icon{
+          background-color: #3434344c;
+        }
+}
+
+      p {
+        color: $white;
+      }
+    }
+  }
+
+  .bottom-section {
+    .line-chart-container,
+    .pie-chart-container,
+    .calendar-container {
+      background: rgba(0, 0, 0, 0.079);
+      border: 1px solid #3d3d3d77;
+      h3 {
+        color: $white;
+      }
+      .legenda{
+        span{
+          color: $white;
+        }
+
+      }
+    }
+
+    .calendar-container {
+      color: $white;
+      .react-calendar {
+        color: $white;
+      }
+      .other {
+        color: $white !important;
+      }
+      
+      .react-calendar__navigation button {
+        color: $white !important;
+        font-size: 14px;
+        font-weight: bold;
+        border-radius: 10px !important;
+        padding: 10px 5px !important;
+        -webkit-border-radius: 10px !important;
+        -moz-border-radius: 10px !important;
+        -ms-border-radius: 10px !important;
+        -o-border-radius: 10px !important;
+        &:hover{
+          background-color: $box-dark;
+        }
+}
+      .react-calendar__tile {
+        color: $white;
+      }
+    }
+  }
+}
+.admin-products,
+.admin-news,
+.admin-campaigns,
+.admin-users,
+.administrators{
+    .page-head{
+        h3{
+          color: $white;
+          .count{
+            color: $white-2nd;
+          }
+        }
+        .procces{
+            .search-bar {
+                background-color: $box-dark;
+                input{
+                  color: $white;
+                  &::placeholder{
+                    color: $white-2nd;
+                  }
+                }
+          
+                button {
+                  color: $white-2nd;
+                }
+            }
+            a{
+                background-color: $red;
+                color: $white;
+                &:hover{
+                    background-color: $red-hover;
+                }
+              }
+        }
+    }
+    .empty-area{
+      p{
+          color: $white-2nd;
+      }
+  }
+    .table-container {
+      .product-table,
+      .news-table,
+      .campaign-table,
+      .user-table,
+      .administrator-table {
+        background: transparent;    
+        thead {
+          background: black;
+          color: $white;
+    
+          tr {
+            th {
+              color: $white
+            }
+          }
+        }
+    
+        tbody {
+          tr {
+            color: $white;
+            @include transition();
+    
+            &:hover {
+              background: #222;
+            }
+            .firstName,
+            .lastName{
+                color: $white;
+              }
+            td {
+              border: 1px solid #76767647;
+              &.reset{
+                &.done{
+                  color: green;
+                }
+                &.not{
+                  color: $red;
+                }
+              }
+              .desc-none{
+                color: red;
+              }
+              .role{
+                &.moderator{
+                  background-color: transparent;
+                  border: 2px solid rgb(227, 128, 0);
+                  color: rgb(227, 128, 0);
+                }
+                &.admin{
+                  background-color: transparent;
+                  border: 2px solid  rgb(15, 76, 216);
+                  color: rgb(15, 76, 216);
+                }
+                &.superadmin{
+                  background-color: transparent;
+                  border: 2px solid rgb(2, 192, 78);
+                  color: rgb(2, 192, 78);
+                }
+              }
+              .email-status,
+              .reset{
+                &.done{
+                  background-color: transparent;
+                  color: rgb(3, 186, 3);;
+                  border: 1px solid rgb(3, 186, 3);
+                }
+                &.not{
+                  background-color: transparent;
+                  color: $red;
+                  border: 1px solid $red;
+                }
+              }
+              .create-hour{
+                margin-left: 10px;
+}
+              .campaign-active{
+                background-color: transparent;
+                color: rgb(6, 167, 6);
+                border: 1px solid rgb(6, 167, 6);
+              }
+              .campaign-ended{
+                background-color: transparent;
+                color: rgb(255, 140, 0);
+                border: 1px solid rgb(255, 140, 0);
+              } 
+              .campaign-deactive{
+                background-color: transparent;
+                color: $red;
+                border: 1px solid $red;
+              } 
+            }
+          }
+        }
+      }
+    }   
+}
+.add-product,
+.edit-product,
+.add-news,
+.edit-news,
+.add-campaign,
+.edit-campaign,
+.add-user,
+.edit-user,
+.add-administrator,
+.edit-administrator{
+    .page-head{
+        color: $white;
+        a{
+            background-color: $red;
+            color: $white;
+            &:hover{
+                background-color: $red-hover;
+            }
+          }
+    }    
+}
+.product-form,
+.news-form,
+.campaign-form,
+.user-form,
+.admin-user-form{
+    background: rgba(0, 0, 0, 0.079);
+    border: 1px solid #26262677;
+    form{
+        .form-first, .form-double, .form-triple, .form-quater{
+            .form-group{
+                label{
+                    color: $white;
+                }
+                input, textarea{
+                    flex: 1;
+                    border: 1px solid $black-2nd;
+                    background-color: transparent;
+                    color: $white;
+                }
+                textarea{
+                    font-family: 'Poppins', sans-serif;
+                }
+                select {
+                    border: 1px solid $black-2nd;
+                    background-color: transparent;
+                    color: $white;
+                }
+            }
+        }
+        .btns{
+            .cancel-btn{
+                background-color: $black;
+                color: $white;
+                &:hover{
+                    background-color: $box-hover-dark;
+                }
+            }
+            .submit-btn{
+              background-color: $box-hover-light;
+                color: $black;
+                &:hover{
+                    background-color: #ccc;
+                }                
+            }
+        }
+    }
 }
 }

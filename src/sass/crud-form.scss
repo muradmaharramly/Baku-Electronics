@@ -1,6 +1,8 @@
 .product-form,
 .news-form,
-.campaign-form{
+.campaign-form,
+.user-form,
+.admin-user-form{
     background-color: $white;
     padding: 30px;
     border-radius: 10px;
@@ -69,6 +71,14 @@
                     font-size: 20px;
                     color: $red;
                 }
+                .pass-hider{
+                    right: 10px;
+                    bottom: 0px;
+                    border: none;
+                    background-color: transparent;
+                    position: absolute;
+                    cursor: pointer;
+                }
                 .error-message{
                     font-size: 12px;
                     color: $red;
@@ -121,7 +131,9 @@
 @media (max-width: 768px) {
     .product-form,
     .news-form,
-    .campaign-form{
+    .campaign-form,
+    .user-form,
+    .admin-user-form{
         padding: 20px;
         form{
             gap: 15px;

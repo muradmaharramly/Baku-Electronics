@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../services/supabaseClient';
 import Swal from 'sweetalert2';
+import { IoText } from 'react-icons/io5';
+import { LuLetterText, LuLink } from 'react-icons/lu';
 
 const CampaignForm = ({ existingCampaign, isEditMode }) => {
     const [title, setTitle] = useState('');
@@ -12,6 +14,8 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
     const [status, setStatus] = useState(true);
     const [imageError, setImageError] = useState('');
     const [statusError, setStatusError] = useState('');
+    const [startDateError, setStartDateError] = useState('');
+    const [endDateError, setEndDateError] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -29,13 +33,25 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
         let isValid = true;
         setImageError('');
         setStatusError('');
+        setStartDateError('');
+        setEndDateError('');
     
         if (image && !/^https?:\/\//.test(image)) {
             setImageError('Şəkil linki "http" və ya "https" ilə başlamalıdır');
             isValid = false;
+        }else if(!image.trim()){
+            setImageError('Şəkil linki boş ola bilməz');
+            isValid = false;
         }
-    
-        const currentDate = new Date().toISOString().split('T')[0];  // Cari tarixi 'YYYY-MM-DD' formatında alırıq
+        if(!startDate.trim()){
+            setStartDateError('Başlama tarixi boş ola bilməz');
+            isValid = false;
+        }
+        if(!endDate.trim()){
+            setEndDateError('Bitmə tarixi boş ola bilməz');
+            isValid = false;
+        }    
+        const currentDate = new Date().toISOString().split('T')[0];  
         if (status === 'TRUE' && endDate < currentDate) {
             setStatusError('Aktiv status seçildikdə, bitmə tarixi gələcək olmalıdır');
             isValid = false;
@@ -116,27 +132,32 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
                     <div className="form-group">
                         <label>Başlıq</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <IoText />
                     </div>
                     <div className="form-group">
                         <label>Şəkil linki</label>
                         <input type="text" value={image} onChange={(e) => setImageLink(e.target.value)} />
                         {imageError && <span className="error-message">{imageError}</span>}
+                        <LuLink />
                     </div>
                 </div>
                 <div className='form-first'>
                     <div className="form-group">
                         <label>Açıqlama</label>
                         <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <LuLetterText />
                     </div>
                 </div>
                 <div className="form-triple">
                     <div className="form-group">
                         <label>Başlama tarixi</label>
                         <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        {startDateError && <span className="error-message">{startDateError}</span>}
                     </div>
                     <div className="form-group">
                         <label>Bitmə tarixi</label>
                         <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                        {endDateError && <span className="error-message">{endDateError}</span>}
                     </div>
                     <div className="form-group">
                         <label>Status</label>

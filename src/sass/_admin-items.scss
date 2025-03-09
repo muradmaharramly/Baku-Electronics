@@ -210,6 +210,7 @@
                 -moz-border-radius: 8px;
                 -ms-border-radius: 8px;
                 -o-border-radius: 8px;
+                border: 1px solid transparent;
                 &.moderator{
                   background-color: rgba(255, 201, 22, 0.541);
                   border: 2px solid rgb(255, 166, 0);
@@ -219,6 +220,11 @@
                   background-color: rgba(67, 123, 254, 0.273);
                   border: 2px solid rgb(67, 123, 254);
                   color: rgb(15, 76, 216);
+                }
+                &.superadmin{
+                  background-color: rgba(67, 254, 167, 0.445);
+                  border: 2px solid rgb(14, 218, 95);
+                  color: rgb(2, 192, 78);
                 }
               }
               .email-status,
@@ -230,6 +236,7 @@
                 -moz-border-radius: 50%;
                 -ms-border-radius: 50%;
                 -o-border-radius: 50%;
+                border: 1px solid transparent;
                 svg{
                   margin-bottom: -2px;
                   font-size: 14px;
@@ -247,6 +254,7 @@
                 margin-left: 10px;
 }
               .campaign-active{
+                border: 1px solid transparent;
                 padding: 2px 8px;
                 border-radius: 6px;
                 -webkit-border-radius: 6px;
@@ -257,6 +265,7 @@
                 color: rgb(8, 110, 8);
               }
               .campaign-ended{
+                border: 1px solid transparent;
                 padding: 2px 8px;
                 border-radius: 6px;
                 -webkit-border-radius: 6px;
@@ -267,6 +276,7 @@
                 color: rgb(255, 140, 0);
               } 
               .campaign-deactive{
+                border: 1px solid transparent;
                 padding: 2px 8px;
                 border-radius: 6px;
                 -webkit-border-radius: 6px;

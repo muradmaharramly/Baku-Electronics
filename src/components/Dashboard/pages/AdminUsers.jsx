@@ -12,6 +12,7 @@ import { PiEmpty } from 'react-icons/pi';
 import { SlRefresh } from 'react-icons/sl';
 import Swal from 'sweetalert2';
 import { supabase } from '../../../services/supabaseClient';
+import slugify from 'slugify';
 
 const AdminUsers = () => {
   const { user, userCount, loading, error } = useSelector((state) => state.user);
@@ -129,7 +130,7 @@ const AdminUsers = () => {
               <ion-icon name="search-outline"></ion-icon>
             </button>
           </div>
-          <Link>Əlavə et <GoPlus /></Link>
+          <Link to="/administrative/users/adduser" >Əlavə et <GoPlus /></Link>
         </div>
       </div>
       {filteredUsers.length === 0 ? (
@@ -165,10 +166,10 @@ const AdminUsers = () => {
                     <td>{user.resetCode === null ? "Yoxdur" : user.resetCode.slice(0, 2)}{user.resetCode === null ? " " : "****"}<span className={`reset ${user.resetCodeConfirmed === true ? "done" : "not"}`}>{user.resetCodeConfirmed === true ? <MdOutlineDone /> : <IoMdClose />}</span></td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.fin}</td>
-                    <td>{user.created_at.slice(0, 10)}<span className='create-hour'>{user.created_at.slice(11, 17)}</span></td>
+                    <td>{user.created_at.slice(0, 10)}<span className='create-hour'>{user.created_at.slice(11, 16)}</span></td>
                     <td>
                       <div className="actions">
-                        <button className="edit-btn"><FiEdit /></button>
+                        <Link to={`/administrative/users/edituser/${slugify(user.email, { lower: true })}`} className="edit-btn"><FiEdit /></Link>
                         <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}><IoTrashBin /></button>
                       </div>
 
@@ -185,10 +186,10 @@ const AdminUsers = () => {
                     <td>{user.resetCode === null ? "Yoxdur" : user.resetCode.slice(0, 2)}{user.resetCode === null ? " " : "****"}<span className={`reset ${user.resetCodeConfirmed === true ? "done" : "not"}`}>{user.resetCodeConfirmed === true ? <MdOutlineDone /> : <IoMdClose />}</span></td>
                     <td>{user.phoneNumber}</td>
                     <td>{user.fin}</td>
-                    <td>{user.created_at.slice(0, 10)}<span className='create-hour'>{user.created_at.slice(11, 17)}</span></td>
+                    <td>{user.created_at.slice(0, 10)}<span className='create-hour'>{user.created_at.slice(11, 16)}</span></td>
                     <td>
                       <div className="actions">
-                        <button className="edit-btn"><FiEdit /></button>
+                        <Link to={`/administrative/users/edituser/${slugify(user.email, { lower: true })}`} className="edit-btn"><FiEdit /></Link>
                         <button className="delete-btn" onClick={() => handleDeleteUser(user.id)}><IoTrashBin /></button>
                       </div>
 

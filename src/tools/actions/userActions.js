@@ -95,3 +95,13 @@ export const setError = (error) => ({
     payload: error,
 });
 
+export const adduser = (singleuser) => ({
+    type: "ADD_USER",
+    payload: singleuser,
+});
+
+export const editUser = (updatedUser) => ({
+    type: "EDIT_USER",
+    payload: updatedUser,
+});
+

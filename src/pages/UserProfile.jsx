@@ -155,7 +155,7 @@ const UserProfile = () => {
                             ))}
                         </ul>
                     </nav>
-                    <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button>
+                    <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış et</button>
                 </aside>
                 <main className="content">
                     {activeTab === "personal" && (
