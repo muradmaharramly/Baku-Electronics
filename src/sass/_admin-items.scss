@@ -352,7 +352,8 @@
   .admin-products,
   .admin-news,
   .admin-campaigns,
-  .admin-users{
+  .admin-users,
+  .administrators{
     padding: 10px 10px !important;
     .page-head{
       flex-direction: column;
@@ -362,11 +363,12 @@
       .procces{
         gap: 15px !important;
         .search-bar{
-          width:250px !important;
+          width:220px !important;
           padding: 8px 12px !important;
         }
         a{
-          padding: 8px 10px;
+          font-size: 12px;
+          padding: 10px;
           border-radius: 10px;
           -webkit-border-radius: 10px;
           -moz-border-radius: 10px;
