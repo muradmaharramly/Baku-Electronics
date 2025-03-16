@@ -29,7 +29,13 @@ const AdminProducts = () => {
 
   if (!products) return <p>Məhsul tapılmadı!</p>;
 
-  const totalPages = Math.ceil(productCount / productPerPage);
+  const filteredProducts = products.filter((product) =>
+    [product.title, product.category, product.productCode].some((field) =>
+      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  const totalPages = Math.ceil((filteredProducts.length !== 0 ? filteredProducts.length : productCount) / productPerPage);
 
   const indexOfLastProduct = currentPage * productPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productPerPage;
@@ -39,11 +45,7 @@ const AdminProducts = () => {
   const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
   const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
 
-  const filteredProducts = products.filter((product) =>
-    [product.title, product.category, product.productCode].some((field) =>
-      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
+  
 
   const resetFilter = () => {
     setSearchTerm('');

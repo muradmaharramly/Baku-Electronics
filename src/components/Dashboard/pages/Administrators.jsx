@@ -42,7 +42,7 @@ const Administrators = () => {
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
 
-  const totalPages = Math.ceil(filteredAdministrators.length / adminPerPage);
+  const totalPages = Math.ceil((filteredAdministrators.length !== 0 ? filteredAdministrators.length : administratorCount) / adminPerPage);
 
   const indexOfLastUser = currentPage * adminPerPage;
   const indexOfFirstUser = indexOfLastUser - adminPerPage;

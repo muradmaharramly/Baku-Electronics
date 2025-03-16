@@ -56,9 +56,9 @@ const Cart = () => {
                                 <Link to={`/products/${slugify(item.title, { lower: true })}`}>
                                     <h6>{item.title}</h6>
                                 </Link>
-                                {item.discount > 0 && <p className="old-price">${item.price}</p>}
+                                {item.discount > 0 && <p className="old-price">{item.price}₼</p>}
                                 <p className="new-price">
-                                    ${(item.price - (item.price * item.discount) / 100).toFixed(2)}
+                                    {(item.price - (item.price * item.discount) / 100).toFixed(2)}₼
                                 </p>
                             </div>
                             <div className="cart-item-actions">
@@ -73,7 +73,7 @@ const Cart = () => {
                             </div>
                         </div>
                     ))}
-                    <button className="checkout-btn">Sifarişi rəsmiləşdir</button>
+                    <Link to="/checkout" className="checkout-btn">Sifarişi rəsmiləşdir</Link>
                 </div>
                 <div className="cart-summary">
                     <h6>Ümumi baxış</h6>
@@ -83,9 +83,9 @@ const Cart = () => {
                                 <div className="summary-item">
                                     <p>{item.title}</p>
                                     <div className="pricing">
-                                        {item.discount > 0 && <p className="old-price">${item.price}</p>}
+                                        {item.discount > 0 && <p className="old-price">{item.price}₼</p>}
                                         <p className="new-price">
-                                            ${(item.price - (item.price * item.discount) / 100).toFixed(2)}
+                                            {(item.price - (item.price * item.discount) / 100).toFixed(2)}₼
                                         </p>
                                     </div>
                                 </div>
@@ -95,14 +95,14 @@ const Cart = () => {
                     </div>
                     <div className="summary-discount">
                         <span>Ümumi endirim</span>
-                        <span>${totalDiscount.toFixed(2)}</span>
+                        <span>{totalDiscount.toFixed(2)}₼</span>
                     </div>
                     <div className="summary-total">
                         <span>Cəmi məbləğ:</span>
-                        <span className="total-price">${cartTotal.toFixed(2)}</span>
+                        <span className="total-price">{cartTotal.toFixed(2)}₼</span>
                     </div>
                 </div>
-                <button className="checkout-btn mobile">Sifarişi rəsmiləşdir</button>
+                <Link to="/checkout" className="checkout-btn mobile">Sifarişi rəsmiləşdir</Link>
             </div>
         </div>
     );

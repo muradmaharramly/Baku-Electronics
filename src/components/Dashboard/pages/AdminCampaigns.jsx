@@ -64,7 +64,13 @@ const AdminCampaigns = () => {
     ...sortedExpiredCampaigns
   ];
 
-  const totalPages = Math.ceil(campaignCount / campaignPerPage);
+  const filteredCampaigns = campaigns.filter((campaign) =>
+    [campaign.title, campaign.startDate, campaign.endDate, campaign.description].some((field) =>
+      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  const totalPages = Math.ceil((filteredCampaigns.length !== 0 ? filteredCampaigns.length : campaignCount) / campaignPerPage);
 
   const indexOfLastCampaign = currentPage * campaignPerPage;
   const indexOfFirstCampaign = indexOfLastCampaign - campaignPerPage;
@@ -73,12 +79,6 @@ const AdminCampaigns = () => {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
   const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
   const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
-
-  const filteredCampaigns = campaigns.filter((campaign) =>
-    [campaign.title, campaign.startDate, campaign.endDate, campaign.description].some((field) =>
-      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
 
   const resetFilter = () => {
     setSearchTerm('');

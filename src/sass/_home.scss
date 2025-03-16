@@ -331,6 +331,7 @@
     align-items: center;
     gap: 30px;
     .card{
+        @include transition();
         flex: 1;
         height: 280px;
         display: flex;
@@ -356,6 +357,7 @@
                 }
             }
             a{
+                @include transition();
                 text-decoration: none;
                 color: $black;
                 padding: 10px 22px;
@@ -373,6 +375,7 @@
             }
         }
         .right{
+            @include transition();
             width: 250px;
             height: 280px;
             margin-top: -60px;

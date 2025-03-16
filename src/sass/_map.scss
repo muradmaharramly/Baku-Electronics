@@ -1,0 +1,63 @@
+.map{
+    padding: 20px 9.5%;
+    .filter-line{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0;
+        gap: 20px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+        .filters {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          gap: 15px;
+          flex-wrap: wrap;      
+          div {
+            background-color: $box-light;
+            width: 110px;
+            padding:8px 15px;
+            border-radius: 15px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -ms-border-radius: 15px;
+            -o-border-radius: 15px;
+            select{
+                border: none;
+                background-color: transparent;
+                &:focus{
+                    border: none;
+                    outline: none;
+                }
+            }
+            
+          }
+          a{
+            background-color: $box-light;
+            padding: 8px 12px 8px 8px;
+            border-radius: 15px;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -ms-border-radius: 15px;
+            -o-border-radius: 15px;
+            text-decoration: none;
+            color: $black;
+            svg{
+                margin: 4px;
+                margin-bottom: -2px;
+                color: $black;
+                font-size: 15px;
+            }
+          }
+        }
+    }
+    .map-frame{
+        margin: 20px 0;
+    }
+}
+@media  (max-width: 768px){
+    .map{
+        padding: 10px 15px;
+    }
+}

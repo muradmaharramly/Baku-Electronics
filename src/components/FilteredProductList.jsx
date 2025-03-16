@@ -5,6 +5,7 @@ import ProductCard from "./PorductCard";
 import PreLoader from "./PreLoader";
 import { PiEmpty } from "react-icons/pi";
 import { SlRefresh } from "react-icons/sl";
+import ErrorPage from "./ErrorPage";
 
 
 function ProductList() {
@@ -16,13 +17,15 @@ function ProductList() {
     }, []);
 
     if (loading) return <PreLoader />;
-    if (error) return <p>Xəta: {error}</p>;
+    if (error) return <p><ErrorPage error={error} /></p>;
 
-    const categories = [...new Set(products.map(product => product.category))];
+    const categories = ["Smartfonlar", "Smart saatlar", "Kompüterlər", "Televizorlar"];
 
     const filteredProducts = products.filter((product) =>
-        selectedCategory === "all" || product.category === selectedCategory
-    );
+        selectedCategory === "all"
+          ? categories.includes(product.category)
+          : product.category === selectedCategory
+      );
     const resetFilters = () => {
         setSelectedCategory("all");
     };

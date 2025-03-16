@@ -13,6 +13,7 @@
     width: 360px;
     @include transition();
     .img-div{
+        @include transition();
         border-radius: 20px;
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;

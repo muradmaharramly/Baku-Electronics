@@ -1,5 +1,6 @@
 .corporative-sales,
-.double-guarantee{
+.double-guarantee,
+.buy-trusted{
     display: flex;
     flex-direction: column;
     padding: 10px 9.5%;
@@ -52,9 +53,28 @@
 .double-guarantee .img-area{
     height: 500px;
 }
+.buy-trusted .img-area{
+    height: 500px;
+}
+.buy-trusted{
+    ul{
+        margin: 10px 0;
+    }
+    p, ul li, strong{
+        font-size: 14px;
+    }
+}
 @media (max-width: 768px){
+    .buy-trusted{
+        div{
+            img{
+                width: 320px;
+            }
+        }
+    }
     .double-guarantee .img-area,
-    .corporative-sales .img-area{
+    .corporative-sales .img-area,
+    .buy-trusted .img-area{
         height: 230px !important;
         padding-top: 0 !important;
         img{
@@ -66,13 +86,15 @@
 }
     }
     .corporative-sales,
-    .double-guarantee{
+    .double-guarantee,
+    .buy-trusted{
         padding:10px 20px !important;
     }
 }
 @media (max-width: 576px){
     .double-guarantee .img-area,
-    .corporative-sales .img-area{
+    .corporative-sales .img-area,
+    .buy-trusted .img-area{
         height: 160px !important;
         padding-top: 0 !important;
         img{

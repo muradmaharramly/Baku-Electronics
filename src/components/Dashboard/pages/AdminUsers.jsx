@@ -35,7 +35,13 @@ const AdminUsers = () => {
     (a, b) => new Date(b.created_at) - new Date(a.created_at)
   );
 
-  const totalPages = Math.ceil(userCount / userPerPage);
+  const filteredUsers = user.filter((user) =>
+    [user.firstName, user.lastName, user.email, user.fin, user.phoneNumber].some((field) =>
+      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  const totalPages = Math.ceil((filteredUsers.length !== 0 ? filteredUsers.length : usertCount) / userPerPage);
 
   const indexOfLastUser = currentPage * userPerPage;
   const indexOfFirstUser = indexOfLastUser - userPerPage;
@@ -44,12 +50,6 @@ const AdminUsers = () => {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
   const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
   const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
-
-  const filteredUsers = user.filter((user) =>
-    [user.firstName, user.lastName, user.email, user.fin, user.phoneNumber].some((field) =>
-      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
 
   const resetFilter = () => {
     setSearchTerm('');

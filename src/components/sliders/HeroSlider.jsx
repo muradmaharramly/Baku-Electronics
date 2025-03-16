@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import PreLoader from "../PreLoader";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
+import ErrorPage from "../ErrorPage";
 
 function NextArrow(props) {
   const { className, onClick } = props;
@@ -35,12 +36,13 @@ function HeroSlider() {
   }, []);
 
   if (loading) return <PreLoader />;
-  if (error) return <p>Xəta: {error}</p>;
+  if (error) return <p><ErrorPage error={error} /></p>;
 
   const now = new Date();
   const sortedCampaigns = [...campaigns]
-    .filter((campaign) => new Date(campaign.endDate) > now)
+    .filter((campaign) => new Date(campaign.endDate) > now && campaign.status !== false)
     .sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
+
 
   const settings = {
     dots: false,

@@ -8,7 +8,7 @@ import { BiDollar } from 'react-icons/bi';
 import { TbDiscount } from 'react-icons/tb';
 import { RiStockLine } from 'react-icons/ri';
 
-const categories = ["Elektronika", "Smartfonlar", "Televizorlar", "Smart saatlar", "Kompüterlər"];
+const categories = ["Elektronika", "Smartfonlar", "Televizorlar", "Smart saatlar", "Kompüterlər", "Məişət texnikası", "Mətbəx texnikası", "Ev heyvanları üçün"];
 
 const ProductForm = ({ existingProduct, isEditMode }) => {
     const [title, setTitle] = useState('');
@@ -52,15 +52,15 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         if (price && (isNaN(price) || parseFloat(price) <= 0)) {
             setPriceError('Qiymət müsbət bir rəqəm olmalıdır');
             isValid = false;
-        }else if(!price.trim()){
+        }else if(!existingProduct && !price.trim()){
             setPriceError('Qiymət boş ola bilməz');
             isValid = false;
         }
 
-        if (discount && (isNaN(discount) || parseFloat(discount) < 0 || parseFloat(discount) > 100) || !discount.trim()) {
+        if (discount && (isNaN(discount) || parseFloat(discount) < 0 || parseFloat(discount) > 100)) {
             setDiscountError('Endirim 0 ilə 100 arasında olmalıdır');
             isValid = false;
-        }else if(!discount.trim()){
+        }else if(!existingProduct && !discount.trim()){
             setDiscountError('Endirim boş ola bilməz');
             isValid = false;
         }
@@ -68,7 +68,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         if (count && isNaN(count)) {
             setCountError('Stok sayı yalnız rəqəm olmalıdır');
             isValid = false;
-        }else if(!count.trim()){
+        }else if(!existingProduct && !count.trim()){
             setCountError('Stok sayı boş ola bilməz');
             isValid = false;
         }

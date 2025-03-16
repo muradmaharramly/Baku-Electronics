@@ -49,6 +49,12 @@ import AddAdministrator from "./components/Dashboard/pages/AddAdministrator";
 import EditAdministrator from "./components/Dashboard/pages/EditAdministrator";
 import AdministratorLogin from "./components/Dashboard/auth/AdministratorLogin";
 import AdministratorProfile from "./components/Dashboard/pages/AdministratorProfile";
+import CheckOut from "./pages/CheckOut";
+import BuyTrusted from "./pages/BuyTrusted";
+import CustomerCard from "./pages/CustomerCard";
+import Map from "./pages/Map";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import ProtectedRoute from "./components/Dashboard/auth/ProtectRoute";
 
 const App = () => {
   return (
@@ -61,12 +67,17 @@ const App = () => {
           <Route path="/loan-purchase" element={<LoanPurchase />} />
           <Route path="/corporative-sales" element={<CorporativeSales />} />
           <Route path="/double-guarantee" element={<DoubleGuarantee />} />
+          <Route path="/buy-trusted" element={<BuyTrusted />} />
+          <Route path="/customer-card" element={<CustomerCard />} />
+          <Route path="/map" element={<Map />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/brands" element={<Brands />} />
           <Route path="/service-centers" element={<ServiceCenters />} />
           <Route path="/delivery-and-billing" element={<DeliveryandBilling />} />
           <Route path="/products" element={<Products />} />
           <Route path="/products/:slug" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<CheckOut />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/news" element={<NewsAndBlogs />} />
           <Route path="/news/:slug" element={<NewsDetails />} />
@@ -86,27 +97,29 @@ const App = () => {
           <Route path="/auth/reset-password" element={<ResetPassword />} />
           <Route path="/auth/confirm-reset" element={<ConfirmReset />} />
           <Route path="/auth/set-password" element={<SetPassword />} />
-          <Route path="/administrative/auth/login" element={<AdministratorLogin/>} />
+          <Route path="/administrative/auth/login" element={<AdministratorLogin />} />
         </Route>
 
         <Route element={<DashboardLayout />}>
-        <Route path="/administrative/dashboard" element={<DashboardPage />} />
-        <Route path="/administrative/products" element={<AdminProducts/>} />
-        <Route path="/administrative/products/addproduct" element={<AddProduct/>} />
-        <Route path="/administrative/products/editproduct/:slug" element={<EditProduct/>} />
-        <Route path="/administrative/news" element={<AdminNews />} />
-        <Route path="/administrative/news/addnews" element={<AddNews/>} />
-        <Route path="/administrative/news/editnews/:slug" element={<EditNews/>} />
-        <Route path="/administrative/campaigns" element={<AdminCampaigns />} />
-        <Route path="/administrative/campaigns/addcampaign" element={<AddCampaign/>} />
-        <Route path="/administrative/campaigns/editcampaign/:slug" element={<EditCampaign/>} />
-        <Route path="/administrative/users" element={<AdminUsers/>} />
-        <Route path="/administrative/users/adduser" element={<AddUser/>} />
-        <Route path="/administrative/users/edituser/:slug" element={<EditUser/>} />
-        <Route path="/administrative/administrators" element={<Administrators/>} />
-        <Route path="/administrative/administrators/addadministrator" element={<AddAdministrator/>} />
-        <Route path="/administrative/administrators/editadministrator/:slug" element={<EditAdministrator/>} />
-        <Route path="/administrative/profile" element={<AdministratorProfile/>} />
+          <Route path="/administrative/*" element={<ProtectedRoute />}>
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="products/addproduct" element={<AddProduct />} />
+            <Route path="products/editproduct/:slug" element={<EditProduct />} />
+            <Route path="news" element={<AdminNews />} />
+            <Route path="news/addnews" element={<AddNews />} />
+            <Route path="news/editnews/:slug" element={<EditNews />} />
+            <Route path="campaigns" element={<AdminCampaigns />} />
+            <Route path="campaigns/addcampaign" element={<AddCampaign />} />
+            <Route path="campaigns/editcampaign/:slug" element={<EditCampaign />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="users/adduser" element={<AddUser />} />
+            <Route path="users/edituser/:slug" element={<EditUser />} />
+            <Route path="administrators" element={<Administrators />} />
+            <Route path="administrators/addadministrator" element={<AddAdministrator />} />
+            <Route path="administrators/editadministrator/:slug" element={<EditAdministrator />} />
+            <Route path="profile" element={<AdministratorProfile />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

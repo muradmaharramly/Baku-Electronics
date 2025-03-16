@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { fetchProducts } from "../tools/request/fetchProducts";
 import ProductCard from "./PorductCard";
 import PreLoader from "./PreLoader";
+import ErrorPage from "./ErrorPage";
 
 function ProductList() {
     const { products, loading, error } = useSelector((state) => state.products);
@@ -12,7 +13,7 @@ function ProductList() {
     }, []);
 
     if (loading) return <PreLoader />;
-    if (error) return <p>Xəta: {error}</p>;
+    if (error) return <p><ErrorPage error={error} /></p>;
 
     return (
         <div className="product-list">

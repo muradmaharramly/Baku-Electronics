@@ -28,17 +28,16 @@ const Footer = () => {
                             <li><Link to="/service-centers">Servis mərkəzləri</Link></li>
                             <li><Link to="/delivery-and-billing">Çatdırılma və ödəniş</Link></li>
                             <li><Link to="/double-guarantee">İkiqat zəmanət</Link></li>
-                            <li className="footer-privacy"><Link>Məxfilik siyasəti</Link></li>
+                            <li className="footer-privacy"><Link to='/privacy-policy'>Məxfilik siyasəti</Link></li>
                         </ul>
                     </div>
                     <div>
                         <h5>Məlumat</h5>
                         <ul>
                             <li><Link to="/campaigns">Kampaniyalar</Link></li>
-                            <li>Müştəri kartı</li>
+                            <li><Link to='/customer-card' >Müştəri kartı</Link></li>
                             <li><Link to="/brands">Brendlər</Link></li>
                             <li><Link to="/news">Bloq və xəbərlər</Link></li>
-                            <li>Zəmanət</li>
                         </ul>
                     </div>
                     <div>
@@ -78,7 +77,7 @@ const Footer = () => {
                 <p>
                     Copyright © {currentYear} <strong>Baku Electronics</strong>. <span>Bütün hüquqlar qorunur.</span>
                 </p>
-                <a href="#">Məxfilik siyasəti</a>
+                <Link to='/privacy-policy'>Məxfilik siyasəti</Link>
             </div>
         </footer>
     );

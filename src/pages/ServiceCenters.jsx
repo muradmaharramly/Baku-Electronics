@@ -61,7 +61,7 @@ const ServiceCenters = () => {
                             ))}
                         </select>
                     </div>
-                    <Link className="map-btn"><CgPin />Xəritədə bax</Link>
+                    <Link to='/map' className="map-btn"><CgPin />Xəritədə bax</Link>
                 </div>
             </div>
             <h5 className="tab-note"><strong>Qeyd:</strong>Siyahıda qeyd olunmayan ərazilərdə xidmət üçün, vahid çağrı mərkəzimizə müraciət edə bilərsiniz <strong>(012) 991</strong></h5>

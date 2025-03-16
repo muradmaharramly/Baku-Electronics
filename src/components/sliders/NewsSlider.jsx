@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchNews } from "../../tools/request/fetchNews";
 import PreLoader from "../PreLoader";
 import slugify from "slugify";
+import ErrorPage from "../ErrorPage";
 
 function NewsSlider() {
     const settings = {
@@ -32,7 +33,7 @@ function NewsSlider() {
         fetchNews();
     }, [])
     if (loading) return <PreLoader />;
-    if (error) return <p>Xəta: {error}</p>;
+    if (error) return <p><ErrorPage error={error} /></p>;
 
     return (
         <div className="news roll-area">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { RiScalesFill, RiShoppingCart2Line } from "react-icons/ri";
+import { RiShoppingCart2Line } from "react-icons/ri";
 import { FaArrowLeft, FaRegHeart } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
 import { IoPhonePortraitOutline } from "react-icons/io5";
@@ -283,9 +283,8 @@ const Header = () => {
                         <li><NavLink to="/monthly-payment">Aylıq ödəniş</NavLink></li>
                         <li className="droped">Digər<ion-icon name="chevron-down-outline"></ion-icon>
                             <ul className="dropdown">
-                                <li>Arxayın al</li>
-                                <li>Müştəri kartı</li>
-                                <li>Zəmanət</li>
+                                <Link to='/buy-trusted' >Arxayın al</Link>
+                                <Link to='/customer-card' >Müştəri kartı</Link>
                             </ul>
                         </li>
                     </ul>
@@ -491,7 +490,6 @@ const Header = () => {
 
                 </div>
                 <div className="actions">
-                    <NavLink to="/scale"><button><RiScalesFill /></button></NavLink>
                     {totalUniqueItems === 0 ? (<NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>) :
                         (<Badge count={totalUniqueItems} className="custom-badge" showZero>
                             <NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>
@@ -507,9 +505,6 @@ const Header = () => {
                 <div className="mobile-menu-content">
                     <p className="top-text">Sayt üzrə naviqasiya</p>
                     <div className="mobile-navbar-top-icons">
-                        <button>
-                            <RiScalesFill />
-                        </button>
                         {totalUniqueItems === 0 ? (<NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>) :
                             (<Badge count={totalUniqueItems} className="custom-badge" showZero>
                                 <NavLink to="/cart"><button><RiShoppingCart2Line /></button></NavLink>
@@ -556,19 +551,14 @@ const Header = () => {
                     <nav className="mobile-navbar-menu">
                         <ul>
                             <li>
-                                <a>
+                                <Link to='/buy-trusted' >
                                     Arxayın al <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a>
+                                <Link to='/customer-card' >
                                     Müştəri kartı <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
-                            </li>
-                            <li>
-                                <a>
-                                    Zəmanət <ion-icon name="chevron-forward-outline"></ion-icon>
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </nav>

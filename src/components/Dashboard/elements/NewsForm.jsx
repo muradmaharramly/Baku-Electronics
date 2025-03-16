@@ -44,7 +44,7 @@ const NewsForm = ({ existingNews, isEditMode }) => {
         if (viewCount && (isNaN(viewCount) || parseFloat(viewCount) <= 0 || !Number.isInteger(parseFloat(viewCount)))) {
             setViewError('Baxış sayı müsbət tam ədəd olmalıdır');
             isValid = false;
-        }else if(!viewCount.trim()){
+        }else if(!existingNews && !viewCount.trim()){
             setViewError('Baxış sayı boş ola bilməz');
             isValid = false;
         }

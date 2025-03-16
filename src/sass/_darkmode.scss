@@ -834,7 +834,7 @@
       font-weight: bold;
   }
 } 
-.not-found-page{
+.not-found-page, .error-page{
   h2{
     color: $white;
   }
@@ -2618,6 +2618,9 @@ border-bottom: 2px solid $white;
       p {
         color: $white;
       }
+      .view-button{
+        background-color: $red;
+      }
     }
   }
 
@@ -2851,6 +2854,10 @@ border-bottom: 2px solid $white;
                     border: 1px solid $black-2nd;
                     background-color: transparent;
                     color: $white;
+                    option{
+                      background-color: #222;
+                      color: $white;
+                    }
                 }
             }
         }
@@ -2871,5 +2878,345 @@ border-bottom: 2px solid $white;
             }
         }
     }
+}
+.checkout{
+  .page-title{
+      color: $white;
+      a{
+          color: $white;
+          background-color: $box-dark;
+      }
+  }
+  .step-indicator{
+    .step{
+      color: $black;
+      &.active,
+      &.completed{
+        color: $white;
+      }
+    }
+  }
+  .complete-order {
+      background: $red;
+      color: $white;
+      &:hover{
+        background: $red-hover;
+      }
+    }
+  .left{
+      .personal-info {
+        color: $white;
+          box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.033);
+          .title{
+            color: $white;
+          }      
+          .info-boxes {
+            input{
+              border: none;
+              &::placeholder{
+                  color: white;
+              }
+            }
+        
+            .info-box {
+              background: $box-dark;
+              color: $white;
+}
+          }
+        }
+        .delivery-container {
+          color: $white;
+          box-shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.033);
+          .title{
+            color: $white;
+          }
+        
+          .tab-menu {
+            span {
+              color: $white-2nd;
+            }       
+            .active {
+              color: $white;
+            }
+          }
+        
+          .address-section, .store-pickup-section {
+            color: $white;
+          }
+        
+          .add-address {
+              background-color: $box-dark;
+              padding: 15px 20px;
+              color: $white;
+}
+        
+          .address-form {
+              background-color: $box-dark;
+          }
+        
+          select, input {
+              color: $white;
+              background: $box-hover-dark;
+              &::placeholder{
+                  color: $white;
+              }
+          }        
+          .store-pickup-section {
+            .branch-box {
+              background: $box-dark;
+              color: $white-2nd;
+              &:hover{
+                  background-color: $box-hover-dark;
+              }
+              &.clicked{
+                  color: $white;
+              }
+}
+          }
+        }
+        .payment-methods {
+          color: $white;
+        
+          .payment-options {
+            .payment-card {
+              background: $box-dark;
+              color: $white;                        
+              p {
+                color: $white-2nd;
+              }
+        
+              &:hover {
+                background: $box-hover-dark;
+              }
+        
+              &.selected {
+                border: 2px solid $red;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                position: relative;
+        
+                .check-icon {
+                  color: $red;
+                }
+              }
+            }
+          }
+        
+          .selected-info {
+            .note{
+              color: $white-2nd;
+              strong{
+                  color: $white;
+              }
+            }
+            h3{
+              color: $white;
+            }
+            .card{
+              background-color: $box-dark;
+              p{
+                  color: $white;
+              }
+              span{
+                  color: $white-2nd;
+              }
+              .check-icon {
+                  position: absolute;
+                  top: 8px;
+                  right: 8px;
+                  color: #ccc;
+                  font-size: 18px;
+              }
+              &.active{
+                  .check-icon {
+                      color: $red;
+                  }
+              }
+}
+          }
+        }
+        
+  }
+  .right{
+    .common-info{
+      background-color: $black;
+      h6{
+        color: $white;
+      }
+      p{
+        color: $white-2nd;
+      }
+    }
+    .cart-summary {
+      background-color: $black;
+      h6{
+        color: $white;
+      }
+  
+      .item-div{
+        .item-elements{
+            border-top: 1px solid #888;
+            .summary-item {
+                p{
+                  color: $white;
+                }
+                .pricing{
+                    .old-price{
+                        color: $white-2nd;
+                    }
+                    .new-price{
+                        color: $white;
+                    }
+                }
+    
+              }
+        }
+      }
+  
+      .summary-quantity {
+        color: $white-2nd;
+      }
+  
+      .summary-discount {
+        background-color: #343434;
+        color: $white-2nd;
+}
+  
+      .summary-total {
+        span{
+            color: $white-2nd;
+        }
+        .total-price{
+            color: $white;
+        }
+      }
+    }      
+  }
+}
+.administrator-profile {
+  background-color: $black;
+  .page-head{
+      color: $white;
+  }
+
+  .profile-info {
+    .form-first, .form-double, .form-triple, .form-quater{
+      .form-group{
+          label{
+              color: $white;
+          }
+          input, textarea{
+              border: 1px solid $white;
+              background-color: transparent;
+              color: $white;
+          }
+      }
+  }
+  }
+
+  .profile-actions {
+    button {
+      &.edit-btn{
+        background-color: $white;
+        color: $black;
+
+        &:hover {
+          background-color: $box-hover-light;
+        }
+      }
+      .cancel-btn{
+          background-color: $box-dark;
+          color: $black;
+          &:hover{
+              background-color: #ccc;
+          }
+      }
+
+      &.save-btn {
+        background-color: $white;
+        color: $black;
+
+        &:hover {
+          background-color: $box-hover-light;
+        }
+      }
+    }
+  }
+
+}
+.buy-trusted{
+  h1,h2, strong{
+    color: $white;
+  }
+  ul li, p{
+    color: $soft-white;
+  }
+}
+.customer-card{
+  h2{
+    color: $white;
+  }
+  .container {
+      .tabs {
+        button {
+          color: $white-2nd;
+    
+          &.active {
+            color: $white;
+          }
+        }
+      }
+    
+      .content {
+        .info-box {
+          background: $box-dark;
+          color: $white;
+}
+    
+        .terms-list {
+          background: $box-dark;
+          h3{
+            color: $white;
+          }
+    
+          ul {
+            li {
+              color: $white;
+            }
+          }
+        }
+      }
+    }
+}
+.map{
+  h2{
+    color: $white;
+  }
+  .filter-line{
+      .filters {        
+        div {
+          background-color: $box-hover-dark;
+          color: $white;
+          select{
+              color: $white;
+          }
+          
+        }
+        a{
+          background-color: $box-hover-dark;
+          color: $white;
+          svg{
+              color: $white;
+          }
+        }
+      }
+  }
+}
+.privacy-policy{
+  h2{
+    color: $white;
+  }
+  p{
+    color: $soft-white;
+  }
 }
 }

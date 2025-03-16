@@ -319,14 +319,14 @@ const ServiceCenters = () => {
                             ))}
                         </select>
                     </div>
-                    <Link className="map-btn"><CgPin />Xəritədə bax</Link>
+                    <Link to='/map' className="map-btn"><CgPin />Xəritədə bax</Link>
                 </div>
             </div>
             <div className="centers-list">
                 {filteredShops.length > 0 ? (
                     filteredShops.map((shop) => (
                         <div className="center-box" key={shop.id}>
-                            <Link>Xəritədə bax</Link>
+                            <Link to='/map' >Xəritədə bax</Link>
                             <div className="center-icon"><BiSolidMapPin /></div>
                             <h3>{shop.name}</h3>
                             <p><strong>Ünvan:</strong> {shop.address}</p>

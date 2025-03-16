@@ -10,6 +10,23 @@ import slugify from "slugify";
 function ProductCard({ product }) {
     const { addItem, inCart } = useCart();
     const { addWishlistItem, removeWishlistItem, inWishlist } = useWishlist();
+    const [rotation, setRotation] = useState({ x: 0, y: 0, shadowX: 0, shadowY: 0 });
+
+    const handleMouseMove = (e) => {
+        const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
+
+        const x = ((e.clientX - left) / width - 0.5) * 20;
+        const y = ((e.clientY - top) / height - 0.5) * 20;
+
+        const shadowX = (e.clientX - left - width / 2) / 10;
+        const shadowY = (e.clientY - top - height / 2) / 10;
+
+        setRotation({ x, y, shadowX, shadowY });
+    };
+
+    const handleMouseLeave = () => {
+        setRotation({ x: 0, y: 0, shadowX: 0, shadowY: 0 });
+    };
 
     const [clickClass, setClickClass] = useState(() => {
         return localStorage.getItem(`clicked-${product.id}`) ? "clicked" : "";
@@ -45,17 +62,30 @@ function ProductCard({ product }) {
     };
 
     return (
-        <div className={`product-card ${product.count === 0 ? "outofstock" : ""}`}>
+        <div className={`product-card ${product.count === 0 ? "outofstock" : ""}`} onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
+                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 10px rgba(0, 0, 0, 0.3)`,
+            }}>
             <Link to={`/products/${slugify(product.title, { lower: true })}`}>
-                <div className="img-div">
+                <div className="img-div" onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    style={{
+                        transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                        boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
+                            ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                            : `${-rotation.shadowX}px ${-rotation.shadowY}px 10px rgba(0, 0, 0, 0.3)`,
+                    }}>
                     {product.count === 0 &&
                         <div className="stock-overlay">
                             <IoBan />
                         </div>
                     }
                     <img src={product.image} alt={product.title} />
-                    {product.discount > 0 && <p className="discount">${product.discount}%</p>}
-                    <button><RiScalesFill /></button>
+                    {product.discount > 0 && <p className="discount">{product.discount}%</p>}
                 </div>
             </Link>
             <div className="details">
@@ -84,16 +114,37 @@ function ProductCard({ product }) {
             </Link>
             <div className="card-ending">
                 {product.count === 0 ? (
-                    <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
+                    <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()} onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                        style={{
+                            transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                            boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
+                                ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                        }}>
                         <RiShoppingCart2Line /><span>Stokda yoxdur</span>
                     </Link>
                 ) : (
                     inCart(product.id) ? (
-                        <Link to="/cart" className="add-to-cart-btn clicked">
+                        <Link to="/cart" className="add-to-cart-btn clicked" onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
+                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}>
                             <RiShoppingCart2Fill /><span>Səbətə keç</span>
                         </Link>
                     ) : (
-                        <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
+                        <Link to="#" className="add-to-cart-btn" onClick={handleAddClick} onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
+                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}>
                             <RiShoppingCart2Line />
                             <span className="desktop-text">Səbətə əlavə et</span>
                             <span className="mobile-text">Səbətə at</span>
@@ -101,7 +152,14 @@ function ProductCard({ product }) {
                     )
                 )}
 
-                <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
+                <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick} onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    style={{
+                        transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                        boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
+                            ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                            : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                    }}>
                     <FaRegHeart />
                 </Link>
             </div>

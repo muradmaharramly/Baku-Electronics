@@ -14,6 +14,7 @@ import { FaArrowLeft } from 'react-icons/fa6';
 import { FiFilter } from 'react-icons/fi';
 import { PiEmpty } from 'react-icons/pi';
 import { SlRefresh } from 'react-icons/sl';
+import ErrorPage from '../components/ErrorPage';
 
 
 const Products = () => {
@@ -39,21 +40,13 @@ const Products = () => {
 
     if (loading) return <PreLoader />;
 
-    if (error) return <p>Xəta baş verdi: {error}</p>;
+    if (error) return <p><ErrorPage error={error} /></p>;
 
     if (!products) return <p>Məhsul tapılmadı!</p>;
 
     const categories = [...new Set(products.map(product => product.category))];
 
-    const totalPages = Math.ceil(productCount / productPerPage);
 
-    const indexOfLastProduct = currentPage * productPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
-
-    const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
-    const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
-    const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
 
     const handleListStyle = () => {
         setIsListed(!isListed);
@@ -80,7 +73,7 @@ const Products = () => {
         setStockFilter(null)
     };
 
-    const filteredProducts = currentProducts
+    const filteredProducts = products
         .filter((product) =>
             selectedCategories.length ? selectedCategories.includes(product.category) : true
         )
@@ -107,6 +100,16 @@ const Products = () => {
         setFilterType(type);
         setIsSelectOpen(false);
     };
+    const totalPages = Math.ceil((filteredProducts.length !== 0 ? filteredProducts.length : productCount) / productPerPage);
+
+    const indexOfLastProduct = currentPage * productPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productPerPage;
+    const currentProducts = (filteredProducts.length !== 0 ? filteredProducts : products)
+        .slice(indexOfFirstProduct, indexOfLastProduct);
+
+    const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
+    const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
+    const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
     return (
         <div className='products-page'>
             <div className='breadcrumb'>
@@ -231,12 +234,12 @@ const Products = () => {
                         </div>
                     ) : (
                         <div className={`product-list ${isListed ? "listed" : ""}`}>
-                            {filteredProducts.map((product) => (
+                            {currentProducts.map((product) => (
                                 <ProductCard key={product.id} product={product} />
                             ))}
                         </div>
                     )}
-                    {totalPages > 1 && filteredProducts.length !== 0 && (
+                    {totalPages > 1 && filteredProducts.length > 6 && (
                         <div className="pagination">
                             <button onClick={handlePrevPage} disabled={currentPage === 1}>
                                 <MdOutlineKeyboardArrowLeft />

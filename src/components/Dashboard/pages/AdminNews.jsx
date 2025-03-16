@@ -29,7 +29,13 @@ const AdminNews = () => {
 
   if (!news) return <p>Xəbər tapılmadı!</p>;
 
-  const totalPages = Math.ceil(newsCount / newsPerPage);
+  const filteredNews = news.filter((singlenews) =>
+    [singlenews.title, singlenews.category, singlenews.description].some((field) =>
+      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+  const totalPages = Math.ceil((filteredNews.length !== 0 ? filteredNews.length : newsCount) / newsPerPage);
 
   const indexOfLastNews = currentPage * newsPerPage;
   const indexOfFirstNews = indexOfLastNews - newsPerPage;
@@ -38,12 +44,6 @@ const AdminNews = () => {
   const handlePageChange = (pageNumber) => setCurrentPage(pageNumber);
   const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
   const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
-
-  const filteredNews = news.filter((singlenews) =>
-    [singlenews.title, singlenews.category, singlenews.description].some((field) =>
-      String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
 
   const resetFilter = () => {
     setSearchTerm('');
