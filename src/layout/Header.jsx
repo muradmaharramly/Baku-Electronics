@@ -277,12 +277,13 @@ const Header = () => {
                         <ion-icon name={isClicked ? "close-outline" : "menu-outline"}></ion-icon>
                     </div>
                     <ul>
+                        <li><NavLink to='/products'>Məhsullar</NavLink></li>
                         <li><NavLink to="/campaigns" >Kampaniyalar</NavLink></li>
-                        <li><NavLink to="/corporative-sales">Korporativ satışlar</NavLink></li>
                         <li><NavLink to="/shops">Mağazalar</NavLink></li>
-                        <li><NavLink to="/monthly-payment">Aylıq ödəniş</NavLink></li>
+                        <li><NavLink to="/corporative-sales">Korporativ satışlar</NavLink></li>
                         <li className="droped">Digər<ion-icon name="chevron-down-outline"></ion-icon>
                             <ul className="dropdown">
+                                <Link to="/monthly-payment">Aylıq ödəniş</Link>
                                 <Link to='/buy-trusted' >Arxayın al</Link>
                                 <Link to='/customer-card' >Müştəri kartı</Link>
                             </ul>
@@ -517,13 +518,13 @@ const Header = () => {
                     <nav className="mobile-navbar-menu">
                         <ul>
                             <li>
-                                <Link to="/campaigns">
-                                    Kampaniyalar <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <Link to="/products">
+                                    Məhsullar <ion-icon name="chevron-forward-outline"></ion-icon>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/corporative-sales">
-                                    Korporativ satışlar <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <Link to="/campaigns">
+                                    Kampaniyalar <ion-icon name="chevron-forward-outline"></ion-icon>
                                 </Link>
                             </li>
                             <li>
@@ -532,8 +533,8 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/monthly-payment">
-                                    Aylıq ödəniş <ion-icon name="chevron-forward-outline"></ion-icon>
+                                <Link to="/corporative-sales">
+                                    Korporativ satışlar <ion-icon name="chevron-forward-outline"></ion-icon>
                                 </Link>
                             </li>
                             <li onClick={handleOtherNavClick}>
@@ -550,6 +551,11 @@ const Header = () => {
                     <h4><button onClick={handleOtherNavClickOff}><FaArrowLeft /></button>  Digər linklər</h4>
                     <nav className="mobile-navbar-menu">
                         <ul>
+                            <li>
+                                <Link to="/monthly-payment">
+                                    Aylıq ödəniş <ion-icon name="chevron-forward-outline"></ion-icon>
+                                </Link>
+                            </li>
                             <li>
                                 <Link to='/buy-trusted' >
                                     Arxayın al <ion-icon name="chevron-forward-outline"></ion-icon>
