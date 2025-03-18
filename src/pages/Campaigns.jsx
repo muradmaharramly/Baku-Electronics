@@ -6,6 +6,7 @@ import CampaignCard from '../components/CampaignCard';
 import { useSelector } from 'react-redux';
 import PreLoader from '../components/PreLoader';
 import { fetchCampaigns } from '../tools/request/fetchCampaigns';
+import ErrorPage from '../components/ErrorPage';
 
 const Campaigns = () => {
     const { campaigns, loading, error } = useSelector((state) => state.campaigns);
@@ -15,7 +16,7 @@ const Campaigns = () => {
     }, []);
 
     if (loading) return <PreLoader />;
-    if (error) return <p>Xəta: {error}</p>;
+    if (error) return <p><ErrorPage error={ error } /></p>;
 
     const currentDate = new Date();
     

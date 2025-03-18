@@ -29,7 +29,7 @@ const CampaignDetails = () => {
     }, [slug, campaigns]);
 
     if (loading) return <PreLoader />;
-    if (!campaign) return <p>Məhsul tapılmadı!</p>;
+    if (!campaign) return <p>Kampaniya tapılmadı!</p>;
 
     const aylar = [
         "Yanvar",

@@ -55,10 +55,12 @@ import CustomerCard from "./pages/CustomerCard";
 import Map from "./pages/Map";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoute from "./components/Dashboard/auth/ProtectRoute";
+import CampaignPopup from "./components/CampaignPopup";
 
 const App = () => {
   return (
     <BrowserRouter>
+    <CampaignPopup />
       <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>
