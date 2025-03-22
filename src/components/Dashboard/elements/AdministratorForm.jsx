@@ -4,8 +4,10 @@ import { supabase } from '../../../services/supabaseClient';
 import Swal from 'sweetalert2';
 import bcrypt from 'bcryptjs';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
+import { useSelector } from 'react-redux';
 
 const AdministratorForm = ({ existingAdmin, isEditMode }) => {
+    const { administrators } = useSelector((state) => state.administrators);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -15,6 +17,9 @@ const AdministratorForm = ({ existingAdmin, isEditMode }) => {
     const [fin, setFin] = useState('');
     const [errors, setErrors] = useState({});
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const loggedInEmail = localStorage.getItem("administratorEmail");
+    const loggedInAdmin = administrators.find(admin => admin.email === loggedInEmail);
+    const loggedInRole = loggedInAdmin ? loggedInAdmin.role : null;
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -126,8 +131,8 @@ const AdministratorForm = ({ existingAdmin, isEditMode }) => {
                         <label>Rol</label>
                         <select value={role} onChange={(e) => setRole(e.target.value)}>
                             <option value="">Rol seçin</option>
-                            <option value="Superadmin">Superadmin</option>
-                            <option value="Admin">Admin</option>
+                            {loggedInRole === "Superadmin" && <option value="Superadmin">Superadmin</option>}
+                            {loggedInRole === "Superadmin" && <option value="Admin">Admin</option>}
                             <option value="Moderator">Moderator</option>
                         </select>
                         {errors.role && <p className="error-message">{errors.role}</p>}

@@ -4,8 +4,6 @@ import { IoClose } from "react-icons/io5";
 import { RiShoppingCart2Line } from "react-icons/ri";
 import { FaArrowLeft, FaRegHeart } from "react-icons/fa6";
 import { FaRegUser } from "react-icons/fa6";
-import { IoPhonePortraitOutline } from "react-icons/io5";
-import { IoTvOutline } from "react-icons/io5";
 import { PiEmpty, PiLaptop } from "react-icons/pi";
 import { FiSun } from "react-icons/fi";
 import { HiOutlineMoon } from "react-icons/hi2";
@@ -14,67 +12,21 @@ import { Link, NavLink } from "react-router-dom";
 import { Badge } from "antd";
 import { useCart } from "react-use-cart";
 import { useWishlist } from "react-use-wishlist";
-import { IoIosSearch } from "react-icons/io";
-import { useSelector } from "react-redux";
+import { IoIosArrowForward, IoIosSearch } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../tools/request/fetchProducts";
-import PreLoader from "../components/PreLoader";
 import slugify from "slugify";
 import { GoHistory } from "react-icons/go";
 import { fetchCampaigns } from "../tools/request/fetchCampaigns";
-
-const categories = [
-    {
-        id: 1,
-        title: "Telefonlar və qadcetlər",
-        icon: <IoPhonePortraitOutline />,
-        content: {
-            subcategories: [
-                { title: "Smartfonlar", items: ["Apple", "Samsung", "Infinix", "Honor", "Vivo", "Motorola", "Bütün telefonlar"] },
-                { title: "Planşetlər", items: ["Apple iPad", "Samsung Galaxy Tab", "Xiaomi", "Honor", "Lenovo", "Bütün planşetlər"] },
-                { title: "Smart saatlar", items: ["Apple", "Samsung", "Huawei", "Xiaomi", "Borofone", "Wonlex", "Bütün saatlar"] },
-                { title: "Qulaqlıqlar", items: ["Apple AirPods", "Samsung", "Huawei", "JBL", "Simsiz qulaqlıqlar", "Simli qulaqlıqlar"] },
-                { title: "Ev və ofis telefonları", items: ["Panasonic", "Gigaset"] },
-                { title: "Aksessuarlar", items: ["Adapterlər", "Telefon üçün keyslər", "Ekran qoruyucuları və plyonkalar", "USB və AUX kabellər", "Power Bank", "Yaddaş kartları", "Selfi çubuqları və ştativlər", "Smart saatlar üçün aksesuarlar", "Müxtəlif"] },
-            ],
-        },
-    },
-    {
-        id: 2,
-        title: "TV, audio-video, foto",
-        icon: <IoTvOutline />,
-        content: {
-            subcategories: [
-                { title: "TV-lər", items: ["Samsung", "LG", "TCL", "Yoshiro", "Sony", "Haier", "Bütün brendlər"] },
-                { title: "Diaqonal üzrə", items: ["43\" qədər", "43\"-55", "55\"-75", "75\"-85", "85\"-100", "Bütün diaqonal"] },
-                { title: "TV aksesuarları", items: ["Kronşteyn", "TV tumbalar", "Uzatma kabelləri", "Batareyalar", "TV bokslar"] },
-                { title: "Audio sistemlər", items: ["Soundbarlar", "Ev kinoteatrları", "Smart TV Box", "Ekşn kameralar", "Smart akustikalar", "Musiqi mərkəzləri"] },
-                { title: "Fotoaparatlar", items: ["Fujifilm", "Polaroid", "Canon", "Panasonic"] },
-            ],
-        },
-    },
-    {
-        id: 3,
-        title: "Notbuklar və kompüterlər, planşetlər",
-        icon: <PiLaptop />,
-        content: {
-            subcategories: [
-                { title: "Notbuklar", items: ["Apple", "HUAWEI", "HP", "ASUS", "Acer", "LENOVO", "Bütün brendlər"] },
-                { title: "Printerlər və kartuçlar", items: ["Printerlər", "Skanerlər", "Kartuçlar"] },
-                { title: "Monitorlar", items: ["Samsung", "LG", "Bütün monitorlar"] },
-                { title: "Masaüstü kompüterlər", items: ["HP", "Şəbəkə avadanlığı"] },
-                { title: "Monobloklar", items: ["Apple", "ASUS", "HP", "LENOVO", "Bütün monobloklar"] },
-                { title: "Xarici toplayıcı disklər HDD və SSD", items: ["Sandisk", "Kingston", "Bütün brendlər"] },
-                { title: "Klavatura və kompüter siçanları", items: ["Apple", "Logitec", "Bütün brendlər"] },
-                { title: "UPS", items: [] },
-                { title: "Aksessuarlar", items: ["Notbuk üçün çantalar", "Notbuklar üçün altlıqlar"] },
-            ],
-        },
-    },
-];
+import { loginSuccess } from "../tools/actions/userActions";
+import { supabase } from "../services/supabaseClient";
 
 
 const Header = () => {
+    const dispatch = useDispatch();
+    const { user } = useSelector((state) => state.user);
     const { products, loading, error } = useSelector((state) => state.products);
+    const categories = [...new Set(products.map(product => product.category))];
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [popularFilteredProducts, setPopularFilteredProducts] = useState([]);
@@ -92,6 +44,36 @@ const Header = () => {
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const inputRef = useRef(null);
     const panelRef = useRef(null);
+
+    useEffect(() => {
+        if (categories.length > 0 && !activeCategory) {
+            setActiveCategory(categories[0]); 
+        }
+    }, [categories]);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const storedEmail = localStorage.getItem("email");
+                if (!storedEmail) throw new Error("İstifadəçi email tapılmadı");
+
+                const { data, error } = await supabase
+                    .from("users")
+                    .select("*")
+                    .eq("email", storedEmail)
+                    .single();
+
+                if (error) throw error;
+
+                dispatch(loginSuccess(data));
+            } catch (error) {
+                console.error("Fetch User Data Error:", error.message);
+            }
+        };
+
+        fetchUserData();
+    }, [dispatch]);
+
 
     const { totalUniqueItems } = useCart();
     const { totalWishlistItems } = useWishlist();
@@ -303,29 +285,39 @@ const Header = () => {
                 <div className={`catalogue-btn ${isPanelActive ? "clicked" : ""} ${isSearchOpen ? "deactive" : ""}`} onClick={handleCatalogueClick}><span className="clicker">{isPanelActive ? <IoClose /> : <HiOutlineViewGrid />}</span> Kataloq</div>
                 <div className={`category-panel ${isScrolled ? "fixed" : ""} ${isPanelActive ? "active" : ""}`}>
                     <div className="side-panel">
-                        {categories.map((category) => (
+                        {categories.map((category, index) => (
                             <div
-                                key={category.id}
-                                className={`side-panel-item ${activeCategory.id === category.id ? "active" : ""}`}
-                                onClick={() => handleCategoryClick(category)}
+                                key={index}
+                                className={`side-panel-item ${activeCategory === category ? "active" : ""}`}
+                                onClick={() => setActiveCategory(category)}
                             >
-                                {category.icon}{category.title}
+
+                                {category}<IoIosArrowForward />
                             </div>
                         ))}
                     </div>
+
                     <div className="content-panel">
-                        {activeCategory.content.subcategories.map((subcategory, index) => (
-                            <div key={index} className="subcategory">
-                                <h6>{subcategory.title}</h6>
-                                <ul>
-                                    {subcategory.items.map((item, idx) => (
-                                        <li key={idx}>{item}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                        {products
+                            .filter((product) => product.category === activeCategory)
+                            .map((product, index) => (
+                                <Link key={product.id} to={`/products/${slugify(product.title, { lower: true })}`} className="product-box" onClick={handleCatalogueClick}>
+                                    <div className="img-div">
+                                        <img src={product.image} alt={product.title} />
+                                    </div>
+                                    <div className="details">
+                                        <span>{product.category}</span>
+                                        <p>{product.title.substring(0, 18)}...</p>
+                                    </div>
+                                    <Link className="pricing" onClick={handleSearchLinkClick}>
+                                        {product.discount > 0 && <p className="old-price">${product.price}</p>}
+                                        <p className="current-price">{(product.price - (product.price * product.discount) / 100).toFixed(2)}$</p>
+                                    </Link>
+                                </Link>
+                            ))}
                     </div>
                 </div>
+
                 <div className={`search-bar ${isSearchOpen ? "active" : ""}`}>
                     <input
                         type="text"
@@ -499,7 +491,16 @@ const Header = () => {
                         (<Badge count={totalWishlistItems} className="custom-badge" showZero>
                             <NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>
                         </Badge>)}
-                    <NavLink to={userEmail ? "/user-profile" : "/auth/register"}><button><FaRegUser /></button></NavLink>
+                    <NavLink to={userEmail ? "/user-profile" : "/auth/register"}>
+                        <button className={userEmail ? "name-btn" : "user-btn"}>
+                            {userEmail ? (
+                                <h4>{user?.firstName && user?.lastName ? `${user.lastName.slice(0, 1)}${user.firstName.slice(0, 1)}` : <FaRegUser />}</h4>
+                            ) : (
+                                <FaRegUser />
+                            )}
+                        </button>
+                    </NavLink>
+
                 </div>
             </div>
             <div className={`mobile-navbar ${isClicked ? "active" : ""}`}>

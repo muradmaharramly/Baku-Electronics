@@ -38,6 +38,7 @@ const Footer = () => {
                             <li><Link to='/customer-card' >Müştəri kartı</Link></li>
                             <li><Link to="/brands">Brendlər</Link></li>
                             <li><Link to="/news">Bloq və xəbərlər</Link></li>
+                            <li><Link to="/faq">FAQ</Link></li>
                         </ul>
                     </div>
                     <div>

@@ -225,9 +225,10 @@
         -o-border-radius: 30px;
         &.fixed{
             top: 78px;
-            height: 600px;
+            height: 450px;
         }
         &.active{
+            height: 450px;
             display: flex;
         }
         .side-panel{
@@ -235,48 +236,7 @@
           background-color: transparent;
           border-right: 1px solid #ddd;
           padding-right: 15px;
-          border-radius: 30px 0px 0px 30px;
-          -webkit-border-radius: 30px 0px 0px 30px;
-          -moz-border-radius: 30px 0px 0px 30px;
-          -ms-border-radius: 30px 0px 0px 30px;
-          -o-border-radius: 30px 0px 0px 30px;
-          .side-panel-item{
-            display: flex;
-            align-items: center;
-            margin-bottom: 5px;
-            padding: 0.8rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 0.9rem;
-            font-size: 13px;
-            border-radius: 15px;
-            color: #333;
-            -webkit-border-radius: 15px;
-            -moz-border-radius: 15px;
-            -ms-border-radius: 15px;
-            -o-border-radius: 15px;
-            svg{
-                font-size: 18px;
-                margin-bottom: -3px;
-                margin-right: 10px;
-            }
-            &:hover{
-              background-color: $box-hover-light;
-            }
-      
-            &.active {
-              background-color: $box-hover-light;
-              font-weight: bold;
-            }
-          }
-        }
-      
-        .content-panel {
-          display: flex;
-          justify-content: left;
-          flex-wrap: wrap;
-          width: 100%;
-          padding:15px 15px 15px 30px;
+          max-height: 420px;
           overflow-x: hidden;
           overflow-y: visible;
           scrollbar-width: 2px;
@@ -299,32 +259,154 @@
             scrollbar-width: thin;
             scrollbar-color: #888 #f0f0f0; 
           }
-
-      
-          .subcategory {
-            margin-bottom: 0px;
-            margin-right: 80px;
-      
-            h6 {
-              font-size: 15px;
-              margin-bottom: 0.5rem;
-              color: #444;
+          .side-panel-item{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            padding: 0.8rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 13px;
+            border-radius: 15px;
+            color: #333;
+            -webkit-border-radius: 15px;
+            -moz-border-radius: 15px;
+            -ms-border-radius: 15px;
+            -o-border-radius: 15px;
+            svg{
+              color: $black-2nd;
+              font-size: 12px;
+              margin-bottom: -3px;
+              margin-right: 10px;
+              @include transition();
+            }
+            &:hover{
+              background-color: $box-hover-light;
+              svg{
+                color: $black;
+              }
             }
       
-            ul {
-              list-style: none;
-              padding: 0;
-      
-              li {
-                padding: 6px 0;
-                color: #666;
-      
-                &:hover {
-                  color: #000;
-                }
+            &.active {
+              background-color: $box-hover-light;
+              font-weight: bold;
+              svg{
+                color: $black;
               }
             }
           }
+        }
+      
+        .content-panel {
+          display: flex;
+          justify-content: left;
+          align-items: flex-start;
+          flex-wrap: wrap;
+          width: 100%;
+          gap: 10px;
+          padding:15px 15px 15px 15px;
+          overflow-x: hidden;
+          overflow-y: visible;
+          scrollbar-width: 2px;
+          color: $black;
+          &::-webkit-scrollbar {
+            width: 2px; 
+            height: 6px; 
+          }
+          &::-webkit-scrollbar-track {
+            background: #f0f0f0; 
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background: #888; 
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
+          &* {
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f0f0f0; 
+          }
+          .product-box{
+            text-decoration: none;
+            color: $black;
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            background-color: $white;
+            padding: 6px 10px;
+            border-radius: 10px;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            -ms-border-radius: 10px;
+            -o-border-radius: 10px;
+            max-width: 295px;
+            @include transition();
+            &:hover{
+              box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.112);
+              transform: translateY(-4px);
+              -webkit-transform: translateY(-4px);
+              -moz-transform: translateY(-4px);
+              -ms-transform: translateY(-4px);
+              -o-transform: translateY(-4px);
+}
+            .img-div{
+              flex: 1;
+              margin-top: -15px;
+              background-color: $main-light;
+              padding: 5px;
+              width: 70px;
+              height: 55px;
+              overflow: hidden;
+              border: 1px solid #dcdbdb;
+              border-radius: 8px;
+              -webkit-border-radius: 8px;
+              -moz-border-radius: 8px;
+              -ms-border-radius: 8px;
+              -o-border-radius: 8px;
+              img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+            .details{
+              text-decoration: none;
+              flex: 5;
+              span{
+                font-size: 11px;
+                color: #888;
+                text-transform: capitalize;
+              }
+              p{
+                font-weight: 500;
+                text-transform: uppercase;
+                line-height: 12px;
+                font-size: 12px;
+              }
+            }
+            .pricing{
+
+              text-decoration: none;
+              text-align: right;
+              margin: auto 0;
+              flex: 1;
+              .old-price{
+                font-size: 10px;
+                text-decoration: line-through;
+                color: $red;
+              }
+              .current-price{
+                color: #10C664;
+                font-weight: 500;
+                line-height: 14px;
+                font-size: 15px;
+              }
+            }
+}
+
         }
       
         @media (max-width: 768px) {
@@ -663,6 +745,7 @@
         gap: 10px;
   
         a {
+          text-decoration: none;
           button{
             padding: 12px 14px;
             border: none;
@@ -684,9 +767,13 @@
               background-color: $box-hover-light;
             }
             }
+          .name-btn{
+              padding: 14px 10px;
+            }
           &.active{
             button{
               background-color: $red;
+              color: $white;
               svg{
                 color: $white;
               }
@@ -853,6 +940,27 @@
             &.deactive{
               display: none !important;
             }
+        }
+        .category-panel{
+          .side-panel{
+            border-radius: 0 !important;
+            -webkit-border-radius: 0 !important;
+            -moz-border-radius: 0 !important;
+            -ms-border-radius: 0 !important;
+            -o-border-radius: 0 !important;
+}
+          &.active{
+            height: 600px !important;
+          }
+          &.fixed{
+            height: 600px !important;
+          }
+          .content-panel{
+            padding: 5px !important;
+            .product-box{
+              min-width: 380px !important;
+            }
+          }
         }
         .search-bar{
             padding: 10px 12px !important;

@@ -64,7 +64,7 @@ const Sidebar = () => {
                 <Link onClick={handleTab} to="/administrative/users">
                     <div className='icon'><FaUsers /></div><span>İstifadəçilər</span><div className='arrow'><IoIosArrowForward /></div>
                 </Link>
-                {currentUser && currentUser.role === "Superadmin" && (
+                {currentUser && currentUser.role !== "Moderator" && (
                     <Link onClick={handleTab} to="/administrative/administrators">
                         <div className='icon'><RiAdminFill /></div><span>Administrasiya</span><div className='arrow'><IoIosArrowForward /></div>
                     </Link>

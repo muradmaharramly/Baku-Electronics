@@ -43,15 +43,45 @@
             background-color: $main-dark;
             .category-panel{
                 background-color: $box-dark;
+                .side-panel{
+                  &::-webkit-scrollbar {
+                    width: 2px; 
+                    height: 6px; 
+                  }
+                  &::-webkit-scrollbar-track {
+                    background: #888; 
+                    border-radius: 10px;
+                  }
+                  &::-webkit-scrollbar-thumb {
+                    background: #f0f0f0; 
+                    border-radius: 10px;
+                  }
+                  &::-webkit-scrollbar-thumb:hover {
+                    background: $white;
+                  }
+                  &* {
+                    scrollbar-width: thin;
+                    scrollbar-color:#f0f0f0 #888; 
+                  }
+                }
                 .side-panel-item{
                     color: $white;
+                    svg{
+                      color: $white-2nd;
+                    }
                     &:hover{
                         background-color: $box-hover-dark;
+                        svg{
+                          color: $white;
+                        }
                       }
                 
                     &.active {
                         background-color: $box-hover-dark;
                         font-weight: bold;
+                        svg{
+                          color: $white;
+                        }
                     }
                 }
                 .content-panel {
@@ -77,21 +107,14 @@
                       scrollbar-width: thin;
                       scrollbar-color:#f0f0f0 #888; 
                     }
-                    .subcategory {                  
-                        h6 {
+                    .product-box{
+                      background-color: $box-hover-dark;
+                      .details{
+                        p{
                           color: $white;
                         }
-                  
-                        ul {                  
-                          li {
-                            color: $white-2nd;
-                  
-                            &:hover {
-                              color: $white;
-                            }
-                          }
-                        }
                       }
+      }
                 }
             }
             .search-bar {
@@ -2182,6 +2205,20 @@ border-bottom: 2px solid $white;
     }
 }
 .user-profile {
+  .dropdown {
+    color: $white;
+
+    &-btn {
+        color: $white;
+        .icon{
+            color: $white;
+        }
+    }
+
+    &-menu {
+        background: $black;
+}
+}
   .profile-page{
     &.change-password{
         justify-content: center;
@@ -3219,4 +3256,45 @@ border-bottom: 2px solid $white;
     color: $soft-white;
   }
 }
+.faq-container {
+  .faq-header {
+    h3{
+      color: $white;
+    }
+    p {
+      color: $white-2nd;
+    }
+  }
+
+  .faq-content {
+    .faq-list {
+      .faq-item {
+        background-color: #343434;
+        &:hover{
+          background-color: $box-hover-dark;
+        }
+
+        &.active {
+          background-color: $box-hover-dark;
+          .faq-question{
+              color: $red;
+          }
+
+          .faq-answer {
+            display: block;
+          }
+        }
+
+        .faq-question {
+          color: $white;
+        }
+
+        .faq-answer {
+          color: $white-2nd;
+        }
+      }
+    }
+  }
+}
+
 }

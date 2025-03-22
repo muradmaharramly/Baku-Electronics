@@ -13,21 +13,32 @@ import ProductCard from "../components/PorductCard";
 import { IoIosArrowDown } from "react-icons/io";
 
 const UserProfile = () => {
+    const tabNames = {
+        personal: { name: "Şəxsi məlumatlarım", icon: <FaRegUser /> },
+        orders: { name: "Sifarişlərim", icon: <IoBagHandleOutline /> },
+        history: { name: "Ən son baxdıqlarım", icon: <LuHistory /> },
+        addresses: { name: "Ünvanlarım", icon: <GrLocation /> },
+        support: { name: "Müraciət et", icon: <LuMessageSquareShare /> },
+    };
     const dispatch = useDispatch();
-    const {user} = useSelector((state) => state.user);
+    const { user } = useSelector((state) => state.user);
     const navigate = useNavigate();
 
-    const [activeTab, setActiveTab] = useState("personal");
+    const [activeTab, setActiveTab] = useState(Object.keys(tabNames)[0]);
+    const [fullName, setFullName] = useState(user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "");
     const [tel, setTel] = useState(user?.phoneNumber || "");
     const [fin, setFin] = useState(user?.fin || "");
+    const [errors, setErrors] = useState({});
+    const [isNameFocused, setIsNameFocused] = useState(false);
     const [isTelFocused, setIsTelFocused] = useState(false);
     const [isFinFocused, setIsFinFocused] = useState(false);
     const [showSave, setShowSave] = useState(false);
     const [isEditable, setIsEditable] = useState(false);
     const [viewedProducts, setViewedProducts] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
 
     const [formData, setFormData] = useState({
-        fullName: "",
+        fullName: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : "",
         email: "",
         phone: "",
         message: "",
@@ -48,6 +59,28 @@ const UserProfile = () => {
         setFocused({ ...focused, [field]: !!formData[field] });
     };
 
+    const validateForm = () => {
+        let isValid = true;
+        let newErrors = {};
+
+        if (!fullName.trim()) {
+            newErrors.fullName = 'Ad və soyad boş ola bilməz';
+            isValid = false;
+        }
+
+        if (tel && !/^[0-9]+$/.test(tel)) {
+            newErrors.tel = 'Telefon nömrəsi yalnız rəqəmlərdən ibarət olmalıdır';
+            isValid = false;
+        }
+        if (!tel.trim()) newErrors.tel = 'Nömrə boş ola bilməz';
+
+        if (!fin.trim()) newErrors.fin = 'FIN boş ola bilməz';
+        if (fin.length !== 7) newErrors.fin = "FIN-i doğru yazın"
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -63,6 +96,7 @@ const UserProfile = () => {
                 if (error) throw error;
 
                 dispatch(loginSuccess(data));
+                setFullName(data.firstName && data.lastName ? `${data.firstName} ${data.lastName}` : "");
                 setTel(data.phoneNumber || "");
                 setFin(data.fin || "");
             } catch (error) {
@@ -73,7 +107,9 @@ const UserProfile = () => {
         fetchUserData();
     }, [dispatch]);
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+        if (!validateForm()) return;
         try {
             const { data, error } = await supabase
                 .from("users")
@@ -120,14 +156,6 @@ const UserProfile = () => {
         setViewedProducts(storedProducts);
     }, []);
 
-    const tabNames = {
-        personal: { name: "Şəxsi məlumatlarım", icon: <FaRegUser /> },
-        orders: { name: "Sifarişlərim", icon: <IoBagHandleOutline /> },
-        history: { name: "Ən son baxdıqlarım", icon: <LuHistory /> },
-        addresses: { name: "Ünvanlarım", icon: <GrLocation /> },
-        support: { name: "Müraciət et", icon: <LuMessageSquareShare /> },
-    };
-
     return (
         <div className="user-profile">
             <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><Link to="/user-profile">Şəxsi kabinetim</Link><RiArrowRightDoubleFill /><span>{tabNames[activeTab].name}</span></div>
@@ -160,16 +188,42 @@ const UserProfile = () => {
                 <main className="content">
                     {activeTab === "personal" && (
                         <div className="tab-content">
-                            <div className="head"><h3>Şəxsi məlumatlarım </h3><button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
+                            <div className="head"><h3>Şəxsi məlumatlarım </h3>
+                                <div className="dropdown">
+                                    <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+                                        {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
+                                    </button>
+                                    {isOpen && (
+                                        <ul className="dropdown-menu">
+                                            {Object.keys(tabNames).map((key) => (
+                                                <li
+                                                    key={key}
+                                                    className={activeTab === key ? "active" : ""}
+                                                    onClick={() => {
+                                                        setActiveTab(key);
+                                                        setIsOpen(false);
+                                                    }}
+                                                >
+                                                    {tabNames[key].name}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                                <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
                             <form>
                                 <div className='form-group'>
                                     <input
                                         type='text'
                                         className="form-control"
-                                        value={`${user?.firstName || ""} ${user?.lastName || ""}`.trim()}
+                                        onChange={(e) => handleInputChange(setFullName, e.target.value)}
+                                        onFocus={() => setIsNameFocused(true)}
+                                        onBlur={() => setIsNameFocused(fullName !== '')}
+                                        value={fullName}
                                         readOnly={!isEditable}
                                     />
-                                    <label className="clicked">Ad və Soyad</label>
+                                    <label className={isNameFocused || tel ? "clicked" : ""}>Ad və Soyad</label>
+                                    {errors.fullName && <span className="error-message">{errors.fullName}</span>}
                                     <FaRegUser />
                                 </div>
                                 <div className='form-group'>
@@ -183,6 +237,7 @@ const UserProfile = () => {
                                         readOnly={!isEditable}
                                         required
                                     />
+                                    {errors.tel && <span className="error-message">{errors.tel}</span>}
                                     <label className={isTelFocused || tel ? "clicked" : ""}>Telefon</label>
                                     <FiPhone />
                                 </div>
@@ -197,6 +252,7 @@ const UserProfile = () => {
                                         readOnly={!isEditable}
                                         required
                                     />
+                                    {errors.fin && <span className="error-message">{errors.fin}</span>}
                                     <label className={isFinFocused || fin ? "clicked" : ""}>Fin</label>
                                     <FaRegUser />
                                 </div>
@@ -209,6 +265,31 @@ const UserProfile = () => {
                         </div>
                     )}
                     {activeTab === "orders" && <div className="tab-content">
+                        <div className="head">
+                            <h3>Ən Son Baxdıqlarım</h3>
+                            <div className="dropdown">
+                                <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+                                    {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
+                                </button>
+                                {isOpen && (
+                                    <ul className="dropdown-menu">
+                                        {Object.keys(tabNames).map((key) => (
+                                            <li
+                                                key={key}
+                                                className={activeTab === key ? "active" : ""}
+                                                onClick={() => {
+                                                    setActiveTab(key);
+                                                    setIsOpen(false);
+                                                }}
+                                            >
+                                                {tabNames[key].name}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                            <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button>
+                        </div>
                         <div className="empty">
                             <img src="https://new.bakuelectronics.az/img/alert.svg" alt="Empty Cart" />
                             <p>Sizin hal-hazırda mövcud sifarişiniz yoxdur.</p>
@@ -217,7 +298,31 @@ const UserProfile = () => {
                         </div>
                     </div>}
                     {activeTab === "history" && <div className="tab-content">
-                        <div className="head"><h3>Ən Son Baxdıqlarım</h3><button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
+                        <div className="head">
+                            <h3>Ən Son Baxdıqlarım</h3>
+                            <div className="dropdown">
+                                <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+                                    {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
+                                </button>
+                                {isOpen && (
+                                    <ul className="dropdown-menu">
+                                        {Object.keys(tabNames).map((key) => (
+                                            <li
+                                                key={key}
+                                                className={activeTab === key ? "active" : ""}
+                                                onClick={() => {
+                                                    setActiveTab(key);
+                                                    setIsOpen(false);
+                                                }}
+                                            >
+                                                {tabNames[key].name}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                            <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button>
+                        </div>
                         <div className="products">
                             <div className="product-list">
                                 {viewedProducts.length > 0 ? (
@@ -236,13 +341,61 @@ const UserProfile = () => {
                         </div>
                     </div>}
                     {activeTab === "addresses" && <div className="tab-content">
+                        <div className="head">
+                            <h3>Ən Son Baxdıqlarım</h3>
+                            <div className="dropdown">
+                                <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+                                    {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
+                                </button>
+                                {isOpen && (
+                                    <ul className="dropdown-menu">
+                                        {Object.keys(tabNames).map((key) => (
+                                            <li
+                                                key={key}
+                                                className={activeTab === key ? "active" : ""}
+                                                onClick={() => {
+                                                    setActiveTab(key);
+                                                    setIsOpen(false);
+                                                }}
+                                            >
+                                                {tabNames[key].name}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                            <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button>
+                        </div>
                         <div className="empty">
                             <img src="https://new.bakuelectronics.az/img/alert.svg" alt="Empty Cart" />
                             <p>Sizin hal-hazırda mövcud ünvanınız yoxdur.</p>
                         </div>
                     </div>}
                     {activeTab === "support" && <div className="tab-content">
-                        <div className="head"><h3>Müraciət et</h3><button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
+                        <div className="head">
+                            <h3>Müraciət et</h3>
+                            <div className="dropdown">
+                                <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
+                                    {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
+                                </button>
+                                {isOpen && (
+                                    <ul className="dropdown-menu">
+                                        {Object.keys(tabNames).map((key) => (
+                                            <li
+                                                key={key}
+                                                className={activeTab === key ? "active" : ""}
+                                                onClick={() => {
+                                                    setActiveTab(key);
+                                                    setIsOpen(false);
+                                                }}
+                                            >
+                                                {tabNames[key].name}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                            <button className="logout" onClick={handleLogout}><IoLogOutOutline /> Çıxış</button></div>
                         <div className="support-form">
                             <div className="form-double">
                                 <div className='form-group'>

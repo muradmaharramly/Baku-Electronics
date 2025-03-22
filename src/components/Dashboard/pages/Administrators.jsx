@@ -18,7 +18,9 @@ const Administrators = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const adminPerPage = 8;
   const [searchTerm, setSearchTerm] = useState("");
-  const loggedInEmail = localStorage.getItem("email");
+  const loggedInEmail = localStorage.getItem("administratorEmail");
+  const loggedInAdmin = administrators.find(admin => admin.email === loggedInEmail);
+  const loggedInRole = loggedInAdmin ? loggedInAdmin.role : null;
 
   useEffect(() => {
     fetchAdministrators();
@@ -31,11 +33,14 @@ const Administrators = () => {
   if (!administrators) return <p>Administrator tapılmadı!</p>;
 
   const filteredAdministrators = administrators
-    .filter(admin => admin.email !== loggedInEmail)
+    .filter(admin => admin.email !== loggedInEmail) 
+    .filter(administrator => 
+        loggedInRole === "Admin" ? administrator.role !== "Superadmin" : true 
+    )
     .filter(administrator =>
-      [administrator.firstName, administrator.lastName, administrator.email, administrator.fin, administrator.phoneNumber].some((field) =>
-        String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
-      )
+        [administrator.firstName, administrator.lastName, administrator.email, administrator.fin, administrator.phoneNumber].some((field) =>
+            String(field || "").toLowerCase().includes(searchTerm.toLowerCase()) 
+        )
     );
 
   const sortedAdmins = [...filteredAdministrators].sort(
@@ -119,7 +124,7 @@ const Administrators = () => {
   return (
     <div className='administrators'>
       <div className='page-head'>
-        <h3>Administrasiya<span className='count'>({administratorCount - 1} nəfər)</span></h3>
+        <h3>Administrasiya</h3>
         <div className='procces'>
           <div className="search-bar">
             <input
@@ -160,7 +165,7 @@ const Administrators = () => {
             <tbody>
               {currentAdmins.map((administrator, index) => (
                 <tr key={administrator.id}>
-                  <td>{(currentPage-1)*8 + index + 1}</td>
+                  <td>{(currentPage - 1) * 8 + index + 1}</td>
                   <td>{administrator.firstName}</td>
                   <td>{administrator.lastName}</td>
                   <td>

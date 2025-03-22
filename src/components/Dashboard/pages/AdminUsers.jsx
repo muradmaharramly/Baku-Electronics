@@ -13,6 +13,7 @@ import { SlRefresh } from 'react-icons/sl';
 import Swal from 'sweetalert2';
 import { supabase } from '../../../services/supabaseClient';
 import slugify from 'slugify';
+import ErrorPage from '../../ErrorPage';
 
 const AdminUsers = () => {
   const { user, userCount, loading, error } = useSelector((state) => state.user);
@@ -26,7 +27,7 @@ const AdminUsers = () => {
 
   if (loading) return <PreLoader />;
 
-  if (error) return <p>Xəta baş verdi: {error}</p>;
+  if (error) return <p><ErrorPage error={error} /></p>;
 
   if (!user) return <p>Istifadəçi tapılmadı!</p>;
 

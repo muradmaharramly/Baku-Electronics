@@ -56,6 +56,7 @@ import Map from "./pages/Map";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ProtectedRoute from "./components/Dashboard/auth/ProtectRoute";
 import CampaignPopup from "./components/CampaignPopup";
+import FAQPage from "./pages/Faq";
 
 const App = () => {
   return (
@@ -89,6 +90,7 @@ const App = () => {
           <Route path="/user-profile" element={<UserProfile />} />
           <Route path="/user-profile/change-password" element={<ChangePassword />} />
           <Route path="/monthly-payment" element={<MonthlyPayment />} />
+          <Route path="/FAQ" element={<FAQPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
 

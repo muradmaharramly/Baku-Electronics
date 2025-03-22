@@ -1,7 +1,6 @@
 import { Badge } from "antd";
 import React from "react";
 import { FaHeart, FaRegHeart, FaUser, FaRegUser } from "react-icons/fa6";
-import { HiViewGrid, HiOutlineViewGrid } from "react-icons/hi";
 import { RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
 import { TbHome, TbHomeFilled } from "react-icons/tb";
 import { Link, useLocation } from "react-router-dom";
@@ -26,11 +25,11 @@ const MobileTabBar = () => {
     const activeTab = Object.keys(tabs).includes(location.pathname) ? location.pathname : null;
 
     const indicatorPositions = {
-        "/": 6.7,
-        "/wishlist": 25.7,
-        "/cart": 64, 
-        "/auth/register": 83,
-        "/user-profile": 83
+        "/": 5.5,
+        "/wishlist": 32,
+        "/cart": 58.5, 
+        "/auth/register": 85,
+        "/user-profile": 85
     };
 
     return (
@@ -53,12 +52,6 @@ const MobileTabBar = () => {
                     <Badge count={totalWishlistItems}>
                         {activeTab === "/wishlist" ? <FaHeart /> : <FaRegHeart />}
                     </Badge>
-                </button>
-            </Link>
-
-            <Link to="/">
-                <button>
-                    <HiOutlineViewGrid />
                 </button>
             </Link>
 

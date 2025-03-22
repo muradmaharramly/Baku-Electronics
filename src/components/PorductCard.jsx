@@ -11,6 +11,14 @@ function ProductCard({ product }) {
     const { addItem, inCart } = useCart();
     const { addWishlistItem, removeWishlistItem, inWishlist } = useWishlist();
     const [rotation, setRotation] = useState({ x: 0, y: 0, shadowX: 0, shadowY: 0 });
+    const [userEmail, setUserEmail] = useState(null);
+
+    useEffect(() => {
+        const storedEmail = localStorage.getItem("email");
+        if (storedEmail) {
+            setUserEmail(storedEmail);
+        }
+    }, []);
 
     const handleMouseMove = (e) => {
         const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
@@ -113,56 +121,117 @@ function ProductCard({ product }) {
                 </div>
             </Link>
             <div className="card-ending">
-                {product.count === 0 ? (
-                    <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()} onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
-                        style={{
-                            transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
-                            boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
-                                ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
-                                : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
-                        }}>
-                        <RiShoppingCart2Line /><span>Stokda yoxdur</span>
-                    </Link>
-                ) : (
-                    inCart(product.id) ? (
-                        <Link to="/cart" className="add-to-cart-btn clicked" onMouseMove={handleMouseMove}
+                {userEmail ? (
+                    product.count === 0 ? (
+                        <Link
+                            to="#"
+                            className="add-to-cart-btn disabled"
+                            onClick={(e) => e.preventDefault()}
+                            onMouseMove={handleMouseMove}
                             onMouseLeave={handleMouseLeave}
                             style={{
                                 transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
-                                boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
-                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
-                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
-                            }}>
-                            <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                                boxShadow:
+                                    rotation.shadowX === 0 && rotation.shadowY === 0
+                                        ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                        : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}
+                        >
+                            <RiShoppingCart2Line />
+                            <span>Stokda yoxdur</span>
+                        </Link>
+                    ) : inCart(product.id) ? (
+                        <Link
+                            to="/cart"
+                            className="add-to-cart-btn clicked"
+                            onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                boxShadow:
+                                    rotation.shadowX === 0 && rotation.shadowY === 0
+                                        ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                        : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}
+                        >
+                            <RiShoppingCart2Fill />
+                            <span>Səbətə keç</span>
                         </Link>
                     ) : (
-                        <Link to="#" className="add-to-cart-btn" onClick={handleAddClick} onMouseMove={handleMouseMove}
+                        <Link
+                            to="#"
+                            className="add-to-cart-btn"
+                            onClick={handleAddClick}
+                            onMouseMove={handleMouseMove}
                             onMouseLeave={handleMouseLeave}
                             style={{
                                 transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
-                                boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
-                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
-                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
-                            }}>
+                                boxShadow:
+                                    rotation.shadowX === 0 && rotation.shadowY === 0
+                                        ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                        : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}
+                        >
                             <RiShoppingCart2Line />
                             <span className="desktop-text">Səbətə əlavə et</span>
                             <span className="mobile-text">Səbətə at</span>
                         </Link>
                     )
+                ) : (
+                    <Link
+                        to="/auth/register"
+                        className="add-to-cart-btn"
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                        style={{
+                            transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                            boxShadow:
+                                rotation.shadowX === 0 && rotation.shadowY === 0
+                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                        }}
+                    >
+                        <RiShoppingCart2Line />
+                        <span>Stokda yoxdur</span>
+                    </Link>
                 )}
 
-                <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick} onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
-                    style={{
-                        transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
-                        boxShadow: rotation.shadowX === 0 && rotation.shadowY === 0
-                            ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
-                            : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
-                    }}>
-                    <FaRegHeart />
-                </Link>
+                {userEmail ? (
+                    <Link
+                        className={`add-to-wish-btn ${wishClass}`}
+                        onClick={handleWishClick}
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                        style={{
+                            transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                            boxShadow:
+                                rotation.shadowX === 0 && rotation.shadowY === 0
+                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                        }}
+                    >
+                        <FaRegHeart />
+                    </Link>
+                ) : (
+                    <Link to="/auth/register"
+                        className={`add-to-wish-btn ${wishClass}`}
+                        onMouseMove={handleMouseMove}
+                        onMouseLeave={handleMouseLeave}
+                        style={{
+                            transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                            boxShadow:
+                                rotation.shadowX === 0 && rotation.shadowY === 0
+                                    ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                    : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                        }}
+                    >
+                        <FaRegHeart />
+                    </Link>
+                )}
+
+
             </div>
+
             <div className="listed-details">
                 <Link to={`/products/${slugify(product.title, { lower: true })}`}>
                     <p className="product-title">{product.title}</p>
@@ -191,27 +260,117 @@ function ProductCard({ product }) {
                     </div>
                 </Link>
                 <div className="card-ending">
-                    {product.count === 0 ? (
-                        <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
-                            <RiShoppingCart2Line /><span>Stokda yoxdur</span>
-                        </Link>
-                    ) : (
-                        inCart(product.id) ? (
-                            <Link to="/cart" className="add-to-cart-btn clicked">
-                                <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                    {userEmail ? (
+                        product.count === 0 ? (
+                            <Link
+                                to="#"
+                                className="add-to-cart-btn disabled"
+                                onClick={(e) => e.preventDefault()}
+                                onMouseMove={handleMouseMove}
+                                onMouseLeave={handleMouseLeave}
+                                style={{
+                                    transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                    boxShadow:
+                                        rotation.shadowX === 0 && rotation.shadowY === 0
+                                            ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                            : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                                }}
+                            >
+                                <RiShoppingCart2Line />
+                                <span>Stokda yoxdur</span>
+                            </Link>
+                        ) : inCart(product.id) ? (
+                            <Link
+                                to="/cart"
+                                className="add-to-cart-btn clicked"
+                                onMouseMove={handleMouseMove}
+                                onMouseLeave={handleMouseLeave}
+                                style={{
+                                    transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                    boxShadow:
+                                        rotation.shadowX === 0 && rotation.shadowY === 0
+                                            ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                            : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                                }}
+                            >
+                                <RiShoppingCart2Fill />
+                                <span>Səbətə keç</span>
                             </Link>
                         ) : (
-                            <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
+                            <Link
+                                to="#"
+                                className="add-to-cart-btn"
+                                onClick={handleAddClick}
+                                onMouseMove={handleMouseMove}
+                                onMouseLeave={handleMouseLeave}
+                                style={{
+                                    transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                    boxShadow:
+                                        rotation.shadowX === 0 && rotation.shadowY === 0
+                                            ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                            : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                                }}
+                            >
                                 <RiShoppingCart2Line />
                                 <span className="desktop-text">Səbətə əlavə et</span>
                                 <span className="mobile-text">Səbətə at</span>
                             </Link>
                         )
+                    ) : (
+                        <Link
+                            to="/auth/register"
+                            className="add-to-cart-btn"
+                            onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                boxShadow:
+                                    rotation.shadowX === 0 && rotation.shadowY === 0
+                                        ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                        : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}
+                        >
+                            <RiShoppingCart2Line />
+                            <span>Stokda yoxdur</span>
+                        </Link>
                     )}
-                    <Link className={`add-to-wish-btn ${wishClass}`} onClick={handleWishClick}>
-                        <FaRegHeart />
-                    </Link>
+
+                    {userEmail ? (
+                        <Link
+                            className={`add-to-wish-btn ${wishClass}`}
+                            onClick={handleWishClick}
+                            onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                boxShadow:
+                                    rotation.shadowX === 0 && rotation.shadowY === 0
+                                        ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                        : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}
+                        >
+                            <FaRegHeart />
+                        </Link>
+                    ) : (
+                        <Link to="/auth/register"
+                            className={`add-to-wish-btn ${wishClass}`}
+                            onMouseMove={handleMouseMove}
+                            onMouseLeave={handleMouseLeave}
+                            style={{
+                                transform: `perspective(1000px) rotateX(${-rotation.y}deg) rotateY(${rotation.x}deg)`,
+                                boxShadow:
+                                    rotation.shadowX === 0 && rotation.shadowY === 0
+                                        ? "0px 0px 5px rgba(0, 0, 0, 0.3)"
+                                        : `${-rotation.shadowX}px ${-rotation.shadowY}px 5px rgba(0, 0, 0, 0.3)`,
+                            }}
+                        >
+                            <FaRegHeart />
+                        </Link>
+                    )}
+
+
                 </div>
+
             </div>
         </div>
     );

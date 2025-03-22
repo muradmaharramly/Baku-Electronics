@@ -8,20 +8,22 @@ import { LuRedoDot, LuTicketPercent } from 'react-icons/lu';
 import { MdOutlineDone } from 'react-icons/md';
 import { RiMastercardFill, RiVisaLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from 'react-use-cart';
 import { supabase } from '../services/supabaseClient';
 import { loginSuccess } from '../tools/actions/userActions';
+import Swal from 'sweetalert2';
 
 const CheckOut = () => {
     const dispatch = useDispatch();
-    const {user} = useSelector((state) => state.user);
+    const { user } = useSelector((state) => state.user);
     const [tel, setTel] = useState(user?.phoneNumber || "");
     const [selectedTab, setSelectedTab] = useState("home");
     const [showAddressForm, setShowAddressForm] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const [selectedBranch, setSelectedBranch] = useState(null);
     const [activeCard, setActiveCard] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -151,6 +153,27 @@ const CheckOut = () => {
         const itemDiscount = (item.price * item.discount) / 100;
         return acc + itemDiscount * item.quantity;
     }, 0);
+
+    const handleCompleteOrder = () => {
+        localStorage.removeItem('react-use-cart');
+    
+        Swal.fire({
+            title: "Sifarişiniz tamamlandı!",
+            text: 'Əməliyyat uğurla başa çatdı.',
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+            customClass: {
+                popup: "custom-swal-popup",
+                title: "custom-swal-title",
+                content: "custom-swal-text"
+            }
+        }).then(() => {
+            navigate('/');
+            window.location.reload();        
+        });
+    };
+    
 
     return (
         <div className='checkout'>
@@ -380,7 +403,7 @@ const CheckOut = () => {
                         </div>
                     )}
 
-                    <button className="complete-order">Sifarişi tamamla</button>
+                    <button className="complete-order" onClick={handleCompleteOrder}>Sifarişi tamamla</button>
                     <div className="step-indicator">
                         <div className="step completed">✔</div>
                         <div className="line red"></div>
@@ -429,7 +452,7 @@ const CheckOut = () => {
                     </div>
                 </div>
             </div>
-            <button className="complete-order mb">Sifarişi tamamla</button>
+            <button className="complete-order mb" onClick={handleCompleteOrder}>Sifarişi tamamla</button>
         </div>
     )
 }
