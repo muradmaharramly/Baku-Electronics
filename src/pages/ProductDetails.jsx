@@ -5,7 +5,7 @@ import slugify from "slugify";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { RiArrowRightDoubleFill, RiScalesFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
+import { RiArrowRightDoubleFill, RiShoppingCart2Fill, RiShoppingCart2Line } from "react-icons/ri";
 import { FaArrowLeft, FaCommentDots, FaRegHeart, FaStar } from "react-icons/fa6";
 import PreLoader from "../components/PreLoader";
 import { useCart } from "react-use-cart";
@@ -147,7 +147,6 @@ function ProductDetails() {
                     </Slider>
                     {product.discount > 0 && <p className="discount">{product.discount}%</p>}
                     <div className="mobile-actions">
-                        <Link className="scale-btn"><RiScalesFill /></Link>
                         <Link className="share-btn"><IoShareSocialOutline /></Link>
                     </div>
                 </div>
@@ -184,7 +183,6 @@ function ProductDetails() {
                             )
                         )}
                         <Link className="share-btn"><IoShareSocialOutline />Paylaş</Link>
-                        <Link className="scale-btn"><RiScalesFill /></Link>
                         <Link className={`heart-btn ${inWishlist(product.id) ? "clicked" : ""}`} onClick={handleWishClick}>
                             <FaRegHeart />
                         </Link>
