@@ -30,6 +30,37 @@ const NewsAndBlogs = () => {
     const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
     const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
 
+    const generatePaginationNumbers = (totalPages, currentPage) => {
+        const pages = [];
+
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            pages.push(1, 2);
+
+            if (currentPage > 4) {
+                pages.push("...");
+            }
+            if (currentPage > 3 && currentPage < totalPages - 2) {
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
+            } else if (currentPage <= 4) {
+                pages.push(3, 4, 5);
+            } else {
+                pages.push(totalPages - 4, totalPages - 3, totalPages - 2);
+            }
+
+            if (currentPage < totalPages - 3) {
+                pages.push("...");
+            }
+
+            pages.push(totalPages - 1, totalPages);
+        }
+
+        return pages;
+    };
+
     return (
         <div className='news-and-blogs-page'>
             <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Xəbərlər və bloqlar</span></div>
@@ -52,17 +83,23 @@ const NewsAndBlogs = () => {
                             <button onClick={handlePrevPage} disabled={currentPage === 1}>
                                 <MdOutlineKeyboardArrowLeft />
                             </button>
-                            <div className='numbers'>
-                                {Array.from({ length: totalPages }, (_, index) => (
-                                    <span
-                                        key={index + 1}
-                                        className={currentPage === index + 1 ? 'active' : ''}
-                                        onClick={() => handlePageChange(index + 1)}
-                                    >
-                                        {index + 1}
-                                    </span>
+
+                            <div className="numbers">
+                                {generatePaginationNumbers(totalPages, currentPage).map((page, index) => (
+                                    page === "..." ? (
+                                        <span key={index} className="dots">...</span>
+                                    ) : (
+                                        <span
+                                            key={index}
+                                            className={currentPage === page ? "active" : ""}
+                                            onClick={() => handlePageChange(page)}
+                                        >
+                                            {page}
+                                        </span>
+                                    )
                                 ))}
                             </div>
+
                             <button onClick={handleNextPage} disabled={currentPage === totalPages}>
                                 <MdOutlineKeyboardArrowRight />
                             </button>

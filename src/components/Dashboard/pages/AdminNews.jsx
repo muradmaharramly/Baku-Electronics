@@ -20,7 +20,7 @@ const AdminNews = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-      fetchNews();
+    fetchNews();
   }, []);
 
   if (loading) return <PreLoader />;
@@ -49,65 +49,96 @@ const AdminNews = () => {
     setSearchTerm('');
   };
 
-      const handleDeleteNews = async (id) => {
-    
-        Swal.fire({
-            title: "Əminsiniz?",
-            text: "Bu xəbəri sildikdən sonra geri qaytara bilməyəcəksiniz!",
-            icon: "question",
-            showCancelButton: true,
-            confirmButtonText: "Bəli, sil!",
-            cancelButtonText: "Ləğv et",
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
+  const handleDeleteNews = async (id) => {
+
+    Swal.fire({
+      title: "Əminsiniz?",
+      text: "Bu xəbəri sildikdən sonra geri qaytara bilməyəcəksiniz!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonText: "Bəli, sil!",
+      cancelButtonText: "Ləğv et",
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      customClass: {
+        popup: "custom-swal-popup",
+        title: "custom-swal-title",
+        content: "custom-swal-text",
+        confirmButton: "custom-swal-confirm",
+        cancelButton: "custom-swal-cancel",
+        icon: "custom-swal-icon"
+      }
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data, error } = await supabase
+          .from("news")
+          .delete()
+          .eq("id", id)
+          .single();
+
+        if (error) {
+          Swal.fire({
+            title: "Xəta!",
+            text: "Silinmə zamanı xəta baş verdi!",
+            icon: "error",
             customClass: {
-                popup: "custom-swal-popup",
-                title: "custom-swal-title",
-                content: "custom-swal-text",
-                confirmButton: "custom-swal-confirm",
-                cancelButton: "custom-swal-cancel",
-                icon: "custom-swal-icon"
+              popup: "custom-swal-popup",
+              title: "custom-swal-title",
+              content: "custom-swal-text",
+              confirmButton: "custom-swal-confirm"
             }
-        }).then(async (result) => {
-            if (result.isConfirmed) {
-                const { data, error } = await supabase
-                    .from("news")
-                    .delete()
-                    .eq("id", id)
-                    .single();
-    
-                if (error) {
-                    Swal.fire({
-                        title: "Xəta!",
-                        text: "Silinmə zamanı xəta baş verdi!",
-                        icon: "error",
-                        customClass: {
-                            popup: "custom-swal-popup",
-                            title: "custom-swal-title",
-                            content: "custom-swal-text",
-                            confirmButton: "custom-swal-confirm"
-                        }
-                    });
-                    return;
-                }
-    
-                Swal.fire({
-                    title: "Uğur!",
-                    text: "Xəbər uğurla silindi!",
-                    icon: "success",
-                    showConfirmButton: false,
-                    timer: 1500,
-                    customClass: {
-                        popup: "custom-swal-popup",
-                        title: "custom-swal-title",
-                        content: "custom-swal-text"
-                    }
-                }).then(() => {
-                    window.location.reload();
-                });
-            }
+          });
+          return;
+        }
+
+        Swal.fire({
+          title: "Uğur!",
+          text: "Xəbər uğurla silindi!",
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1500,
+          customClass: {
+            popup: "custom-swal-popup",
+            title: "custom-swal-title",
+            content: "custom-swal-text"
+          }
+        }).then(() => {
+          window.location.reload();
         });
-    };
+      }
+    });
+  };
+
+  const generatePaginationNumbers = (totalPages, currentPage) => {
+    const pages = [];
+
+    if (totalPages <= 7) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1, 2);
+
+      if (currentPage > 4) {
+        pages.push("...");
+      }
+      if (currentPage > 3 && currentPage < totalPages - 2) {
+        pages.push(currentPage - 1, currentPage, currentPage + 1);
+      } else if (currentPage <= 4) {
+        pages.push(3, 4, 5);
+      } else {
+        pages.push(totalPages - 4, totalPages - 3, totalPages - 2);
+      }
+
+      if (currentPage < totalPages - 3) {
+        pages.push("...");
+      }
+
+      pages.push(totalPages - 1, totalPages);
+    }
+
+    return pages;
+  };
   return (
     <div className='admin-news'>
       <div className='page-head'>
@@ -176,7 +207,7 @@ const AdminNews = () => {
               ) : (
                 currentNews.map((singlenews, index) => (
                   <tr key={singlenews.id}>
-                    <td>{(currentPage-1)*6 + index + 1}</td>
+                    <td>{(currentPage - 1) * 6 + index + 1}</td>
                     <td >
                       <div className="image-container"><img src={singlenews.image} alt={singlenews.title} className="news-image" /></div>
 
@@ -205,17 +236,23 @@ const AdminNews = () => {
           <button onClick={handlePrevPage} disabled={currentPage === 1}>
             <MdOutlineKeyboardArrowLeft />
           </button>
-          <div className='numbers'>
-            {Array.from({ length: totalPages }, (_, index) => (
-              <span
-                key={index + 1}
-                className={currentPage === index + 1 ? 'active' : ''}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </span>
+
+          <div className="numbers">
+            {generatePaginationNumbers(totalPages, currentPage).map((page, index) => (
+              page === "..." ? (
+                <span key={index} className="dots">...</span>
+              ) : (
+                <span
+                  key={index}
+                  className={currentPage === page ? "active" : ""}
+                  onClick={() => handlePageChange(page)}
+                >
+                  {page}
+                </span>
+              )
             ))}
           </div>
+
           <button onClick={handleNextPage} disabled={currentPage === totalPages}>
             <MdOutlineKeyboardArrowRight />
           </button>

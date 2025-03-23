@@ -20,16 +20,16 @@ const brands = [
     { "id": 14, "name": "LG", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FLG.jpg&w=1920&q=75" },
     { "id": 15, "name": "Asus", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2Fasus.jpg&w=1920&q=75" },
     { "id": 16, "name": "WMF", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2Fwmf.jpg&w=1920&q=75" },
-    { "id": 17, "name": "Panasonic", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FPanasonic_pXuIRVB.png&w=1920&q=75"},
+    { "id": 17, "name": "Panasonic", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FPanasonic_pXuIRVB.png&w=1920&q=75" },
     { "id": 18, "name": "Chicco", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2Fchicco.jpg&w=1920&q=75" },
-    { "id": 19, "name": "Istanbul home collection", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2Flogo_NA8S1kA.jpg&w=1920&q=75"},
+    { "id": 19, "name": "Istanbul home collection", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2Flogo_NA8S1kA.jpg&w=1920&q=75" },
     { "id": 20, "name": "Braun", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FBRAUN.png&w=1920&q=75" },
     { "id": 21, "name": "Joyroom", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FJoyroom.jpg&w=1920&q=75" },
     { "id": 22, "name": "Lenovo", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2Flenovo.png&w=1920&q=75" },
     { "id": 23, "name": "Huawei", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FHUAWEI.jpg&w=1920&q=75" },
-    { "id": 24, "name": "Zwiling", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FZwilling.jpeg&w=1920&q=75"},
+    { "id": 24, "name": "Zwiling", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FZwilling.jpeg&w=1920&q=75" },
     { "id": 25, "name": "Sony", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FSony.jpg&w=1920&q=75" },
-    { "id": 26, "name": "Haier", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FHAIER.jpg&w=1920&q=75"},
+    { "id": 26, "name": "Haier", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FHAIER.jpg&w=1920&q=75" },
     { "id": 27, "name": "Logitech", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FLOGITECH.png&w=1920&q=75" },
     { "id": 28, "name": "Nuovacer", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FNuovacer-Logo-2020.jpg&w=1920&q=75" },
     { "id": 29, "name": "Fakir", "logo": "https://new.bakuelectronics.az/_next/image?url=https%3A%2F%2Fimg.b-e.az%2Fmedia%2Fbrand%2Ficons%2FFakir-Logo.jpg&w=1920&q=75" },
@@ -52,6 +52,37 @@ const Brands = () => {
     const handlePrevPage = () => currentPage > 1 && setCurrentPage(currentPage - 1);
     const handleNextPage = () => currentPage < totalPages && setCurrentPage(currentPage + 1);
 
+    const generatePaginationNumbers = (totalPages, currentPage) => {
+        const pages = [];
+
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) {
+                pages.push(i);
+            }
+        } else {
+            pages.push(1, 2);
+
+            if (currentPage > 4) {
+                pages.push("...");
+            }
+            if (currentPage > 3 && currentPage < totalPages - 2) {
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
+            } else if (currentPage <= 4) {
+                pages.push(3, 4, 5);
+            } else {
+                pages.push(totalPages - 4, totalPages - 3, totalPages - 2);
+            }
+
+            if (currentPage < totalPages - 3) {
+                pages.push("...");
+            }
+
+            pages.push(totalPages - 1, totalPages);
+        }
+
+        return pages;
+    };
+
     return (
         <div className="brands-page">
             <div className="breadcrumb"><Link to="/">Ana səhifə</Link><RiArrowRightDoubleFill /><span>Brendlər</span></div>
@@ -63,25 +94,33 @@ const Brands = () => {
                     </div>
                 ))}
             </div>
-            <div className="pagination">
-                <button onClick={handlePrevPage} disabled={currentPage === 1}>
-                    <MdOutlineKeyboardArrowLeft />
-                </button>
-                <div className='numbers'>
-                    {Array.from({ length: totalPages }, (_, index) => (
-                        <span
-                            key={index + 1}
-                            className={currentPage === index + 1 ? 'active' : ''}
-                            onClick={() => handlePageChange(index + 1)}
-                        >
-                            {index + 1}
-                        </span>
-                    ))}
+            {totalPages > 1 && (
+                <div className="pagination">
+                    <button onClick={handlePrevPage} disabled={currentPage === 1}>
+                        <MdOutlineKeyboardArrowLeft />
+                    </button>
+
+                    <div className="numbers">
+                        {generatePaginationNumbers(totalPages, currentPage).map((page, index) => (
+                            page === "..." ? (
+                                <span key={index} className="dots">...</span>
+                            ) : (
+                                <span
+                                    key={index}
+                                    className={currentPage === page ? "active" : ""}
+                                    onClick={() => handlePageChange(page)}
+                                >
+                                    {page}
+                                </span>
+                            )
+                        ))}
+                    </div>
+
+                    <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                        <MdOutlineKeyboardArrowRight />
+                    </button>
                 </div>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-                    <MdOutlineKeyboardArrowRight />
-                </button>
-            </div>
+            )}
         </div>
     );
 };
