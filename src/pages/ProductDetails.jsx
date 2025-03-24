@@ -52,6 +52,14 @@ function ProductDetails() {
     const [initialPayment, setInitialPayment] = useState(0);
     const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
     const [isCommentsOpen, setIsCommentsOpen] = useState(false);
+    const [userEmail, setUserEmail] = useState(null);
+
+    useEffect(() => {
+        const storedEmail = localStorage.getItem("email");
+        if (storedEmail) {
+            setUserEmail(storedEmail);
+        }
+    }, []);
 
     useEffect(() => {
         if (products.length === 0) {
@@ -166,26 +174,53 @@ function ProductDetails() {
                         <p className="current-price">{discountPrice.toFixed(2)}₼</p>
                     </div>
                     <div className="btns-div">
-                        {product.count === 0 ? (
-                            <Link to="#" className="add-to-cart-btn disabled" onClick={(e) => e.preventDefault()}>
-                                <RiShoppingCart2Line /><span>Stokda yoxdur</span>
-                            </Link>
-                        ) : (
-                            inCart(product.id) ? (
-                                <Link to="/cart" className="add-to-cart-btn clicked">
-                                    <RiShoppingCart2Fill /><span>Səbətə keç</span>
+                        {userEmail ? (
+                            product.count === 0 ? (
+                                <Link
+                                    to="#"
+                                    className="add-to-cart-btn disabled"
+                                    onClick={(e) => e.preventDefault()}
+                                >
+                                    <RiShoppingCart2Line />
+                                    <span>Stokda yoxdur</span>
+                                </Link>
+                            ) : inCart(product.id) ? (
+                                <Link
+                                    to="/cart"
+                                    className="add-to-cart-btn clicked"
+                                >
+                                    <RiShoppingCart2Fill />
+                                    <span>Səbətə keç</span>
                                 </Link>
                             ) : (
-                                <Link to="#" className="add-to-cart-btn" onClick={handleAddClick}>
+                                <Link
+                                    to="#"
+                                    className="add-to-cart-btn"
+                                    onClick={handleAddClick}
+                                >
                                     <RiShoppingCart2Line />
                                     <span>Səbətə əlavə et</span>
                                 </Link>
                             )
+                        ) : (
+                            <Link
+                                to="/auth/register"
+                                className="add-to-cart-btn"
+                            >
+                                <RiShoppingCart2Line />
+                                <span>Səbətə əlavə et</span>
+                            </Link>
                         )}
+
                         <Link className="share-btn"><IoShareSocialOutline />Paylaş</Link>
-                        <Link className={`heart-btn ${inWishlist(product.id) ? "clicked" : ""}`} onClick={handleWishClick}>
-                            <FaRegHeart />
-                        </Link>
+                        {userEmail ? (
+                            <Link className={`heart-btn ${inWishlist(product.id) ? "clicked" : ""}`} onClick={handleWishClick}>
+                                <FaRegHeart />
+                            </Link>) :
+                            (<Link to="/auth/register" className={`heart-btn ${inWishlist(product.id) ? "clicked" : ""}`}>
+                                <FaRegHeart />
+                            </Link>)}
+
                     </div>
                     {product.count && (
                         <div className="actions">

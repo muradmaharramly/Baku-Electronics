@@ -192,9 +192,10 @@ function ProductCard({ product }) {
                         }}
                     >
                         <RiShoppingCart2Line />
-                        <span>Stokda yoxdur</span>
+                        <span>Səbətə əlavə et</span> 
                     </Link>
                 )}
+
 
                 {userEmail ? (
                     <Link
