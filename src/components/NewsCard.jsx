@@ -42,7 +42,7 @@ const NewsCard = ({ singlenews }) => {
                     <img src={singlenews.image} />
                 </div>
                 <h5>{singlenews.title.substring(0, 30)}...</h5>
-                <p>Xeberler</p>
+                <p>{singlenews.category}</p>
                 <div className='card-ending'>
                     <span>{singlenews.date.slice(0, 10)}</span>
                     <Link>Bax<MdArrowRightAlt /></Link>
