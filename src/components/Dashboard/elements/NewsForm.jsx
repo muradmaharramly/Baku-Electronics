@@ -64,7 +64,7 @@ const NewsForm = ({ existingNews, isEditMode }) => {
             category, 
             image, 
             viewCount: parseInt(viewCount, 10), 
-            editDate: currentDate
+            editDate: isEditMode ? currentDate : null  
         };
 
         let result;
