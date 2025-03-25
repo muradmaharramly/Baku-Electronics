@@ -29,7 +29,7 @@ function PrevArrow(props) {
 
 function NewsPageSlider({ news }) {
   const settings = {
-    dots: true,  // Dots-ları aktivləşdir
+    dots: true,  
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -40,7 +40,7 @@ function NewsPageSlider({ news }) {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     customPaging: (i) => (
-      <div className="custom-dot"></div>  // Xüsusi dot görünüşü
+      <div className="custom-dot"></div>  
     ),
     appendDots: dots => (
       <div className="custom-dots-container">

@@ -32,7 +32,7 @@ const NewsDetails = () => {
     }
 
     if (!singlenews) {
-        return <p>News not found!</p>;
+        return <p>Xəbər tapılmadı</p>;
     }
     return (
         <div className='news-details-page'>
