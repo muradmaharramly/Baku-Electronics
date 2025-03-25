@@ -17,6 +17,8 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
     const [price, setPrice] = useState('');
     const [discount, setDiscount] = useState('');
     const [count, setStock] = useState('');
+    const [titleError, setTitleError] = useState('');
+    const [categoryError, setCategoryError] = useState('');
     const [imageError, setImageError] = useState('');
     const [priceError, setPriceError] = useState('');
     const [discountError, setDiscountError] = useState('');
@@ -34,17 +36,49 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         }
     }, [isEditMode, existingProduct]);
 
-    const validateForm = () => {
+    const validateForm = async () => {
         let isValid = true;
+        setTitleError('');
         setImageError('');
         setPriceError('');
         setDiscountError('');
         setCountError('');
 
+        if (!isEditMode) {
+            const { data: existingProducts, error } = await supabase
+                .from('products')
+                .select('title')
+                .eq('title', title);
+        
+            if (existingProducts && existingProducts.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Xəta!',
+                    text: 'Bu məhsul artıq mövcuddur!',
+                    customClass: {
+                        popup: "custom-swal-popup",
+                        title: "custom-swal-title",
+                        content: "custom-swal-text"
+                    }
+                });
+                return false;
+            }
+        }
+        
+        if (!title.trim()) {
+            setTitleError('Başlıq boş ola bilməz');
+            isValid = false;
+        }
+
+        if (!category) {
+            setCategoryError('Kateqoriya seçin');
+            isValid = false;
+        }
+
         if (image && !/^https?:\/\//.test(image)) {
             setImageError('Şəkil linki "http" və ya "https" ilə başlamalıdır');
             isValid = false;
-        }else if(!image.trim()){
+        } else if (!image.trim()) {
             setImageError('Şəkil linki boş ola bilməz');
             isValid = false;
         }
@@ -52,7 +86,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         if (price && (isNaN(price) || parseFloat(price) <= 0)) {
             setPriceError('Qiymət müsbət bir rəqəm olmalıdır');
             isValid = false;
-        }else if(!existingProduct && !price.trim()){
+        } else if (!existingProduct && !price.trim()) {
             setPriceError('Qiymət boş ola bilməz');
             isValid = false;
         }
@@ -60,7 +94,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         if (discount && (isNaN(discount) || parseFloat(discount) < 0 || parseFloat(discount) > 100)) {
             setDiscountError('Endirim 0 ilə 100 arasında olmalıdır');
             isValid = false;
-        }else if(!existingProduct && !discount.trim()){
+        } else if (!existingProduct && !discount.trim()) {
             setDiscountError('Endirim boş ola bilməz');
             isValid = false;
         }
@@ -68,7 +102,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         if (count && isNaN(count)) {
             setCountError('Stok sayı yalnız rəqəm olmalıdır');
             isValid = false;
-        }else if(!existingProduct && !count.trim()){
+        } else if (!existingProduct && !count.trim()) {
             setCountError('Stok sayı boş ola bilməz');
             isValid = false;
         }
@@ -134,6 +168,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
                     <div className="form-group">
                         <label>Başlıq</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        {titleError && <span className="error-message">{titleError}</span>}
                         <IoText />
                     </div>
                     <div className="form-group">
@@ -144,6 +179,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
                                 <option key={cat} value={cat}>{cat}</option>
                             ))}
                         </select>
+                        {categoryError && <span className="error-message">{categoryError}</span>}
                     </div>
                     <div className="form-group">
                         <label>Şəkil linki</label>

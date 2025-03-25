@@ -12,6 +12,7 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
     const [endDate, setEndDate] = useState('');
     const [image, setImageLink] = useState('');
     const [status, setStatus] = useState(true);
+    const [titleError, setTitleError] = useState('');
     const [imageError, setImageError] = useState('');
     const [statusError, setStatusError] = useState('');
     const [startDateError, setStartDateError] = useState('');
@@ -29,12 +30,39 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
         }
     }, [isEditMode, existingCampaign]);
 
-    const validateForm = () => {
+    const validateForm = async () => {
         let isValid = true;
+        setTitleError('');
         setImageError('');
         setStatusError('');
         setStartDateError('');
         setEndDateError('');
+
+        if (!isEditMode) {
+            const { data: existingProducts, error } = await supabase
+                .from('campaigns')
+                .select('title')
+                .eq('title', title);
+        
+            if (existingProducts && existingProducts.length > 0) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Xəta!',
+                    text: 'Bu kampaniya artıq mövcuddur!',
+                    customClass: {
+                        popup: "custom-swal-popup",
+                        title: "custom-swal-title",
+                        content: "custom-swal-text"
+                    }
+                });
+                return false;
+            }
+        }
+        
+        if (!title.trim()) {
+            setTitleError('Başlıq boş ola bilməz');
+            isValid = false;
+        }
     
         if (image && !/^https?:\/\//.test(image)) {
             setImageError('Şəkil linki "http" və ya "https" ilə başlamalıdır');
@@ -132,6 +160,7 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
                     <div className="form-group">
                         <label>Başlıq</label>
                         <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        {titleError && <span className="error-message">{titleError}</span>}
                         <IoText />
                     </div>
                     <div className="form-group">
