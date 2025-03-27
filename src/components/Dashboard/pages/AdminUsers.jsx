@@ -42,7 +42,7 @@ const AdminUsers = () => {
     )
   );
 
-  const totalPages = Math.ceil((filteredUsers.length !== 0 ? filteredUsers.length : usertCount) / userPerPage);
+  const totalPages = Math.ceil((filteredUsers.length !== 0 ? filteredUsers.length : userCount) / userPerPage);
 
   const indexOfLastUser = currentPage * userPerPage;
   const indexOfFirstUser = indexOfLastUser - userPerPage;
