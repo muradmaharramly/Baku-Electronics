@@ -47,7 +47,7 @@ const Header = () => {
 
     useEffect(() => {
         if (categories.length > 0 && !activeCategory) {
-            setActiveCategory(categories[0]); 
+            setActiveCategory(categories[0]);
         }
     }, [categories]);
 
@@ -491,16 +491,19 @@ const Header = () => {
                         (<Badge count={totalWishlistItems} className="custom-badge" showZero>
                             <NavLink to="/wishlist"><button><FaRegHeart /></button></NavLink>
                         </Badge>)}
-                    <NavLink to={userEmail ? "/user-profile" : "/auth/register"}>
-                        <button className={userEmail ? "name-btn" : "user-btn"}>
-                            {userEmail ? (
-                                <h4>{user?.firstName && user?.lastName ? `${user.lastName.slice(0, 1)}${user.firstName.slice(0, 1)}` : <FaRegUser />}</h4>
+                    <NavLink to={user && user.emailConfirmed ? "/user-profile" : "/auth/register"}>
+                        <button className={user && user.emailConfirmed ? "name-btn" : "user-btn"}>
+                            {user && user.emailConfirmed ? (
+                                <h4>
+                                    {user?.firstName && user?.lastName
+                                        ? `${user.lastName.slice(0, 1)}${user.firstName.slice(0, 1)}`
+                                        : <FaRegUser />}
+                                </h4>
                             ) : (
                                 <FaRegUser />
                             )}
                         </button>
                     </NavLink>
-
                 </div>
             </div>
             <div className={`mobile-navbar ${isClicked ? "active" : ""}`}>
