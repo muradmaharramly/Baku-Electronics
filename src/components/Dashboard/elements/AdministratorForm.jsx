@@ -3,8 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../../services/supabaseClient';
 import Swal from 'sweetalert2';
 import bcrypt from 'bcryptjs';
-import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6';
+import { FaRegEye, FaRegEyeSlash, FaRegUser, FaUsersViewfinder } from 'react-icons/fa6';
 import { useSelector } from 'react-redux';
+import { MdOutlineEmail } from 'react-icons/md';
+import { FiPhone } from 'react-icons/fi';
 
 const AdministratorForm = ({ existingAdmin, isEditMode }) => {
     const { administrators } = useSelector((state) => state.administrators);
@@ -108,16 +110,19 @@ const AdministratorForm = ({ existingAdmin, isEditMode }) => {
                         <label>Ad</label>
                         <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         {errors.firstName && <p className="error-message">{errors.firstName}</p>}
+                        <FaRegUser />
                     </div>
                     <div className='form-group'>
                         <label>Soyad</label>
                         <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+                        <FaRegUser />
                     </div>
                     <div className='form-group'>
                         <label>Email</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         {errors.email && <p className="error-message">{errors.email}</p>}
+                        <MdOutlineEmail />
                     </div>
                 </div>
                 <div className='form-quater'>
@@ -141,11 +146,13 @@ const AdministratorForm = ({ existingAdmin, isEditMode }) => {
                         <label>Telefon</label>
                         <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                         {errors.phoneNumber && <p className="error-message">{errors.phoneNumber}</p>}
+                        <FiPhone />
                     </div>
                     <div className='form-group'>
                         <label>FIN</label>
                         <input type="text" value={fin} onChange={(e) => setFin(e.target.value)} />
                         {errors.fin && <p className="error-message">{errors.fin}</p>}
+                        <FaUsersViewfinder />
                     </div>
                 </div>
                 <div className="btns">

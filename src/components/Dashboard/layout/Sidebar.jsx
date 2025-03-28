@@ -5,7 +5,7 @@ import { IoIosArrowForward } from 'react-icons/io'
 import { MdCampaign } from 'react-icons/md'
 import { RiAdminFill, RiDashboard2Fill } from 'react-icons/ri'
 import { TiThList } from 'react-icons/ti'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { fetchAdministrators } from '../../../tools/request/fetchAdministrators'
 
@@ -49,21 +49,21 @@ const Sidebar = () => {
             </Link>
             <div className='sidebar-list'>
                 <button onClick={handleGrid}>{isGrid ? <HiViewGrid /> : <TiThList />}</button>
-                <Link onClick={handleTab} to="/administrative/dashboard">
+                <NavLink onClick={handleTab} to="/administrative/dashboard">
                     <div className='icon'><RiDashboard2Fill /></div><span>İdarə paneli</span><div className='arrow'><IoIosArrowForward /></div>
-                </Link>
-                <Link onClick={handleTab} to="/administrative/products">
+                </NavLink>
+                <NavLink onClick={handleTab} to="/administrative/products">
                     <div className='icon'><FaBoxesStacked /></div><span>Məhsullar</span><div className='arrow'><IoIosArrowForward /></div>
-                </Link>
-                <Link onClick={handleTab} to="/administrative/news">
+                </NavLink>
+                <NavLink onClick={handleTab} to="/administrative/news">
                     <div className='icon'><HiNewspaper /></div><span>Xəbərlər</span><div className='arrow'><IoIosArrowForward /></div>
-                </Link>
-                <Link onClick={handleTab} to="/administrative/campaigns">
+                </NavLink>
+                <NavLink onClick={handleTab} to="/administrative/campaigns">
                     <div className='icon'><MdCampaign /></div><span>Kampaniyalar</span><div className='arrow'><IoIosArrowForward /></div>
-                </Link>
-                <Link onClick={handleTab} to="/administrative/users">
+                </NavLink>
+                <NavLink onClick={handleTab} to="/administrative/users">
                     <div className='icon'><FaUsers /></div><span>İstifadəçilər</span><div className='arrow'><IoIosArrowForward /></div>
-                </Link>
+                </NavLink>
                 {currentUser && currentUser.role !== "Moderator" && (
                     <Link onClick={handleTab} to="/administrative/administrators">
                         <div className='icon'><RiAdminFill /></div><span>Administrasiya</span><div className='arrow'><IoIosArrowForward /></div>

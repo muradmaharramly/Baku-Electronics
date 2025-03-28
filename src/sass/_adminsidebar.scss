@@ -86,9 +86,17 @@
             align-items: center;
             gap: 10px;
             @include transition();
+            &.active{
+                .icon{
+                    background-color: #ccc;
+                }
+                .arrow{
+                    display: flex;
+                }                
+            }
             &:hover{
                 .icon{
-                    background-color: $box-hover-light;
+                    background-color: #ccc;
                 }
                 .arrow{
                     display: flex;
