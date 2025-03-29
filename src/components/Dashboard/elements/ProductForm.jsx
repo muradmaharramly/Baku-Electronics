@@ -45,12 +45,12 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
         setCountError('');
 
         if (!isEditMode) {
-            const { data: existingProducts, error } = await supabase
+            const { data: existingTitle, error } = await supabase
                 .from('products')
                 .select('title')
                 .eq('title', title);
-        
-            if (existingProducts && existingProducts.length > 0) {
+
+            if (existingTitle && existingTitle.length > 0) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Xəta!',
@@ -64,7 +64,7 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
                 return false;
             }
         }
-        
+
         if (!title.trim()) {
             setTitleError('Başlıq boş ola bilməz');
             isValid = false;
@@ -112,7 +112,8 @@ const ProductForm = ({ existingProduct, isEditMode }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!validateForm()) return;
+        const isValid = await validateForm(); 
+        if (!isValid) return;
 
         const productData = { title, category, image, price, discount, count };
 

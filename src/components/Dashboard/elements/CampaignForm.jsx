@@ -39,12 +39,12 @@ const CampaignForm = ({ existingCampaign, isEditMode }) => {
         setEndDateError('');
 
         if (!isEditMode) {
-            const { data: existingProducts, error } = await supabase
+            const { data: existingCampaigns, error } = await supabase
                 .from('campaigns')
                 .select('title')
                 .eq('title', title);
         
-            if (existingProducts && existingProducts.length > 0) {
+            if (existingCampaigns && existingCampaigns.length > 0) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Xəta!',
