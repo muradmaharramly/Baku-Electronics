@@ -266,7 +266,7 @@ const UserProfile = () => {
                     )}
                     {activeTab === "orders" && <div className="tab-content">
                         <div className="head">
-                            <h3>Ən Son Baxdıqlarım</h3>
+                            <h3>Sifarişlərim</h3>
                             <div className="dropdown">
                                 <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
                                     {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
@@ -342,7 +342,7 @@ const UserProfile = () => {
                     </div>}
                     {activeTab === "addresses" && <div className="tab-content">
                         <div className="head">
-                            <h3>Ən Son Baxdıqlarım</h3>
+                            <h3>Ünvanlarım</h3>
                             <div className="dropdown">
                                 <button className={`dropdown-btn ${isOpen ? "open" : ""}`} onClick={() => setIsOpen(!isOpen)}>
                                     {tabNames[activeTab].name} <div className="icon"><IoIosArrowDown /></div>
