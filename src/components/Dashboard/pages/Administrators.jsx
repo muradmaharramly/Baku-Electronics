@@ -35,12 +35,15 @@ const Administrators = () => {
   const filteredAdministrators = administrators
     .filter(admin => admin.email !== loggedInEmail)
     .filter(administrator =>
-      loggedInRole === "Admin" ? administrator.role !== "Superadmin" : true
+      loggedInRole === "Admin"
+        ? administrator.role === "Moderator"
+        : loggedInRole === "Superadmin"
+          ? true
+          : administrator.role !== "Superadmin"
     )
     .filter(administrator =>
-      [administrator.firstName, administrator.lastName, administrator.email, administrator.fin, administrator.phoneNumber].some((field) =>
-        String(field || "").toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      [administrator.firstName, administrator.lastName, administrator.email, administrator.fin, administrator.phoneNumber]
+        .some((field) => String(field || "").toLowerCase().includes(searchTerm.toLowerCase()))
     );
 
   const sortedAdmins = [...filteredAdministrators].sort(
