@@ -178,7 +178,7 @@ const AdminCampaigns = () => {
   return (
     <div className='admin-campaigns'>
       <div className='page-head'>
-        <h3>Kampaniyalar <span className='count'>({campaignCount} ədəd)</span></h3>
+        <h3>Kampaniyalar <span className='count'>({filteredCampaigns.length > 0 ? filteredCampaigns.length : (filteredCampaigns.length === 0 ? 0 : campaignCount)} ədəd)</span></h3>
         <div className='procces'>
           <div className="search-bar">
             <input

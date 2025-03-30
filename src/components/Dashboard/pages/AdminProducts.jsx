@@ -146,7 +146,7 @@ const AdminProducts = () => {
   return (
     <div className='admin-products'>
       <div className='page-head'>
-        <h3>Məhsullar <span className='count'>({productCount} ədəd)</span></h3>
+        <h3>Məhsullar <span className='count'>({filteredProducts.length > 0 ? filteredProducts.length : (filteredProducts.length === 0 ? 0 : productCount)} ədəd)</span></h3>
         <div className='procces'>
           <div className="search-bar">
             <input

@@ -142,7 +142,7 @@ const AdminNews = () => {
   return (
     <div className='admin-news'>
       <div className='page-head'>
-        <h3>Xəbərlər <span className='count'>({newsCount} ədəd)</span></h3>
+        <h3>Xəbərlər <span className='count'>({filteredNews.length > 0 ? filteredNews.length : (filteredNews.length === 0 ? 0 : newsCount)} ədəd)</span></h3>
         <div className='procces'>
           <div className="search-bar">
             <input

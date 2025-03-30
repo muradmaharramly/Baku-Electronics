@@ -148,7 +148,7 @@ const AdminUsers = () => {
   return (
     <div className='admin-users'>
       <div className='page-head'>
-        <h3>İstifadəçilər <span className='count'>({userCount} nəfər)</span></h3>
+        <h3>İstifadəçilər <span className='count'>({filteredUsers.length > 0 ? filteredUsers.length : (filteredUsers.length === 0 ? 0 : userCount)} nəfər)</span></h3>
         <div className='procces'>
           <div className="search-bar">
             <input
