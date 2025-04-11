@@ -1,5 +1,6 @@
-.checkout{
-    padding: 20px 9.5%;
+.checkout-page{
+  padding: 20px 9.5%;
+  .checkout{
     display: flex;
     gap: 20px;
     .page-title{
@@ -567,9 +568,12 @@
         
     }
 }
+}
 @media (max-width: 768px){
+  .checkout-page{
+    padding: 10px 15px;
+  }
     .checkout{
-        padding: 10px 15px;
         display: flex;
         flex-direction: column;
         gap: 15px; 

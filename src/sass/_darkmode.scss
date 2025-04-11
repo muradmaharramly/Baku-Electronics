@@ -943,6 +943,14 @@ border-bottom: 2px solid $white;
   a{
       color: $white;
   }
+  .also-like-con{
+    p{
+      color: $white-2nd;
+    }
+    h3{
+      color: $white;
+    }
+  }
   .cart-title{
     color: $white;
       a{
@@ -2915,6 +2923,16 @@ border-bottom: 2px solid $white;
             }
         }
     }
+}
+.checkout-page{
+  .also-like-con{
+    p{
+      color: $white-2nd;
+    }
+    h3{
+      color: $white;
+    }
+  }
 }
 .checkout{
   .page-title{

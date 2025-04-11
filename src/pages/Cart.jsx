@@ -6,8 +6,11 @@ import { RiArrowRightDoubleFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { useCart } from "react-use-cart";
 import slugify from "slugify";
+import { useSelector } from "react-redux";
+import ProductSliderRecomend from "../components/sliders/ProductSliderRecomend";
 
 const Cart = () => {
+    const { products, loading } = useSelector((state) => state.products);
     const {
         cartTotal,
         isEmpty,
@@ -104,6 +107,7 @@ const Cart = () => {
                 </div>
                 <Link to="/checkout" className="checkout-btn mobile">Sifarişi rəsmiləşdir</Link>
             </div>
+            <ProductSliderRecomend products={products} />
         </div>
     );
 };
