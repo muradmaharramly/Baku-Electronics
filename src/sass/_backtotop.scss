@@ -50,3 +50,10 @@
     z-index: 1;
   }
 }
+@media (max-width: 768px){
+    .back-to-top{
+        bottom: 80px;
+        right: 30px;
+    }
+    
+}
