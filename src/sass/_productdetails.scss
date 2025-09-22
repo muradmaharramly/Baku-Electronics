@@ -335,7 +335,7 @@
                     }
                     &:hover{
                         svg{
-                            left: 180px;
+                            left: 200px;
                         }
                         span{
                             margin-right: 0;
@@ -759,6 +759,9 @@
                         }
                     }
                     .add{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
                         padding: 10px 15px;
                         background-color: $box-hover-light;
                         border-radius: 12px;
@@ -768,6 +771,8 @@
                         -o-border-radius: 12px;
                         text-decoration: none;
                         font-weight: 500;
+                        min-width: 120px;
+                        font-size: 14px;
                         color: $black;
                         @include transition();
                         svg{
@@ -1352,7 +1357,13 @@
                             }
                         }
                         .add{
+                            border-radius: 8px;
+                            min-width: auto;
                             padding: 6px 8px;
+                            -webkit-border-radius: 8px;
+                            -moz-border-radius: 8px;
+                            -ms-border-radius: 8px;
+                            -o-border-radius: 8px;
                             svg{
                                 margin-bottom: -4px;
                                 font-size: 20px;
